@@ -1,0 +1,66 @@
+{
+  "name": "Heidar Abdi Ahmed",
+  "title": "Full Stack Developer",
+  "contact": {
+    "email": "heidar@example.com",
+    "github": "github.com/heidar",
+    "linkedin": "linkedin.com/in/heidar",
+    "location": "Global"
+  },
+  "summary": "Full Stack Developer focused on building high-performance digital infrastructure. Specializing in modern web architecture, scalable backend systems, and crafting responsive, accessible user interfaces.",
+  "services": [
+    {
+      "title": "Full Stack Development",
+      "description": "End-to-end application development using modern frameworks like Astro, Next.js, and React combined with robust backends."
+    },
+    {
+      "title": "System Architecture",
+      "description": "Designing scalable, maintainable, and efficient system architectures optimized for performance and growth."
+    },
+    {
+      "title": "UI/UX Engineering",
+      "description": "Translating design concepts into pixel-perfect, interactive, and accessible web experiences."
+    },
+    {
+      "title": "Performance Optimization",
+      "description": "Auditing and optimizing application performance to ensure lightning-fast load times and smooth interactions."
+    }
+  ],
+  "technicalInventory": {
+    "Languages": ["TypeScript", "JavaScript", "Python", "SQL", "HTML/CSS"],
+    "Frameworks": ["Astro", "React", "Next.js", "Express", "Tailwind CSS"],
+    "Tools": ["Git", "Docker", "Bun", "PostgreSQL", "Figma", "VS Code"]
+  },
+  "selectedWorks": [
+    {
+      "name": "Tensor Hubble",
+      "description": "A high-performance analytics dashboard built with Astro and Tailwind v4. Features real-time data visualization and deep dark mode aesthetics.",
+      "technologies": ["Astro", "Tailwind v4", "Bun", "Recharts"],
+      "link": "#"
+    },
+    {
+      "name": "Nexus Commerce",
+      "description": "Scalable headless e-commerce platform with Stripe integration, inventory management, and high-performance checkout flow.",
+      "technologies": ["Next.js", "PostgreSQL", "Stripe", "Redis"],
+      "link": "#"
+    },
+    {
+      "name": "Orbit Design System",
+      "description": "A comprehensive React component library focusing on accessibility and developer experience, published as an NPM package.",
+      "technologies": ["React", "TypeScript", "Storybook", "Rollup"],
+      "link": "#"
+    }
+  ],
+  "endorsements": [
+    {
+      "author": "Sarah Lin",
+      "role": "CTO @ TechFlow",
+      "quote": "Heidar transformed our legacy codebase into a modern, high-performance application. His attention to detail is unmatched."
+    },
+    {
+      "author": "James Chen",
+      "role": "Product Manager @ StartUpper",
+      "quote": "An exceptional engineer who understands both the technical and business requirements. Delivered ahead of schedule."
+    }
+  ]
+}

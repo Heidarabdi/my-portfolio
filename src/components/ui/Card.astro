@@ -1,0 +1,26 @@
+---
+interface Props {
+    class?: string;
+    variant?: "default" | "sm";
+    hoverEffect?: boolean;
+}
+
+const {
+    class: className,
+    variant = "default",
+    hoverEffect = false,
+} = Astro.props;
+---
+
+<div
+    class:list={[
+        "bg-paper-light border-ink border-2",
+        variant === "default" &&
+            "hard-shadow-sm" /* In export, default cards have hard-shadow-sm */,
+        hoverEffect &&
+            "group cursor-pointer transition-all hover:-translate-y-1",
+        className,
+    ]}
+>
+    <slot />
+</div>

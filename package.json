@@ -1,14 +1,36 @@
 {
-  "name": "my-portfolio",
+  "name": "tensor-hubble",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "astro": "^5.13.5"
+    "@fontsource/playfair-display": "^5.2.8",
+    "@fontsource/space-mono": "^5.2.9",
+    "@tailwindcss/vite": "^4.1.17",
+    "astro": "^5.16.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-astro": "^0.556.0",
+    "pdf-parse": "^2.4.5",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.49.0",
+    "@typescript-eslint/parser": "^8.49.0",
+    "astro-eslint-parser": "^1.2.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-astro": "^1.5.0",
+    "prettier": "^3.7.4",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "typescript-eslint": "^8.49.0"
   }
 }

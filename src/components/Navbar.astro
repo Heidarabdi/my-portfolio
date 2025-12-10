@@ -1,0 +1,108 @@
+---
+import { User, FileText, Layers, BookOpen, Moon } from "lucide-astro";
+
+const pathname = Astro.url.pathname;
+
+const navItems = [
+    { href: "/", label: "Home", icon: User },
+    { href: "/about", label: "Profile", icon: FileText },
+    { href: "/projects", label: "Works", icon: Layers },
+    { href: "/blog", label: "Journal", icon: BookOpen },
+];
+
+const isActive = (href: string) => {
+    if (href === "/" && pathname === "/") return true;
+    if (href !== "/" && pathname.startsWith(href)) return true;
+    return false;
+};
+---
+
+<nav
+    class="bg-paper/95 border-ink fixed top-0 right-0 left-0 z-40 border-b-2 font-mono backdrop-blur-sm transition-colors duration-300"
+>
+    <!-- Desktop/Main Bar -->
+    <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+        <a
+            href="/"
+            class="group flex items-center gap-3 rounded-sm focus:outline-none"
+            data-astro-prefetch
+        >
+            <div
+                class="bg-ink text-paper border-ink group-hover:bg-accent transition-vintage hard-shadow-sm relative flex h-10 w-10 items-center justify-center overflow-hidden border-2"
+            >
+                <div class="absolute inset-0 border border-white/20"></div>
+                <span class="font-display text-xl italic">H</span>
+            </div>
+            <span
+                class="font-display group-hover:text-accent text-lg font-bold tracking-tight transition-colors"
+                >HeidarDev.</span
+            >
+        </a>
+
+        <div
+            class="flex items-center gap-6 text-xs font-bold tracking-widest uppercase md:gap-8"
+        >
+            <div class="hidden items-center gap-6 md:flex">
+                {
+                    navItems.map((item) => (
+                        <a
+                            href={item.href}
+                            data-astro-prefetch
+                            class:list={[
+                                "transition-vintage flex items-center gap-2 border-b-2 pb-1",
+                                isActive(item.href)
+                                    ? "border-accent text-ink"
+                                    : "hover:text-ink hover:border-line-medium border-transparent text-stone-500",
+                            ]}
+                        >
+                            <item.icon
+                                class:list={[
+                                    "h-3.5 w-3.5",
+                                    isActive(item.href) ? "text-accent" : "",
+                                ]}
+                            />{" "}
+                            {item.label}
+                        </a>
+                    ))
+                }
+            </div>
+
+            <button
+                id="theme-toggle"
+                class="text-ink hover:text-accent transition-vintage rounded-sm p-2 focus:outline-none"
+            >
+                <div id="theme-icon"><Moon class="h-5 w-5" /></div>
+            </button>
+
+            <a
+                href="/contact"
+                data-astro-prefetch
+                class="bg-ink text-paper hover:bg-accent border-ink hard-shadow-sm hidden items-center justify-center border-2 px-4 py-2 transition-all hover:shadow-[4px_4px_0px_0px_var(--color-accent)] sm:inline-flex"
+            >
+                Contact
+            </a>
+        </div>
+    </div>
+
+    <!-- Mobile Sub-Bar -->
+    <div
+        class="border-ink/20 bg-paper text-ink hidden justify-between overflow-x-auto border-t px-6 py-2 text-xs font-bold uppercase md:hidden"
+    >
+        {
+            navItems.map((item) => (
+                <a
+                    href={item.href}
+                    data-astro-prefetch
+                    class:list={[
+                        "transition-vintage mr-4 flex items-center gap-2 border-b-2 pb-1 whitespace-nowrap",
+                        isActive(item.href)
+                            ? "border-accent text-ink"
+                            : "border-transparent text-stone-500",
+                    ]}
+                >
+                    {item.label}
+                </a>
+            ))
+        }
+    </div>
+</nav>

@@ -1,0 +1,93 @@
+---
+import { Layout, Cpu, ShieldCheck, Check } from "lucide-astro";
+import Section from "./Section.astro";
+import Badge from "./ui/Badge.astro";
+
+// Direct content match from export/index.html
+const services = [
+    {
+        title: "Web Application Development",
+        description:
+            "End-to-end development of responsive, accessible, and high-performance web applications tailored to your business needs.",
+        features: [
+            "Custom React/Next.js",
+            "CMS Integration",
+            "WCAG Accessibility",
+        ],
+        icon: Layout,
+    },
+    {
+        title: "AI & Machine Learning",
+        description:
+            "Integration of intelligent predictive models into existing systems to automate processes and generate data-driven insights.",
+        features: [
+            "Model Training",
+            "NLP & Sentiment Analysis",
+            "Data Visualization",
+        ],
+        icon: Cpu,
+    },
+    {
+        title: "IT Consultancy & Support",
+        description:
+            "Strategic technical advice and hands-on support to optimize your organization's digital infrastructure and workflow.",
+        features: [
+            "System Optimization",
+            "Troubleshooting",
+            "Workflow Automation",
+        ],
+        icon: ShieldCheck,
+    },
+];
+---
+
+<Section id="services">
+    <div
+        class="border-ink mb-16 items-end justify-between border-b-4 pb-6 md:flex"
+    >
+        <div class="max-w-2xl">
+            <h2
+                class="text-ink font-display mb-4 text-4xl font-bold md:text-5xl"
+            >
+                Service Offerings
+            </h2>
+            <p class="font-display text-lg text-stone-600 italic">
+                Specialized engineering services for modern digital challenges.
+            </p>
+        </div>
+        <div class="mt-4 md:mt-0">
+            <Badge variant="filled">Section 03</Badge>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+        {
+            services.map((service, index) => {
+                const Icon = service.icon;
+                return (
+                    <div class="bg-paper-light border-ink hard-shadow-sm group h-full cursor-pointer border-2 p-8 transition-all hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_var(--color-accent)]">
+                        <div class="bg-ink text-paper group-hover:bg-accent mb-6 flex h-16 w-16 items-center justify-center transition-colors">
+                            <Icon class="h-8 w-8" />
+                        </div>
+                        <h3 class="font-display text-ink group-hover:text-accent transition-vintage mb-4 text-xl font-bold">
+                            {service.title}
+                        </h3>
+                        <p class="font-display mb-6 text-sm leading-relaxed text-stone-600">
+                            {service.description}
+                        </p>
+                        <div class="border-line-faint space-y-3 border-t-2 border-dashed pt-6">
+                            {service.features.map((feature) => (
+                                <div class="flex items-start gap-3">
+                                    <Check class="text-accent mt-0.5 h-4 w-4" />
+                                    <span class="text-xs font-bold tracking-wide text-stone-500 uppercase">
+                                        {feature}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                );
+            })
+        }
+    </div>
+</Section>

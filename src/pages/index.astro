@@ -1,11 +1,58 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import ServiceOfferings from "../components/ServiceOfferings.astro";
+import TechnicalInventory from "../components/TechnicalInventory.astro";
+import SelectedWorks from "../components/SelectedWorks.astro";
+import ClientEndorsements from "../components/ClientEndorsements.astro";
+import CTA from "../components/CTA.astro";
+import Separator from "../components/ui/Separator.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Data is now hardcoded in components for strict 1:1 match
+// We pass simple strings to Hero for customization
+const name = "Heidar Dev";
+const title = "Full Stack Engineer";
+const summary =
+	"Innovative and detail-oriented Full Stack Developer with hands-on experience in web and mobile app development, machine learning, and IT support. Adept at quickly adapting to new technologies and frameworks, delivering scalable, efficient solutions for complex challenges.";
+const contact = {
+	github: "github.com/Heidarabdi",
+	linkedin: "linkedin.com/in/heidar",
+	email: "contact@heidar.dev",
+};
 ---
 
 <Layout>
-	<Welcome />
+	<main class="min-h-screen space-y-0 pt-24" transition:animate="fade">
+		<div class="mx-auto max-w-7xl px-6">
+			<Hero
+				name={name}
+				title={title}
+				summary={summary}
+				contact={contact}
+			/>
+
+			<Separator />
+
+			<TechnicalInventory />
+
+			<Separator />
+
+			<ServiceOfferings />
+
+			<Separator />
+
+			<SelectedWorks />
+
+			<div class="mt-20 mb-20"></div>
+
+			<ClientEndorsements />
+
+			<div
+				class="border-ink my-16 mt-20 mb-20 w-full border-t-2 border-dashed opacity-30"
+			>
+			</div>
+
+			<CTA />
+		</div>
+	</main>
 </Layout>
