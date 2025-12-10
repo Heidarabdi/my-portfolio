@@ -1,10 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { BLOG_POSTS } from "../data/siteData";
+import { getCollection } from "astro:content"
 import BlogCard from "../components/cards/BlogCard.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 
 const title = "Journal - Heidar Dev Portfolio";
+const posts = await getCollection('blog')
 ---
 
 <Layout title={title}>
@@ -24,7 +25,7 @@ const title = "Journal - Heidar Dev Portfolio";
             <div
                 class="reveal reveal-delay-100 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
             >
-                {BLOG_POSTS.map((post) => <BlogCard post={post} />)}
+                {posts.map((post) => <BlogCard post={post} />)}
             </div>
         </div>
     </main>

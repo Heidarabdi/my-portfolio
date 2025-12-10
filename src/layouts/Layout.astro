@@ -1,7 +1,13 @@
 ---
 import "../styles/global.css";
-import "@fontsource/playfair-display";
-import "@fontsource/space-mono";
+// @ts-expect-error: Playfair Display font 400-italic
+import "@fontsource/playfair-display/400-italic";
+// @ts-expect-error: Playfair Display font 700
+import "@fontsource/playfair-display/700";
+// @ts-expect-error: Space Mono font 400
+import "@fontsource/space-mono/400";
+// @ts-expect-error: Space Mono font 700
+import "@fontsource/space-mono/700";
 import { ClientRouter } from "astro:transitions";
 
 import Navbar from "../components/Navbar.astro";
@@ -11,6 +17,14 @@ import { ArrowUp } from "lucide-astro";
 interface Props {
   title?: string;
   description?: string;
+  ogUrl?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  twitterCard?: string;
+  twitterHandle?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
 }
 
 const {
@@ -74,6 +88,7 @@ const {
     <button
       id="back-to-top"
       class="bg-accent border-ink hard-shadow focus:ring-ink pointer-events-none fixed right-8 bottom-8 z-50 translate-y-4 border-2 p-3 text-white opacity-0 transition-all duration-300 hover:shadow-[6px_6px_0px_0px_var(--color-ink)] focus:ring-2 focus:ring-offset-2 focus:outline-none"
+      aria-label="Back to top"
     >
       <ArrowUp class="h-6 w-6" />
     </button>

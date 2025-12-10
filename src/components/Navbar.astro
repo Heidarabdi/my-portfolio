@@ -16,7 +16,6 @@ const isActive = (href: string) => {
     return false;
 };
 ---
-
 <nav
     class="bg-paper/95 border-ink fixed top-0 right-0 left-0 z-40 border-b-2 font-mono backdrop-blur-sm transition-colors duration-300"
 >
@@ -70,6 +69,7 @@ const isActive = (href: string) => {
             <button
                 id="theme-toggle"
                 class="text-ink hover:text-accent transition-vintage rounded-sm p-2 focus:outline-none"
+                aria-label="Toggle theme"
             >
                 <div id="theme-icon"><Moon class="h-5 w-5" /></div>
             </button>
