@@ -6,11 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
+    "check": "astro check",
+    "clean": "rm -rf dist .astro",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource/playfair-display": "^5.2.8",
     "@fontsource/space-mono": "^5.2.9",

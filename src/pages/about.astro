@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 import {
     User,
     Mail,
@@ -44,7 +45,7 @@ const title = "About - Heidar Dev Portfolio";
                     class="text-ink mt-4 flex gap-4 font-mono text-sm font-bold tracking-widest uppercase md:mt-0"
                 >
                     <a
-                        href="contact"
+                        href="/contact"
                         class="inline-flex items-center gap-2 rounded p-2 transition-colors hover:bg-stone-100"
                         ><Mail class="h-4 w-4" />
                         Contact</a
@@ -68,10 +69,12 @@ const title = "About - Heidar Dev Portfolio";
                         <div
                             class="aspect-3/4 overflow-hidden bg-stone-200 grayscale transition-all duration-700 hover:grayscale-0"
                         >
-                            <img
+                            <Image
                                 src="https://picsum.photos/400/500?random=99"
                                 alt="Heidar Abdi Ahmed"
-                                loading="lazy"
+                                width={400}
+                                height={500}
+                                loading="eager"
                                 class="h-full w-full object-cover"
                             />
                         </div>
@@ -562,7 +565,7 @@ const title = "About - Heidar Dev Portfolio";
                         Interested in collaboration?
                     </h2>
                     <a
-                        href="contact"
+                        href="/contact"
                         class="border-ink text-ink hover:bg-ink hover:text-paper group inline-flex items-center gap-3 border-2 bg-transparent px-6 py-3 font-bold tracking-widest uppercase transition-all"
                     >
                         Proceed to Communication

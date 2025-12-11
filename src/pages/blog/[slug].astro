@@ -1,10 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getCollection } from 'astro:content';
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import { ArrowLeft, Calendar, Clock, Tag, User } from "lucide-astro";
 
 export async function getStaticPaths() {
-    const blogPosts = await getCollection('blog');
+    const blogPosts = await getCollection("blog");
     return blogPosts.map((post) => ({
         params: { slug: post.slug },
         props: { post },
@@ -61,10 +62,12 @@ const title = `${post.data.title} - Heidar Dev Journal`;
                 class="bg-paper-light border-ink hard-shadow-sm mb-12 rotate-1 border-2 p-3 transition-transform duration-500 hover:rotate-0"
             >
                 <div class="aspect-video w-full overflow-hidden grayscale-0">
-                    <img
+                    <Image
                         id="post-image"
                         src={post.data.imageUrl}
                         alt={post.data.title}
+                        width={800}
+                        height={450}
                         class="h-full w-full object-cover"
                     />
                 </div>
@@ -85,9 +88,11 @@ const title = `${post.data.title} - Heidar Dev Journal`;
                     <div
                         class="border-ink hard-shadow-sm h-24 w-24 shrink-0 overflow-hidden rounded-full border-2"
                     >
-                        <img
+                        <Image
                             src="https://picsum.photos/200/200?random=99"
                             alt="Heidar Abdi"
+                            width={200}
+                            height={200}
                             class="h-full w-full object-cover grayscale"
                         />
                     </div>

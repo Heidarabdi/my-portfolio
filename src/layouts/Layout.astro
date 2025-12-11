@@ -30,7 +30,26 @@ interface Props {
 const {
   title = "Heidar Dev Portfolio",
   description = "Engineering Intelligent Solutions",
+  ogUrl,
+  ogTitle,
+  ogDescription,
+  twitterCard = "summary_large_image",
+  twitterHandle = "@heidarabdi",
+  twitterTitle,
+  twitterDescription,
+  twitterImage,
 } = Astro.props;
+
+// Generate canonical URL
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Use provided OG values or fall back to defaults
+const finalOgTitle = ogTitle || title;
+const finalOgDescription = ogDescription || description;
+const finalOgUrl = ogUrl || canonicalURL.toString();
+
+const finalTwitterTitle = twitterTitle || title;
+const finalTwitterDescription = twitterDescription || description;
 ---
 
 <!doctype html>
@@ -41,38 +60,38 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/h.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
 
-    <!-- Fonts (Strict 1:1 Match via CDN) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- RSS Feed -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
-      rel="stylesheet"
+      rel="alternate"
+      type="application/rss+xml"
+      title="Heidar Dev Blog"
+      href="/rss.xml"
     />
 
+    <title>{title}</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={finalOgUrl} />
+    <meta property="og:title" content={finalOgTitle} />
+    <meta property="og:description" content={finalOgDescription} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content={twitterCard} />
+    <meta property="twitter:url" content={finalOgUrl} />
+    <meta property="twitter:title" content={finalTwitterTitle} />
+    <meta property="twitter:description" content={finalTwitterDescription} />
+    {twitterHandle && <meta property="twitter:site" content={twitterHandle} />}
+    {twitterImage && <meta property="twitter:image" content={twitterImage} />}
+
     <ClientRouter />
-
-    <script is:inline>
-      // 1. Initial Theme Check (Prevent FOUC)
-      // This runs immediately when the HTML is parsed
-      (function () {
-        try {
-          const savedTheme = localStorage.getItem("theme");
-          const prefersDark = window.matchMedia(
-            "(prefers-color-scheme: dark)",
-          ).matches;
-
-          if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-            document.documentElement.classList.add("dark");
-          } else {
-            document.documentElement.classList.remove("dark");
-          }
-        } catch (e) {
-          console.error("Theme check failed", e);
-        }
-      })();
-    </script>
   </head>
   <body
     class="selection:bg-accent bg-paper text-ink transition-colors duration-300 selection:text-white"

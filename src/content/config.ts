@@ -5,10 +5,12 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
-    date: z.string(),
+    date: z.coerce.date(), // ✅ Proper date handling instead of string
     readTime: z.string(),
     category: z.enum(['Machine Learning', 'Web Development', 'IT Operations']),
     imageUrl: z.string(),
+    author: z.string().optional(),
+    tags: z.array(z.string()).optional(),
   }),
 });
 
