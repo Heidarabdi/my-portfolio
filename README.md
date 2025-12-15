@@ -224,14 +224,19 @@ Cloudflare Pages offers blazing-fast global CDN, automatic SSL, and preview depl
    npm run build
    ```
 
-3. **Deploy**
+3. **Deploy to Cloudflare Pages**
    ```bash
    npx wrangler pages deploy dist
    ```
+   
+   **Important**: Use `wrangler pages deploy dist` (not just `wrangler deploy`)
 
-4. **Login and follow prompts**
-   - The CLI will guide you through authentication
+4. **First time setup**
+   - The CLI will ask for your project name
+   - It will guide you through authentication
    - Your site will be deployed to `<project-name>.pages.dev`
+
+**Note**: Method 1 (Git integration) is recommended as it's easier and provides automatic deployments on every push!
 
 #### Custom Domain Setup
 
