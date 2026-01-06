@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { PROJECTS } from "../data/siteData";
+import { getCollection } from "astro:content";
+import { toProjectData } from "../types/project";
 import ProjectCard from "../components/cards/ProjectCard.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 import {
@@ -11,6 +12,20 @@ import {
     ExternalLink,
     Github,
 } from "lucide-astro";
+
+// Fetch projects from content collection
+const projectEntries = await getCollection("projects", ({ slug }) => {
+    // Filter out template file
+    return !slug.startsWith("_");
+});
+
+// Convert to ProjectData and sort by order
+const projects = projectEntries
+    .map(toProjectData)
+    .sort((a, b) => a.order - b.order);
+
+// Prepare JSON for client-side modal
+const projectsJson = JSON.stringify(projects);
 
 const title = "Works - Heidar Dev Portfolio";
 ---
@@ -64,7 +79,7 @@ const title = "Works - Heidar Dev Portfolio";
             <div
                 class="reveal reveal-delay-200 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3"
             >
-                {PROJECTS.map((project) => <ProjectCard project={project} />)}
+                {projects.map((project) => <ProjectCard project={project} />)}
             </div>
         </section>
     </main>
@@ -175,25 +190,36 @@ const title = "Works - Heidar Dev Portfolio";
                     <ul id="modal-features-list" class="space-y-3"></ul>
                 </div>
 
-                <div class="mt-auto flex flex-col gap-3 pt-6">
-                    <button
-                        class="bg-ink text-paper border-ink hover:bg-accent hover:border-accent flex w-full items-center justify-center gap-2 border-2 py-3 font-bold tracking-widest uppercase transition-colors"
+                <div id="modal-links" class="mt-auto flex flex-col gap-3 pt-6">
+                    <a
+                        id="modal-live-link"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="bg-ink text-paper border-ink hover:bg-accent hover:border-accent hidden w-full items-center justify-center gap-2 border-2 py-3 font-bold tracking-widest uppercase transition-colors"
                     >
                         Launch Project
                         <ExternalLink class="h-4 w-4" />
-                    </button>
-                    <button
-                        class="bg-paper-light text-ink border-ink flex w-full items-center justify-center gap-2 border-2 py-3 font-bold tracking-widest uppercase transition-shadow hover:shadow-[4px_4px_0px_0px_var(--color-accent)]"
+                    </a>
+                    <a
+                        id="modal-github-link"
+                        href="#"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="bg-paper-light text-ink border-ink hidden w-full items-center justify-center gap-2 border-2 py-3 font-bold tracking-widest uppercase transition-shadow hover:shadow-[4px_4px_0px_0px_var(--color-accent)]"
                     >
                         Source Code
                         <Github class="h-4 w-4" />
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <script is:inline define:vars={{ PROJECTS }}>
+    <script is:inline define:vars={{ projectsJson }}>
+        // Parse projects data
+        const PROJECTS = JSON.parse(projectsJson);
+
         // ---------------------------------------------------------
         // 1. FILTER LOGIC
         // ---------------------------------------------------------
@@ -221,8 +247,6 @@ const title = "Works - Heidar Dev Portfolio";
 
                 filterBtns.forEach((btn) => {
                     btn.addEventListener("click", () => {
-                        const filter = btn.getAttribute("data-filter");
-
                         // Batch DOM updates in single frame to prevent flash
                         requestAnimationFrame(() => {
                             // Reset ALL buttons to inactive style
@@ -295,8 +319,8 @@ const title = "Works - Heidar Dev Portfolio";
         let currentProject = null;
         let currentGalleryIndex = 0;
 
-        function openModal(projectId) {
-            currentProject = PROJECTS.find((p) => p.id === projectId);
+        function openModal(projectSlug) {
+            currentProject = PROJECTS.find((p) => p.slug === projectSlug);
             if (!currentProject) return;
 
             currentGalleryIndex = 0;
@@ -332,6 +356,28 @@ const title = "Works - Heidar Dev Portfolio";
                 });
             }
 
+            // Handle links
+            const liveLink = document.getElementById("modal-live-link");
+            const githubLink = document.getElementById("modal-github-link");
+
+            if (currentProject.liveUrl) {
+                liveLink.href = currentProject.liveUrl;
+                liveLink.classList.remove("hidden");
+                liveLink.classList.add("flex");
+            } else {
+                liveLink.classList.add("hidden");
+                liveLink.classList.remove("flex");
+            }
+
+            if (currentProject.githubUrl) {
+                githubLink.href = currentProject.githubUrl;
+                githubLink.classList.remove("hidden");
+                githubLink.classList.add("flex");
+            } else {
+                githubLink.classList.add("hidden");
+                githubLink.classList.remove("flex");
+            }
+
             const modal = document.getElementById("project-modal");
             modal.classList.remove("hidden");
             document.body.classList.add("modal-open");
@@ -350,7 +396,10 @@ const title = "Works - Heidar Dev Portfolio";
         function updateGalleryImage() {
             if (!currentProject) return;
             const imgEl = document.getElementById("modal-img");
-            const gallery = currentProject.gallery || [currentProject.imageUrl];
+            const gallery =
+                currentProject.gallery.length > 0
+                    ? currentProject.gallery
+                    : [currentProject.imageUrl];
 
             // Fade out
             imgEl.style.opacity = "0";
@@ -370,8 +419,8 @@ const title = "Works - Heidar Dev Portfolio";
             // Card Clicks
             document.querySelectorAll(".project-card").forEach((card) => {
                 card.addEventListener("click", () => {
-                    const id = card.getAttribute("data-id");
-                    openModal(id);
+                    const slug = card.getAttribute("data-id");
+                    openModal(slug);
                 });
             });
 
@@ -387,12 +436,14 @@ const title = "Works - Heidar Dev Portfolio";
                 .getElementById("prev-image")
                 ?.addEventListener("click", (e) => {
                     e.stopPropagation();
-                    if (!currentProject || !currentProject.gallery) return;
+                    if (!currentProject) return;
+                    const gallery =
+                        currentProject.gallery.length > 0
+                            ? currentProject.gallery
+                            : [currentProject.imageUrl];
                     currentGalleryIndex =
-                        (currentGalleryIndex -
-                            1 +
-                            currentProject.gallery.length) %
-                        currentProject.gallery.length;
+                        (currentGalleryIndex - 1 + gallery.length) %
+                        gallery.length;
                     updateGalleryImage();
                 });
 
@@ -400,10 +451,13 @@ const title = "Works - Heidar Dev Portfolio";
                 .getElementById("next-image")
                 ?.addEventListener("click", (e) => {
                     e.stopPropagation();
-                    if (!currentProject || !currentProject.gallery) return;
+                    if (!currentProject) return;
+                    const gallery =
+                        currentProject.gallery.length > 0
+                            ? currentProject.gallery
+                            : [currentProject.imageUrl];
                     currentGalleryIndex =
-                        (currentGalleryIndex + 1) %
-                        currentProject.gallery.length;
+                        (currentGalleryIndex + 1) % gallery.length;
                     updateGalleryImage();
                 });
 
@@ -414,28 +468,49 @@ const title = "Works - Heidar Dev Portfolio";
 
                 if (e.key === "Escape") closeModal();
                 if (e.key === "ArrowRight") {
-                    if (!currentProject || !currentProject.gallery) return;
+                    if (!currentProject) return;
+                    const gallery =
+                        currentProject.gallery.length > 0
+                            ? currentProject.gallery
+                            : [currentProject.imageUrl];
                     currentGalleryIndex =
-                        (currentGalleryIndex + 1) %
-                        currentProject.gallery.length;
+                        (currentGalleryIndex + 1) % gallery.length;
                     updateGalleryImage();
                 }
                 if (e.key === "ArrowLeft") {
-                    if (!currentProject || !currentProject.gallery) return;
+                    if (!currentProject) return;
+                    const gallery =
+                        currentProject.gallery.length > 0
+                            ? currentProject.gallery
+                            : [currentProject.imageUrl];
                     currentGalleryIndex =
-                        (currentGalleryIndex -
-                            1 +
-                            currentProject.gallery.length) %
-                        currentProject.gallery.length;
+                        (currentGalleryIndex - 1 + gallery.length) %
+                        gallery.length;
                     updateGalleryImage();
                 }
             });
+        }
+
+        // Check for hash in URL and open modal
+        function checkHashAndOpenModal() {
+            const hash = window.location.hash;
+            if (hash && hash.length > 1) {
+                const slug = hash.substring(1); // Remove the #
+                const project = PROJECTS.find((p) => p.slug === slug);
+                if (project) {
+                    // Small delay to ensure DOM is ready
+                    setTimeout(() => {
+                        openModal(slug);
+                    }, 100);
+                }
+            }
         }
 
         // Run Logic (Handle View Transitions)
         function run() {
             initFilter();
             initModal();
+            checkHashAndOpenModal();
         }
 
         // Astro events

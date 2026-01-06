@@ -16,16 +16,37 @@ const blog = defineCollection({
 
 const projects = defineCollection({
   type: 'content',
-  schema: z.object({
+  schema: ({ image }) => z.object({
+    // Core fields
     title: z.string(),
     description: z.string(),
+    longDescription: z.string().optional(),
+
+    // Technical
     technologies: z.array(z.string()),
-    imageUrl: z.string(),
-    link: z.string(),
+    features: z.array(z.string()).default([]),
+
+    // Links
+    liveUrl: z.string().optional(),
+    githubUrl: z.string().optional(),
+
+    // Media - supports local images via image() helper
+    image: image().optional(),
+    imageUrl: z.string().optional(), // Fallback for external URLs
+    gallery: z.array(z.string()).default([]),
+
+    // Categorization
     category: z.enum(['Machine Learning', 'Web Development', 'IT Support', 'Other']),
-    longDescription: z.string(),
-    features: z.array(z.string()),
-    gallery: z.array(z.string()),
+
+    // Display control
+    featured: z.boolean().default(false),
+    order: z.number().default(100),
+    status: z.enum(['completed', 'in-progress', 'archived']).default('completed'),
+
+    // Additional metadata
+    client: z.string().optional(),
+    year: z.number().optional(),
+    teamSize: z.number().optional(),
   }),
 });
 

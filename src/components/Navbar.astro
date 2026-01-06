@@ -16,8 +16,9 @@ const isActive = (href: string) => {
     return false;
 };
 ---
+
 <nav
-    class="bg-paper/95 border-ink fixed top-0 right-0 left-0 z-40 border-b-2 font-mono backdrop-blur-sm transition-colors duration-300"
+    class="bg-paper/95 border-ink fixed top-0 right-0 left-0 z-40 border-b-2 backdrop-blur-sm transition-colors duration-300"
 >
     <!-- Desktop/Main Bar -->
     <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
@@ -38,9 +39,8 @@ const isActive = (href: string) => {
             >
         </a>
 
-        <div
-            class="flex items-center gap-6 text-xs font-bold tracking-widest uppercase md:gap-8"
-        >
+        <div class="flex items-center gap-6 md:gap-8">
+            <!-- Clean Navigation -->
             <div class="hidden items-center gap-6 md:flex">
                 {
                     navItems.map((item) => (
@@ -48,45 +48,52 @@ const isActive = (href: string) => {
                             href={item.href}
                             data-astro-prefetch
                             class:list={[
-                                "transition-vintage flex items-center gap-2 border-b-2 pb-1",
+                                "group flex items-center gap-2 text-sm font-medium transition-colors duration-200",
                                 isActive(item.href)
-                                    ? "border-accent text-ink"
-                                    : "hover:text-ink hover:border-line-medium border-transparent text-stone-500",
+                                    ? "text-ink"
+                                    : "hover:text-ink text-stone-500",
                             ]}
                         >
                             <item.icon
                                 class:list={[
-                                    "h-3.5 w-3.5",
-                                    isActive(item.href) ? "text-accent" : "",
+                                    "h-4 w-4 transition-colors",
+                                    isActive(item.href)
+                                        ? "text-accent"
+                                        : "text-stone-400 group-hover:text-stone-600",
                                 ]}
-                            />{" "}
-                            {item.label}
+                            />
+                            <span>{item.label}</span>
+                            {isActive(item.href) && (
+                                <span class="sr-only">(current)</span>
+                            )}
                         </a>
                     ))
                 }
             </div>
 
-            <button
-                id="theme-toggle"
-                class="text-ink hover:text-accent transition-vintage rounded-sm p-2 focus:outline-none"
-                aria-label="Toggle theme"
-            >
-                <div id="theme-icon"><Moon class="h-5 w-5" /></div>
-            </button>
+            <div class="flex items-center gap-4">
+                <button
+                    id="theme-toggle"
+                    class="hover:text-ink p-2 text-stone-500 transition-colors focus:outline-none"
+                    aria-label="Toggle theme"
+                >
+                    <div id="theme-icon"><Moon class="h-5 w-5" /></div>
+                </button>
 
-            <a
-                href="/contact"
-                data-astro-prefetch
-                class="bg-ink text-paper hover:bg-accent border-ink hard-shadow-sm hidden items-center justify-center border-2 px-4 py-2 transition-all hover:shadow-[4px_4px_0px_0px_var(--color-accent)] sm:inline-flex"
-            >
-                Contact
-            </a>
+                <a
+                    href="/contact"
+                    data-astro-prefetch
+                    class="bg-ink text-paper hover:bg-accent border-ink hard-shadow-sm hidden items-center justify-center border-2 px-4 py-2 text-sm font-medium transition-all hover:shadow-[4px_4px_0px_0px_var(--color-accent)] sm:inline-flex"
+                >
+                    Contact
+                </a>
+            </div>
         </div>
     </div>
 
     <!-- Mobile Sub-Bar -->
     <div
-        class="border-ink/20 bg-paper text-ink hidden justify-between overflow-x-auto border-t px-6 py-2 text-xs font-bold uppercase md:hidden"
+        class="border-ink/20 bg-paper flex justify-around border-t px-4 py-3 md:hidden"
     >
         {
             navItems.map((item) => (
@@ -94,13 +101,19 @@ const isActive = (href: string) => {
                     href={item.href}
                     data-astro-prefetch
                     class:list={[
-                        "transition-vintage mr-4 flex items-center gap-2 border-b-2 pb-1 whitespace-nowrap",
-                        isActive(item.href)
-                            ? "border-accent text-ink"
-                            : "border-transparent text-stone-500",
+                        "flex flex-col items-center gap-1 px-3 py-1 text-xs font-medium transition-colors",
+                        isActive(item.href) ? "text-ink" : "text-stone-500",
                     ]}
                 >
-                    {item.label}
+                    <item.icon
+                        class:list={[
+                            "h-4 w-4",
+                            isActive(item.href)
+                                ? "text-accent"
+                                : "text-stone-400",
+                        ]}
+                    />
+                    <span>{item.label}</span>
                 </a>
             ))
         }

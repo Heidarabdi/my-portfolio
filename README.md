@@ -291,8 +291,18 @@ If using analytics or external services, set these in Cloudflare Pages dashboard
 2. Add variables:
    ```env
    PUBLIC_SITE_URL=https://yourdomain.com
-   PUBLIC_GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
+   PUBLIC_CF_ANALYTICS_TOKEN=your-cloudflare-token
    ```
+
+#### Getting Your Cloudflare Analytics Token
+
+1. Log in to [Cloudflare Dashboard](https://dash.cloudflare.com/)
+2. Go to **Analytics & Logs** → **Web Analytics**
+3. Click **Add a site** and enter your domain
+4. Copy the token from the script snippet (the value after `data-cf-beacon`)
+5. Add it as `PUBLIC_CF_ANALYTICS_TOKEN` in your environment variables
+
+The analytics script only loads in production builds.
 
 
 ## 🔧 Configuration

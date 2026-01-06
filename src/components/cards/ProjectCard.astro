@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import type { Project } from "../../data/siteData";
+import type { ProjectData } from "../../types/project";
 
 interface Props {
-    project: Project;
+    project: ProjectData;
 }
 
 const { project } = Astro.props;
@@ -12,14 +12,14 @@ const { project } = Astro.props;
 <div
     class="project-card hard-shadow-sm group border-ink bg-paper-light flex h-full cursor-pointer flex-col border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_var(--color-ink)]"
     data-category={project.category}
-    data-id={project.id}
+    data-id={project.slug}
 >
     <div class="p-3 pb-0">
         <div
             class="border-line-faint relative aspect-video overflow-hidden border"
         >
             <Image
-                src={project.imageUrl}
+                src={project.imageUrl || "https://picsum.photos/600/400"}
                 alt={project.title}
                 width={600}
                 height={400}
@@ -28,7 +28,7 @@ const { project } = Astro.props;
             <div
                 class="bg-ink text-paper absolute top-2 right-2 px-2 py-1 text-xs font-bold opacity-0 transition-opacity group-hover:opacity-100"
             >
-                REF.0{project.id}
+                {project.order.toString().padStart(2, '0')}
             </div>
             <div
                 class="bg-paper-light/90 text-ink absolute bottom-2 left-2 inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-bold tracking-widest uppercase"

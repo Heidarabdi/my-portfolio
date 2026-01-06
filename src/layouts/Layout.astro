@@ -1,12 +1,8 @@
 ---
 import "../styles/global.css";
-// @ts-expect-error: Playfair Display font 400-italic
 import "@fontsource/playfair-display/400-italic";
-// @ts-expect-error: Playfair Display font 700
 import "@fontsource/playfair-display/700";
-// @ts-expect-error: Space Mono font 400
 import "@fontsource/space-mono/400";
-// @ts-expect-error: Space Mono font 700
 import "@fontsource/space-mono/700";
 import { ClientRouter } from "astro:transitions";
 
@@ -200,5 +196,16 @@ const finalTwitterDescription = twitterDescription || description;
         runAll();
       }
     </script>
+
+    <!-- Cloudflare Web Analytics -->
+    {
+      import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN && import.meta.env.PROD && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={`{"token": "${import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN}"}`}
+        />
+      )
+    }
   </body>
 </html>
