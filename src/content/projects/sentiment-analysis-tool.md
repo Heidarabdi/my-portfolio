@@ -13,10 +13,9 @@ features:
   - Visual reporting dashboard
   - Multi-source data ingestion
 category: "Machine Learning"
-imageUrl: "https://picsum.photos/600/400?random=40"
+imageUrl: "/images/portfolio/project-sentiment.svg"
 gallery:
-  - "https://picsum.photos/800/600?random=41"
-  - "https://picsum.photos/800/600?random=42"
+  - "/images/portfolio/project-sentiment.svg"
 featured: false
 order: 4
 status: "completed"

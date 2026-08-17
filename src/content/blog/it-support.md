@@ -4,7 +4,7 @@ excerpt: "Lessons learned from managing university computer labs, troubleshootin
 date: "Aug 10, 2023"
 readTime: "5 min read"
 category: "IT Operations"
-imageUrl: "https://picsum.photos/800/400?random=6"
+imageUrl: "/images/portfolio/blog-it.svg"
 ---
 
 Hardware fails, software crashes, and networks slow down. Being an IT Support Specialist at a major institution like **Jamhuriya University of Science & Technology (JUST)** is about more than just fixing broken printers—it's about ensuring the continuity of education.

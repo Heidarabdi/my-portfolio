@@ -24,13 +24,15 @@ export function getRemoteImageProps(
 }
 
 /**
- * Generate placeholder image URL
- * Replace this with your actual images later
+ * Generate the local branded placeholder image URL.
  */
 export function getPlaceholderImage(
   seed: number,
   width = 600,
   height = 400,
 ): string {
-  return `https://picsum.photos/${width}/${height}?random=${seed}`;
+  void width;
+  void height;
+  void seed;
+  return "/images/portfolio/project-placeholder.svg";
 }

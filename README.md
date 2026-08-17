@@ -10,7 +10,7 @@ A modern, performant portfolio website built with **Astro 7**, featuring optimiz
 
 ### 🚀 Performance & Optimization
 
-- **Astro Image Component** - Automatic image optimization with WebP/AVIF conversion
+- **Local Image Assets** - Branded SVG artwork with no external image-fetch dependency
 - **Zero Duplicate Font Loading** - Optimized font delivery via `@fontsource`
 - **SVG Optimization** - Build-time compression using Astro's SVGO optimizer
 - **View Transitions** - Smooth page transitions with Astro's built-in API
@@ -130,6 +130,7 @@ All commands are run from the root of the project:
 | `npm run build`   | Build production site to `./dist/`   |
 | `npm run preview` | Preview production build locally     |
 | `npm run check`   | Run Astro type checking              |
+| `npm test`        | Run static output smoke tests        |
 | `npm run clean`   | Remove build artifacts               |
 | `npm run lint`    | Run ESLint                           |
 | `npm run format`  | Format code with Prettier            |

@@ -22,7 +22,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "Jan 15, 2025",
     readTime: "8 min read",
     category: "Machine Learning",
-    imageUrl: "https://picsum.photos/800/400?random=4",
+    imageUrl: "/images/portfolio/blog-ai.svg",
     content: `
       <p class="mb-4">Bringing machine learning models from a Jupyter notebook to a production web application is a common challenge for many developers. The disconnect between the data science environment (typically Python-heavy) and the web development ecosystem (JavaScript/TypeScript) requires a robust integration strategy.</p>
 
@@ -70,7 +70,7 @@ pickle.dump(model, open(filename, 'wb'))</code></pre>
     date: "Nov 20, 2024",
     readTime: "6 min read",
     category: "Web Development",
-    imageUrl: "https://picsum.photos/800/400?random=5",
+    imageUrl: "/images/portfolio/blog-accessibility.svg",
     content: `
       <p class="mb-4">Building for the public sector means building for everyone. When I was tasked with developing the official portal for the <strong>Somali National Women Organization (SNWO)</strong>, accessibility wasn't just a "nice-to-have"—it was a fundamental requirement.</p>
 
@@ -108,7 +108,7 @@ button:focus-visible {
     date: "Aug 10, 2023",
     readTime: "5 min read",
     category: "IT Operations",
-    imageUrl: "https://picsum.photos/800/400?random=6",
+    imageUrl: "/images/portfolio/blog-it.svg",
     content: `
       <p class="mb-4">Hardware fails, software crashes, and networks slow down. Being an IT Support Specialist at a major institution like <strong>Jamhuriya University of Science & Technology (JUST)</strong> is about more than just fixing broken printers—it's about ensuring the continuity of education.</p>
 

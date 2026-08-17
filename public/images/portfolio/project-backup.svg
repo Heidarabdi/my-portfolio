@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title">
+  <title id="title">Auto backup script suite artwork</title>
+  <rect width="1200" height="800" fill="#fffbeb"/>
+  <path d="M600 120a250 250 0 1 1-215 125" fill="none" stroke="#92400e" stroke-width="34" stroke-linecap="round"/>
+  <path d="m405 135-35 150 145-35" fill="#f97316"/>
+  <rect x="400" y="330" width="400" height="230" fill="#92400e"/>
+  <path d="M470 405h260M470 475h170" stroke="#fffbeb" stroke-width="22"/>
+  <text x="135" y="700" fill="#92400e" font-family="monospace" font-size="38" letter-spacing="5">AUTOMATION / BACKUP</text>
+</svg>

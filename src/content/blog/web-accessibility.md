@@ -4,7 +4,7 @@ excerpt: "Why inclusive design matters and how I implemented WCAG 2.1 standards 
 date: "Nov 20, 2024"
 readTime: "6 min read"
 category: "Web Development"
-imageUrl: "https://picsum.photos/800/400?random=5"
+imageUrl: "/images/portfolio/blog-accessibility.svg"
 ---
 
 Building for the public sector means building for everyone. When I was tasked with developing the official portal for the **Somali National Women Organization (SNWO)**, accessibility wasn't just a "nice-to-have"—it was a fundamental requirement.

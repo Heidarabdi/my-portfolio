@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import { ArrowLeft, Calendar, Clock, Tag, User } from "lucide-astro";
 
@@ -62,7 +61,7 @@ const title = `${post.data.title} - Heidar Dev Journal`;
         class="bg-paper-light border-ink hard-shadow-sm mb-12 rotate-1 border-2 p-3 transition-transform duration-500 hover:rotate-0"
       >
         <div class="aspect-video w-full overflow-hidden grayscale-0">
-          <Image
+          <img
             id="post-image"
             src={post.data.imageUrl}
             alt={post.data.title}
@@ -88,8 +87,8 @@ const title = `${post.data.title} - Heidar Dev Journal`;
           <div
             class="border-ink hard-shadow-sm h-24 w-24 shrink-0 overflow-hidden rounded-full border-2"
           >
-            <Image
-              src="https://picsum.photos/200/200?random=99"
+            <img
+              src="/images/portfolio/author.svg"
               alt="Heidar Abdi"
               width={200}
               height={200}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title">
+  <title id="title">Machine learning integration platform artwork</title>
+  <rect width="1200" height="800" fill="#fdf8f3"/>
+  <rect x="90" y="90" width="1020" height="620" fill="#1a1512"/>
+  <g fill="#f97316"><circle cx="250" cy="270" r="28"/><circle cx="410" cy="180" r="28"/><circle cx="560" cy="330" r="28"/><circle cx="760" cy="220" r="28"/><circle cx="930" cy="390" r="28"/></g>
+  <g stroke="#fdf8f3" stroke-width="10"><path d="m250 270 160-90 150 150 200-110 170 170"/></g>
+  <text x="145" y="625" fill="#fdf8f3" font-family="monospace" font-size="42" letter-spacing="5">ML / INTEGRATION PLATFORM</text>
+</svg>

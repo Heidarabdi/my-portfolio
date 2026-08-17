@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title">
+  <title id="title">AI model integration illustration</title>
+  <rect width="1200" height="800" fill="#fdf8f3"/>
+  <path d="M0 650 260 390l170 140L720 150l480 270v380H0Z" fill="#1a1512"/>
+  <circle cx="300" cy="300" r="92" fill="#f97316"/>
+  <path d="M300 250v100M250 300h100M268 268l64 64M332 268l-64 64" stroke="#fdf8f3" stroke-width="12"/>
+  <text x="82" y="115" fill="#1a1512" font-family="monospace" font-size="34" letter-spacing="8">JOURNAL / 01</text>
+  <text x="82" y="730" fill="#fdf8f3" font-family="sans-serif" font-size="54" font-weight="700">AI × WEB APPS</text>
+</svg>

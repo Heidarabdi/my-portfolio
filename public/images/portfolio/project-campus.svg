@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title">
+  <title id="title">Campus IT infrastructure artwork</title>
+  <rect width="1200" height="800" fill="#ecfdf5"/>
+  <path d="M120 610h960M190 610V360l210-150 210 150v250M700 610V360l155-110 155 110v250" fill="none" stroke="#065f46" stroke-width="28"/>
+  <path d="M330 610V470h140v140M805 610V470h100v140" fill="#f97316"/>
+  <text x="110" y="105" fill="#065f46" font-family="monospace" font-size="34" letter-spacing="8">CAMPUS / IT SYSTEMS</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title">
+  <title id="title">Sentiment analysis tool artwork</title>
+  <rect width="1200" height="800" fill="#fff1f2"/>
+  <path d="M150 590h900" stroke="#9f1239" stroke-width="14"/>
+  <path d="m170 530 150-120 125 55 160-210 140 115 190-180" fill="none" stroke="#e11d48" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="605" cy="255" r="42" fill="#f97316"/>
+  <text x="120" y="120" fill="#9f1239" font-family="monospace" font-size="34" letter-spacing="8">NLP / SIGNALS</text>
+  <text x="120" y="710" fill="#9f1239" font-family="sans-serif" font-size="52" font-weight="700">SENTIMENT TOOL</text>
+</svg>

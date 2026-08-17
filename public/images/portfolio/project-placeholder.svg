@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title">
+  <title id="title">Heidar Dev project placeholder</title>
+  <rect width="1200" height="800" fill="#fdf8f3"/>
+  <rect x="80" y="80" width="1040" height="640" fill="#1a1512"/>
+  <path d="M170 575h860M170 225h860" stroke="#f97316" stroke-width="18"/>
+  <text x="600" y="425" fill="#fdf8f3" font-family="monospace" font-size="54" letter-spacing="8" text-anchor="middle">HEIDAR DEV</text>
+</svg>

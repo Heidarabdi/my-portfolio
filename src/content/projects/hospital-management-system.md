@@ -13,10 +13,9 @@ features:
   - Secure Login System
   - Report Generation
 category: "Other"
-imageUrl: "https://picsum.photos/600/400?random=50"
+imageUrl: "/images/portfolio/project-hospital.svg"
 gallery:
-  - "https://picsum.photos/800/600?random=51"
-  - "https://picsum.photos/800/600?random=52"
+  - "/images/portfolio/project-hospital.svg"
 featured: false
 order: 5
 status: "completed"

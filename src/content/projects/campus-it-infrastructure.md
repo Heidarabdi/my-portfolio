@@ -13,10 +13,9 @@ features:
   - Software Lifecycle Management
   - Student Technical Support
 category: "IT Support"
-imageUrl: "https://picsum.photos/600/400?random=30"
+imageUrl: "/images/portfolio/project-campus.svg"
 gallery:
-  - "https://picsum.photos/800/600?random=31"
-  - "https://picsum.photos/800/600?random=32"
+  - "/images/portfolio/project-campus.svg"
 featured: true
 order: 3
 status: "completed"

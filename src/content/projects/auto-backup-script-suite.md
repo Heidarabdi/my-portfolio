@@ -13,10 +13,9 @@ features:
   - Error Logging & Alerts
   - Cron Job Management
 category: "IT Support"
-imageUrl: "https://picsum.photos/600/400?random=60"
+imageUrl: "/images/portfolio/project-backup.svg"
 gallery:
-  - "https://picsum.photos/800/600?random=61"
-  - "https://picsum.photos/800/600?random=62"
+  - "/images/portfolio/project-backup.svg"
 featured: false
 order: 6
 status: "completed"

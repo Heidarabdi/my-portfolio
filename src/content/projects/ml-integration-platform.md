@@ -13,10 +13,9 @@ features:
   - Algorithm Optimization for Real-world Data
   - Scalable Deployment Architecture
 category: "Machine Learning"
-imageUrl: "https://picsum.photos/600/400?random=10"
+imageUrl: "/images/portfolio/project-ml.svg"
 gallery:
-  - "https://picsum.photos/800/600?random=11"
-  - "https://picsum.photos/800/600?random=12"
+  - "/images/portfolio/project-ml.svg"
 featured: true
 order: 1
 status: "completed"

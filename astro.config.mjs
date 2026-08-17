@@ -12,9 +12,6 @@ export default defineConfig({
   experimental: {
     svgOptimizer: svgoOptimizer(),
   },
-  image: {
-    domains: ["picsum.photos", "fastly.picsum.photos"],
-  },
   vite: {
     plugins: [tailwindcss()],
   },

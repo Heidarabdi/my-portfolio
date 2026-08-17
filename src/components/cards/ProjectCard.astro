@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import type { ProjectData } from "../../types/project";
 
 interface Props {
@@ -16,8 +15,8 @@ const { project } = Astro.props;
 >
   <div class="p-3 pb-0">
     <div class="border-line-faint relative aspect-video overflow-hidden border">
-      <Image
-        src={project.imageUrl || "https://picsum.photos/600/400"}
+      <img
+        src={project.imageUrl || "/images/portfolio/project-placeholder.svg"}
         alt={project.title}
         width={600}
         height={400}

@@ -4,7 +4,7 @@ excerpt: "A comprehensive guide on deploying Python-based Machine Learning model
 date: "Jan 15, 2025"
 readTime: "8 min read"
 category: "Machine Learning"
-imageUrl: "https://picsum.photos/800/400?random=4"
+imageUrl: "/images/portfolio/blog-ai.svg"
 ---
 
 Bringing machine learning models from a Jupyter notebook to a production web application is a common challenge for many developers. The disconnect between the data science environment (typically Python-heavy) and the web development ecosystem (JavaScript/TypeScript) requires a robust integration strategy.

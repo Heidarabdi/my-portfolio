@@ -13,10 +13,9 @@ features:
   - Content Management System
   - Digital Communication Tools
 category: "Web Development"
-imageUrl: "https://picsum.photos/600/400?random=20"
+imageUrl: "/images/portfolio/project-snwo.svg"
 gallery:
-  - "https://picsum.photos/800/600?random=21"
-  - "https://picsum.photos/800/600?random=22"
+  - "/images/portfolio/project-snwo.svg"
 featured: true
 order: 2
 status: "completed"

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title">
+  <title id="title">Accessible web design illustration</title>
+  <rect width="1200" height="800" fill="#eef3ff"/>
+  <circle cx="605" cy="235" r="72" fill="#2563eb"/>
+  <path d="M605 330v185M605 370 425 460M605 370l180 90M605 515l-120 155M605 515l120 155" fill="none" stroke="#1e293b" stroke-width="32" stroke-linecap="round"/>
+  <circle cx="605" cy="400" r="245" fill="none" stroke="#2563eb" stroke-width="12" stroke-dasharray="24 24"/>
+  <text x="88" y="112" fill="#1e293b" font-family="monospace" font-size="34" letter-spacing="8">JOURNAL / 02</text>
+  <text x="88" y="735" fill="#1e293b" font-family="sans-serif" font-size="54" font-weight="700">ACCESS FOR ALL</text>
+</svg>

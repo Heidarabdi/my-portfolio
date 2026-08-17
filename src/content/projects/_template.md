@@ -22,12 +22,10 @@ features:
 # liveUrl: "https://your-project.com"
 # githubUrl: "https://github.com/username/repo"
 
-# Images - use external URLs or local paths
-# For local images, place them in src/assets/projects/ and use relative path
-imageUrl: "https://picsum.photos/600/400?random=100"
+# Images - use a path from public/images/portfolio or a local asset URL
+imageUrl: "/images/portfolio/project-placeholder.svg"
 gallery:
-  - "https://picsum.photos/800/600?random=101"
-  - "https://picsum.photos/800/600?random=102"
+  - "/images/portfolio/project-placeholder.svg"
 
 # Category - must be one of: Machine Learning, Web Development, IT Support, Other
 category: "Web Development"
