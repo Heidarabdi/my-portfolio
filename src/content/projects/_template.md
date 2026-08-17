@@ -33,9 +33,10 @@ gallery:
 category: "Web Development"
 
 # Display options
-featured: false       # Set to true to show on homepage
-order: 10            # Lower numbers appear first
-status: "completed"  # completed, in-progress, or archived
+featured: false # Set to true to show on homepage
+order: 10 # Lower numbers appear first
+status: "completed" # completed, in-progress, or archived
+
 
 # Optional metadata
 # client: "Client Name"

@@ -1,27 +1,30 @@
 # Heidar Dev Portfolio
 
-A modern, performant portfolio website built with **Astro 5**, featuring optimized images, SEO best practices, and a vintage-inspired design aesthetic.
+A modern, performant portfolio website built with **Astro 7**, featuring optimized images, SEO best practices, and a vintage-inspired design aesthetic.
 
-![Astro](https://img.shields.io/badge/Astro-5.0-BC52EE?logo=astro&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38BDF8?logo=tailwind-css&logoColor=white)
+![Astro](https://img.shields.io/badge/Astro-7.2-BC52EE?logo=astro&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.3-38BDF8?logo=tailwind-css&logoColor=white)
 
 ## ✨ Features
 
 ### 🚀 Performance & Optimization
+
 - **Astro Image Component** - Automatic image optimization with WebP/AVIF conversion
 - **Zero Duplicate Font Loading** - Optimized font delivery via `@fontsource`
-- **SVG Optimization** - Automatic compression using SVGO
+- **SVG Optimization** - Build-time compression using Astro's SVGO optimizer
 - **View Transitions** - Smooth page transitions with Astro's built-in API
 - **Lazy Loading** - Images and content load on demand
 
 ### 🎨 Design
+
 - **Vintage Aesthetic** - Custom design system with hard shadows and paper textures
 - **Dark Mode** - Full dark/light theme support with system preference detection
 - **Responsive** - Mobile-first design that works on all devices
 - **Accessibility** - Semantic HTML, ARIA labels, keyboard navigation
 
 ### 📈 SEO & Discoverability
+
 - **OpenGraph Tags** - Rich social media previews
 - **Twitter Cards** - Optimized Twitter/X sharing
 - **Canonical URLs** - Proper SEO URL structure
@@ -30,8 +33,9 @@ A modern, performant portfolio website built with **Astro 5**, featuring optimiz
 - **RSS Feed** - Blog content syndication at `/rss.xml`
 
 ### 🎯 Content
+
 - **Projects Showcase** - Filterable portfolio with modal details
-- **Blog** - Content collections with MDX support
+- **Blog** - Markdown content collections
 - **About Page** - Professional history, education, certificates
 - **Contact Form** - Interactive contact form with validation
 - **Custom 404** - Branded error page
@@ -53,12 +57,10 @@ A modern, performant portfolio website built with **Astro 5**, featuring optimiz
 │   │   ├── Hero.astro
 │   │   ├── Navbar.astro
 │   │   └── ...
-│   ├── content/           # Content collections
-│   │   ├── blog/          # Blog posts (MDX)
+│   ├── content/           # Content collection entries
+│   │   ├── blog/          # Blog posts (Markdown)
 │   │   ├── projects/      # Project details
-│   │   └── config.ts      # Collection schemas
-│   ├── data/
-│   │   └── siteData.ts    # Site-wide data
+│   ├── content.config.ts  # Collection loaders and schemas
 │   ├── layouts/
 │   │   └── Layout.astro   # Base layout with SEO
 │   ├── pages/
@@ -76,42 +78,43 @@ A modern, performant portfolio website built with **Astro 5**, featuring optimiz
 │       └── image.ts       # Image helpers
 ├── .env.example           # Environment variables template
 ├── astro.config.mjs       # Astro configuration
-├── tailwind.config.mjs    # Tailwind configuration
+├── .nvmrc                 # Supported Node.js version
 └── tsconfig.json          # TypeScript config with path aliases
 ```
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ or Bun
-- npm, yarn, pnpm, or bun
+
+- Node.js 24.19.0 or newer
+- npm 11+
 
 ### Installation
 
 1. **Clone the repository**
+
 ```bash
 git clone https://github.com/Heidarabdi/my-portfolio.git
 cd my-portfolio
 ```
 
 2. **Install dependencies**
+
 ```bash
 npm install
-# or
-bun install
 ```
 
 3. **Configure environment variables** (optional)
+
 ```bash
 cp .env.example .env
 # Edit .env with your values
 ```
 
 4. **Start development server**
+
 ```bash
 npm run dev
-# or
-bun dev
 ```
 
 Visit `http://localhost:4321` to see your site!
@@ -120,21 +123,23 @@ Visit `http://localhost:4321` to see your site!
 
 All commands are run from the root of the project:
 
-| Command | Action |
-|:--------|:-------|
-| `npm install` | Install dependencies |
-| `npm run dev` | Start dev server at `localhost:4321` |
-| `npm run build` | Build production site to `./dist/` |
-| `npm run preview` | Preview production build locally |
-| `npm run check` | Run Astro type checking |
-| `npm run clean` | Remove build artifacts |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format code with Prettier |
+| Command           | Action                               |
+| :---------------- | :----------------------------------- |
+| `npm install`     | Install dependencies                 |
+| `npm run dev`     | Start dev server at `localhost:4321` |
+| `npm run build`   | Build production site to `./dist/`   |
+| `npm run preview` | Preview production build locally     |
+| `npm run check`   | Run Astro type checking              |
+| `npm run clean`   | Remove build artifacts               |
+| `npm run lint`    | Run ESLint                           |
+| `npm run format`  | Format code with Prettier            |
 
 ## 🎨 Customization
 
 ### Colors & Theme
+
 Edit `src/styles/global.css` to customize colors:
+
 ```css
 :root {
   --color-paper: #fdf8f3;
@@ -145,22 +150,28 @@ Edit `src/styles/global.css` to customize colors:
 ```
 
 ### Content
-- **Projects**: Add to `src/data/siteData.ts`
-- **Blog Posts**: Add MDX files to `src/content/blog/`
+
+- **Projects**: Add Markdown files to `src/content/projects/`
+- **Blog Posts**: Add Markdown files to `src/content/blog/`
 - **About Info**: Edit `src/pages/about.astro`
 
 ### Images
+
 Place images in `src/assets/images/` and import:
+
 ```astro
 ---
-import { Image } from 'astro:assets';
-import myImage from '@assets/images/my-image.jpg';
+import { Image } from "astro:assets";
+import myImage from "@assets/images/my-image.jpg";
 ---
+
 <Image src={myImage} alt="Description" />
 ```
 
 ### Path Aliases
+
 Configured in `tsconfig.json`:
+
 - `@/*` → `src/*`
 - `@components/*` → `src/components/*`
 - `@layouts/*` → `src/layouts/*`
@@ -170,7 +181,7 @@ Configured in `tsconfig.json`:
 
 ## 📦 Technologies
 
-- **[Astro 5](https://astro.build)** - Static site framework
+- **[Astro 7](https://astro.build)** - Static site framework
 - **[TypeScript](https://www.typescriptlang.org/)** - Type safety
 - **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS
 - **[Lucide Icons](https://lucide.dev/)** - Icon library
@@ -189,6 +200,7 @@ Cloudflare Pages offers blazing-fast global CDN, automatic SSL, and preview depl
 #### Method 1: Deploy via Git (Easiest)
 
 1. **Push your code to GitHub/GitLab**
+
    ```bash
    git add .
    git commit -m "Ready for deployment"
@@ -206,8 +218,8 @@ Cloudflare Pages offers blazing-fast global CDN, automatic SSL, and preview depl
      - **Framework preset**: `Astro`
      - **Build command**: `npm run build`
      - **Build output directory**: `dist`
-     - **Production branch**: `main`
-   
+     - **Production branch**: `master`
+
 4. **Deploy**
    - Click **Save and Deploy**
    - Your site will be live in ~1 minute! 🎉
@@ -215,20 +227,23 @@ Cloudflare Pages offers blazing-fast global CDN, automatic SSL, and preview depl
 #### Method 2: Deploy via Wrangler CLI
 
 1. **Install Wrangler**
+
    ```bash
    npm install -D wrangler
    ```
 
 2. **Build your site**
+
    ```bash
    npm run build
    ```
 
 3. **Deploy to Cloudflare Pages**
+
    ```bash
    npx wrangler pages deploy dist
    ```
-   
+
    **Important**: Use `wrangler pages deploy dist` (not just `wrangler deploy`)
 
 4. **First time setup**
@@ -246,6 +261,7 @@ Cloudflare Pages offers blazing-fast global CDN, automatic SSL, and preview depl
 4. Follow DNS instructions (usually add a CNAME record)
 
 **Benefits of Cloudflare Pages:**
+
 - ⚡ Global CDN with 275+ locations
 - 🔒 Free SSL certificates
 - 🚀 Unlimited bandwidth
@@ -253,35 +269,14 @@ Cloudflare Pages offers blazing-fast global CDN, automatic SSL, and preview depl
 - 🔄 Automatic preview deployments for PRs
 - 💰 Generous free tier
 
-#### Troubleshooting Bun Deployment
+#### Deployment notes
 
-If you encounter a **"lockfile had changes, but lockfile is frozen"** error:
+This repository uses npm as its canonical package manager. Use the committed lockfile in CI and Cloudflare Pages:
 
-**Solution 1: Update lockfile and commit (Recommended)**
 ```bash
-bun install
-git add bun.lock
-git commit -m "Update Bun lockfile"
-git push
+npm ci
+npm run build
 ```
-
-**Solution 2: Configure Cloudflare to use npm instead**
-In Cloudflare Pages project settings:
-1. Go to **Settings** → **Build & deployments**
-2. Under **Build configurations**, set:
-   - Build command: `npm install && npm run build`
-   
-**Solution 3: Remove frozen lockfile flag**
-Create a `package.json` script:
-```json
-{
-  "scripts": {
-    "cf:build": "bun install && bun run build"
-  }
-}
-```
-Then in Cloudflare, set build command to: `bun run cf:build`
-
 
 ### Environment Variables
 
@@ -304,11 +299,12 @@ If using analytics or external services, set these in Cloudflare Pages dashboard
 
 The analytics script only loads in production builds.
 
-
 ## 🔧 Configuration
 
 ### Adding Remote Images
+
 To use images from external sources, authorize them in `astro.config.mjs`:
+
 ```javascript
 export default defineConfig({
   image: {
@@ -317,10 +313,16 @@ export default defineConfig({
 });
 ```
 
+### Content collections
+
+Collections are defined in `src/content.config.ts` and loaded from Markdown files with Astro's built-in `glob()` loader. Update the schemas there when changing frontmatter fields.
+
 ### RSS Feed
+
 The RSS feed is automatically generated at `/rss.xml` from blog posts in `src/content/blog/`.
 
 ### Sitemap
+
 Automatically generated at `/sitemap-index.xml`. Configure in `astro.config.mjs`.
 
 ## 📝 License
@@ -334,6 +336,7 @@ Contributions, issues, and feature requests are welcome!
 ## 📧 Contact
 
 **Heidar Abdi Ahmed**
+
 - Website: [heidarabdi.dev](https://heidarabdi.dev)
 - GitHub: [@Heidarabdi](https://github.com/Heidarabdi)
 - Email: [contact@heidarabdi.dev](mailto:contact@heidarabdi.dev)

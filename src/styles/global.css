@@ -1,179 +1,180 @@
 @import "tailwindcss";
 
 @layer base {
-    :root {
-        /* Core Surfaces */
-        --paper: #f2f0e9;
-        --paper-light: #ffffff;
-        --paper-wash: #fafaf9;
-        --paper-dim: #f5f5f4;
+  :root {
+    /* Core Surfaces */
+    --paper: #f2f0e9;
+    --paper-light: #ffffff;
+    --paper-wash: #fafaf9;
+    --paper-dim: #f5f5f4;
 
-        /* Text & Content */
-        --ink: #1c1c1c;
-        --ink-muted: #57534e;
-        --accent: #ea580c;
+    /* Text & Content */
+    --ink: #1c1c1c;
+    --ink-muted: #57534e;
+    --accent: #ea580c;
 
-        /* Lines */
-        --line-faint: #e7e5e4;
-        --line-medium: #d6d3d1;
+    /* Lines */
+    --line-faint: #e7e5e4;
+    --line-medium: #d6d3d1;
 
-        /* Status */
-        --success: #15803d;
-        --error: #b91c1c;
-        --warning: #b45309;
-        --info: #0369a1;
+    /* Status */
+    --success: #15803d;
+    --error: #b91c1c;
+    --warning: #b45309;
+    --info: #0369a1;
 
-        /* Tokens */
-        --border-width: 2px;
-        --shadow-vintage: 4px 4px 0px 0px var(--ink);
-        --shadow-vintage-hover: 6px 6px 0px 0px var(--accent);
-        --shadow-vintage-sm: 2px 2px 0px 0px var(--ink);
-    }
+    /* Tokens */
+    --border-width: 2px;
+    --shadow-vintage: 4px 4px 0px 0px var(--ink);
+    --shadow-vintage-hover: 6px 6px 0px 0px var(--accent);
+    --shadow-vintage-sm: 2px 2px 0px 0px var(--ink);
+  }
 
-    :root.dark {
-        --paper: #0c0c0c;
-        --paper-light: #1c1c1c;
-        --paper-wash: #1c1c1c;
-        --paper-dim: #292524;
-        --ink: #e5e5e5;
-        --ink-muted: #a3a3a3;
-        --accent: #fb923c;
-        --line-faint: #44403c;
-        --line-medium: #57534e;
+  :root.dark {
+    --paper: #0c0c0c;
+    --paper-light: #1c1c1c;
+    --paper-wash: #1c1c1c;
+    --paper-dim: #292524;
+    --ink: #e5e5e5;
+    --ink-muted: #a3a3a3;
+    --accent: #fb923c;
+    --line-faint: #44403c;
+    --line-medium: #57534e;
 
-        --success: #4ade80;
-        --error: #f87171;
-        --warning: #fbbf24;
-        --info: #38bdf8;
-    }
+    --success: #4ade80;
+    --error: #f87171;
+    --warning: #fbbf24;
+    --info: #38bdf8;
+  }
 }
 
 @theme {
-    /* Mapping Tailwind colors to our variables */
-    --color-paper: var(--paper);
-    --color-paper-light: var(--paper-light);
-    --color-paper-wash: var(--paper-wash);
-    --color-paper-dim: var(--paper-dim);
+  /* Mapping Tailwind colors to our variables */
+  --color-paper: var(--paper);
+  --color-paper-light: var(--paper-light);
+  --color-paper-wash: var(--paper-wash);
+  --color-paper-dim: var(--paper-dim);
 
-    --color-ink: var(--ink);
-    --color-ink-muted: var(--ink-muted);
-    --color-accent: var(--accent);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
 
-    --color-line-faint: var(--line-faint);
-    --color-line-medium: var(--line-medium);
+  --color-line-faint: var(--line-faint);
+  --color-line-medium: var(--line-medium);
 
-    /* Strict Color Mappings from Export Layout */
-    --color-stone-50: var(--paper-wash);
-    --color-stone-100: var(--paper-dim);
-    --color-stone-200: var(--line-faint);
-    --color-stone-300: var(--line-medium);
-    --color-stone-400: var(--ink-muted);
-    --color-stone-500: var(--ink-muted);
-    --color-stone-600: var(--ink-muted);
-    --color-stone-700: var(--ink);
-    --color-stone-800: var(--ink);
-    --color-stone-900: var(--ink);
+  /* Strict Color Mappings from Export Layout */
+  --color-stone-50: var(--paper-wash);
+  --color-stone-100: var(--paper-dim);
+  --color-stone-200: var(--line-faint);
+  --color-stone-300: var(--line-medium);
+  --color-stone-400: var(--ink-muted);
+  --color-stone-500: var(--ink-muted);
+  --color-stone-600: var(--ink-muted);
+  --color-stone-700: var(--ink);
+  --color-stone-800: var(--ink);
+  --color-stone-900: var(--ink);
 
-    /* Font override matches export */
-    --font-display: "Playfair Display", serif;
-    --font-mono: "Space Mono", monospace;
+  /* Font override matches export */
+  --font-display: "Playfair Display", serif;
+  --font-mono: "Space Mono", monospace;
 
-    --animate-rotate-loop: rotateLoop 60s linear infinite;
-    --ease-vintage: cubic-bezier(0.4, 0, 0.2, 1);
+  --animate-rotate-loop: rotateLoop 60s linear infinite;
+  --ease-vintage: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @layer utilities {
-    .hard-shadow {
-        box-shadow: var(--shadow-vintage);
-    }
+  .hard-shadow {
+    box-shadow: var(--shadow-vintage);
+  }
 
-    .hard-shadow:hover {
-        box-shadow: var(--shadow-vintage-hover);
-        transform: translate(-2px, -2px);
-    }
+  .hard-shadow:hover {
+    box-shadow: var(--shadow-vintage-hover);
+    transform: translate(-2px, -2px);
+  }
 
-    .hard-shadow-sm {
-        box-shadow: var(--shadow-vintage-sm);
-    }
+  .hard-shadow-sm {
+    box-shadow: var(--shadow-vintage-sm);
+  }
 
-    .transition-vintage {
-        transition-property: all;
-        transition-timing-function: var(--ease-vintage);
-        transition-duration: 300ms;
-    }
+  .transition-vintage {
+    transition-property: all;
+    transition-timing-function: var(--ease-vintage);
+    transition-duration: 300ms;
+  }
 
-    .noise-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 9999;
-        opacity: 0.05;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    }
+  .noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
 
-    .modal-open {
-        overflow: hidden;
-    }
+  .modal-open {
+    overflow: hidden;
+  }
 }
 
 /* Base Styles */
 html {
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    background-color: var(--paper);
-    color: var(--ink);
-    transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--paper);
+  color: var(--ink);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 
-    /* Vintage Grid Pattern */
-    background-image:
-        linear-gradient(rgba(125, 125, 125, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(125, 125, 125, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    background-position: -2px -2px;
+  /* Vintage Grid Pattern */
+  background-image:
+    linear-gradient(rgba(125, 125, 125, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 125, 125, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: -2px -2px;
 
-    font-family: var(--font-mono);
-    overflow-x: hidden;
+  font-family: var(--font-mono);
+  overflow-x: hidden;
 }
 
 @keyframes rotateLoop {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
 
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
-    width: 12px;
-    border-left: 2px solid var(--ink);
+  width: 12px;
+  border-left: 2px solid var(--ink);
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--paper);
+  background: var(--paper);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--ink);
-    border: 2px solid var(--paper);
+  background: var(--ink);
+  border: 2px solid var(--paper);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
+  background: var(--accent);
 }

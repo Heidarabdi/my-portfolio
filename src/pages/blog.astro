@@ -1,32 +1,32 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content"
+import { getCollection } from "astro:content";
 import BlogCard from "../components/cards/BlogCard.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 
 const title = "Journal - Heidar Dev Portfolio";
-const posts = await getCollection('blog')
+const posts = await getCollection("blog");
 ---
 
 <Layout title={title}>
-    <main
-        class="mx-auto min-h-screen max-w-7xl px-6 pt-24"
-        transition:animate="fade"
-    >
-        <div class="py-12">
-            <!-- HEADER -->
-            <SectionHeader
-                title="The Journal"
-                subtitle="Technical dispatches and engineering notes from the field."
-                badge="Section 04"
-            />
+  <main
+    class="mx-auto min-h-screen max-w-7xl px-6 pt-24"
+    transition:animate="fade"
+  >
+    <div class="py-12">
+      <!-- HEADER -->
+      <SectionHeader
+        title="The Journal"
+        subtitle="Technical dispatches and engineering notes from the field."
+        badge="Section 04"
+      />
 
-            <!-- BLOG GRID -->
-            <div
-                class="reveal reveal-delay-100 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
-            >
-                {posts.map((post) => <BlogCard post={post} />)}
-            </div>
-        </div>
-    </main>
+      <!-- BLOG GRID -->
+      <div
+        class="reveal reveal-delay-100 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+      >
+        {posts.map((post) => <BlogCard post={post} />)}
+      </div>
+    </div>
+  </main>
 </Layout>

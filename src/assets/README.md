@@ -13,8 +13,8 @@ Import and use images with Astro's Image component:
 
 ```astro
 ---
-import { Image } from 'astro:assets';
-import myImage from '@assets/images/hero.jpg';
+import { Image } from "astro:assets";
+import myImage from "@assets/images/hero.jpg";
 ---
 
 <Image src={myImage} alt="Description" />

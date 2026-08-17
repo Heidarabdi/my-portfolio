@@ -3,27 +3,27 @@
 // To add a new project, create a new .md file in src/content/projects/
 
 export interface BlogPost {
-    id: string;
-    title: string;
-    excerpt: string;
-    date: string;
-    readTime: string;
-    category: "Machine Learning" | "Web Development" | "IT Operations";
-    imageUrl: string;
-    content: string;
+  id: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  category: "Machine Learning" | "Web Development" | "IT Operations";
+  imageUrl: string;
+  content: string;
 }
 
 export const BLOG_POSTS: BlogPost[] = [
-    {
-        id: "1",
-        title: "Bridging the Gap: Integrating AI Models into Modern Web Apps",
-        excerpt:
-            "A comprehensive guide on deploying Python-based Machine Learning models to production web interfaces using Flask and React.",
-        date: "Jan 15, 2025",
-        readTime: "8 min read",
-        category: "Machine Learning",
-        imageUrl: "https://picsum.photos/800/400?random=4",
-        content: `
+  {
+    id: "1",
+    title: "Bridging the Gap: Integrating AI Models into Modern Web Apps",
+    excerpt:
+      "A comprehensive guide on deploying Python-based Machine Learning models to production web interfaces using Flask and React.",
+    date: "Jan 15, 2025",
+    readTime: "8 min read",
+    category: "Machine Learning",
+    imageUrl: "https://picsum.photos/800/400?random=4",
+    content: `
       <p class="mb-4">Bringing machine learning models from a Jupyter notebook to a production web application is a common challenge for many developers. The disconnect between the data science environment (typically Python-heavy) and the web development ecosystem (JavaScript/TypeScript) requires a robust integration strategy.</p>
 
       <p class="mb-8">In this post, I will share the methodology I used at the <strong>Setsom Institute</strong> to deploy predictive models for real-time usage.</p>
@@ -61,17 +61,17 @@ pickle.dump(model, open(filename, 'wb'))</code></pre>
       <h2 class="text-2xl font-bold text-ink mb-4 mt-8 font-serif">Conclusion</h2>
       <p class="mb-4">Integrating AI into web apps doesn't have to be overwhelming. By isolating the model logic behind a clean API, we can build powerful, intelligent applications that leverage the best of both Python and JavaScript ecosystems.</p>
     `,
-    },
-    {
-        id: "2",
-        title: "Optimizing Web Accessibility for Public Sector Portals",
-        excerpt:
-            "Why inclusive design matters and how I implemented WCAG 2.1 standards for the Somali National Women Organization website.",
-        date: "Nov 20, 2024",
-        readTime: "6 min read",
-        category: "Web Development",
-        imageUrl: "https://picsum.photos/800/400?random=5",
-        content: `
+  },
+  {
+    id: "2",
+    title: "Optimizing Web Accessibility for Public Sector Portals",
+    excerpt:
+      "Why inclusive design matters and how I implemented WCAG 2.1 standards for the Somali National Women Organization website.",
+    date: "Nov 20, 2024",
+    readTime: "6 min read",
+    category: "Web Development",
+    imageUrl: "https://picsum.photos/800/400?random=5",
+    content: `
       <p class="mb-4">Building for the public sector means building for everyone. When I was tasked with developing the official portal for the <strong>Somali National Women Organization (SNWO)</strong>, accessibility wasn't just a "nice-to-have"—it was a fundamental requirement.</p>
 
       <p class="mb-8">Digital inclusion ensures that people with disabilities—visual, auditory, motor, or cognitive—can navigate, understand, and interact with the web. Here is how we achieved WCAG 2.1 compliance.</p>
@@ -99,17 +99,17 @@ button:focus-visible {
 
       <p class="mb-4">By prioritizing accessibility, we didn't just meet a standard; we expanded the reach of the organization's critical resources to the widest possible audience.</p>
     `,
-    },
-    {
-        id: "3",
-        title: "Effective IT Support: Managing Large-Scale Campus Infrastructure",
-        excerpt:
-            "Lessons learned from managing university computer labs, troubleshooting hardware, and maintaining software at Jamhuriya University.",
-        date: "Aug 10, 2023",
-        readTime: "5 min read",
-        category: "IT Operations",
-        imageUrl: "https://picsum.photos/800/400?random=6",
-        content: `
+  },
+  {
+    id: "3",
+    title: "Effective IT Support: Managing Large-Scale Campus Infrastructure",
+    excerpt:
+      "Lessons learned from managing university computer labs, troubleshooting hardware, and maintaining software at Jamhuriya University.",
+    date: "Aug 10, 2023",
+    readTime: "5 min read",
+    category: "IT Operations",
+    imageUrl: "https://picsum.photos/800/400?random=6",
+    content: `
       <p class="mb-4">Hardware fails, software crashes, and networks slow down. Being an IT Support Specialist at a major institution like <strong>Jamhuriya University of Science & Technology (JUST)</strong> is about more than just fixing broken printers—it's about ensuring the continuity of education.</p>
 
       <h2 class="text-2xl font-bold text-ink mb-4 mt-8 font-serif">Proactive vs. Reactive Maintenance</h2>
@@ -134,5 +134,5 @@ button:focus-visible {
 
       <p class="mb-4">These experiences taught me that technical skills are only half the job; communication and calmness under pressure are what truly define a successful IT professional.</p>
     `,
-    },
+  },
 ];

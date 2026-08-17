@@ -4,69 +4,69 @@ import Badge from "./ui/Badge.astro";
 import Button from "./ui/Button.astro";
 
 interface Props {
-    summary: string;
-    contact: {
-        email?: string;
-        github?: string;
-        linkedin?: string;
-    };
+  summary: string;
+  contact: {
+    email?: string;
+    github?: string;
+    linkedin?: string;
+  };
 }
 
 const { summary, contact } = Astro.props;
 ---
 
 <section class="relative flex min-h-[85vh] flex-col justify-center py-20">
-    <div
-        class="border-line-faint animate-rotate-loop absolute top-20 right-0 -z-10 hidden h-64 w-64 rounded-full border-2 border-dashed opacity-50 md:block"
+  <div
+    class="border-line-faint animate-rotate-loop absolute top-20 right-0 -z-10 hidden h-64 w-64 rounded-full border-2 border-dashed opacity-50 md:block"
+  >
+  </div>
+
+  <div class="max-w-5xl">
+    <div class="mb-8">
+      <Badge variant="neutral" class="inline-flex items-center gap-2">
+        <Star class="text-accent fill-accent h-4 w-4" /> Available for Hire
+      </Badge>
+    </div>
+
+    <h1
+      class="text-ink font-display mb-8 text-6xl leading-[0.9] font-bold tracking-tight md:text-8xl"
     >
+      Engineering <br />
+      <span class="text-accent italic">Intelligent</span> Solutions.
+    </h1>
+
+    <p
+      class="font-display border-accent mb-12 max-w-2xl border-l-4 pl-6 text-xl leading-relaxed text-stone-600 italic md:text-2xl"
+    >
+      {summary}
+    </p>
+
+    <div
+      class="flex flex-col items-start gap-6 sm:flex-row sm:items-center md:gap-8"
+    >
+      <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
+        <Button href="#works" variant="primary">
+          Examine Work <ArrowRight class="h-5 w-5" />
+        </Button>
+
+        <Button href="/contact" variant="secondary">
+          Contact Me <Mail class="h-5 w-5" />
+        </Button>
+      </div>
+
+      <div class="mt-4 flex items-center gap-6 sm:mt-0">
+        {
+          contact.github && (
+            <a
+              href={`https://${contact.github}`}
+              target="_blank"
+              class="text-ink hover:text-accent border-ink bg-paper-light hard-shadow-sm border-2 p-3 transition-colors focus:outline-none"
+            >
+              <Github class="h-6 w-6" />
+            </a>
+          )
+        }
+      </div>
     </div>
-
-    <div class="max-w-5xl">
-        <div class="mb-8">
-            <Badge variant="neutral" class="inline-flex items-center gap-2">
-                <Star class="text-accent fill-accent h-4 w-4" /> Available for Hire
-            </Badge>
-        </div>
-
-        <h1
-            class="text-ink font-display mb-8 text-6xl leading-[0.9] font-bold tracking-tight md:text-8xl"
-        >
-            Engineering <br />
-            <span class="text-accent italic">Intelligent</span> Solutions.
-        </h1>
-
-        <p
-            class="font-display border-accent mb-12 max-w-2xl border-l-4 pl-6 text-xl leading-relaxed text-stone-600 italic md:text-2xl"
-        >
-            {summary}
-        </p>
-
-        <div
-            class="flex flex-col items-start gap-6 sm:flex-row sm:items-center md:gap-8"
-        >
-            <div class="flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
-                <Button href="#works" variant="primary">
-                    Examine Work <ArrowRight class="h-5 w-5" />
-                </Button>
-
-                <Button href="/contact" variant="secondary">
-                    Contact Me <Mail class="h-5 w-5" />
-                </Button>
-            </div>
-
-            <div class="mt-4 flex items-center gap-6 sm:mt-0">
-                {
-                    contact.github && (
-                        <a
-                            href={`https://${contact.github}`}
-                            target="_blank"
-                            class="text-ink hover:text-accent border-ink bg-paper-light hard-shadow-sm border-2 p-3 transition-colors focus:outline-none"
-                        >
-                            <Github class="h-6 w-6" />
-                        </a>
-                    )
-                }
-            </div>
-        </div>
-    </div>
+  </div>
 </section>

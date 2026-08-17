@@ -1,119 +1,118 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { ArrowLeft, Calendar, Clock, Tag, User } from "lucide-astro";
 
 export async function getStaticPaths() {
-    const blogPosts = await getCollection("blog");
-    return blogPosts.map((post) => ({
-        params: { slug: post.slug },
-        props: { post },
-    }));
+  const blogPosts = await getCollection("blog");
+  return blogPosts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 const title = `${post.data.title} - Heidar Dev Journal`;
 ---
 
 <Layout title={title}>
-    <main class="mx-auto min-h-screen max-w-4xl px-6 pt-24">
-        <!-- Back Link -->
-        <a
-            href="/blog"
-            class="hover:text-ink mb-12 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-stone-500 uppercase transition-colors"
+  <main class="mx-auto min-h-screen max-w-4xl px-6 pt-24">
+    <!-- Back Link -->
+    <a
+      href="/blog"
+      class="hover:text-ink mb-12 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-stone-500 uppercase transition-colors"
+    >
+      <ArrowLeft class="h-4 w-4" /> Return to Index
+    </a>
+
+    <article>
+      <!-- Post Header -->
+      <header class="mb-12 text-center">
+        <div
+          class="bg-accent mb-6 inline-flex items-center gap-2 px-3 py-1 text-xs font-bold tracking-widest text-white uppercase"
         >
-            <ArrowLeft class="h-4 w-4" /> Return to Index
-        </a>
+          <Tag class="h-3 w-3" />
+          <span id="post-category">{post.data.category}</span>
+        </div>
+        <h1
+          id="post-title"
+          class="text-ink mb-6 font-serif text-3xl leading-tight font-bold md:text-5xl"
+        >
+          {post.data.title}
+        </h1>
+        <div
+          class="flex flex-wrap items-center justify-center gap-6 font-mono text-xs font-bold tracking-widest text-stone-500 uppercase"
+        >
+          <span class="flex items-center gap-2">
+            <Calendar class="h-4 w-4" />
+            <span id="post-date">{post.data.date}</span>
+          </span>
+          <span class="h-1.5 w-1.5 rounded-full bg-stone-300"></span>
+          <span class="flex items-center gap-2">
+            <Clock class="h-4 w-4" />
+            <span id="post-readtime">{post.data.readTime}</span>
+          </span>
+        </div>
+      </header>
 
-        <article>
-            <!-- Post Header -->
-            <header class="mb-12 text-center">
-                <div
-                    class="bg-accent mb-6 inline-flex items-center gap-2 px-3 py-1 text-xs font-bold tracking-widest text-white uppercase"
-                >
-                    <Tag class="h-3 w-3" />
-                    <span id="post-category">{post.data.category}</span>
-                </div>
-                <h1
-                    id="post-title"
-                    class="text-ink mb-6 font-serif text-3xl leading-tight font-bold md:text-5xl"
-                >
-                    {post.data.title}
-                </h1>
-                <div
-                    class="flex flex-wrap items-center justify-center gap-6 font-mono text-xs font-bold tracking-widest text-stone-500 uppercase"
-                >
-                    <span class="flex items-center gap-2">
-                        <Calendar class="h-4 w-4" />
-                        <span id="post-date">{post.data.date}</span>
-                    </span>
-                    <span class="h-1.5 w-1.5 rounded-full bg-stone-300"></span>
-                    <span class="flex items-center gap-2">
-                        <Clock class="h-4 w-4" />
-                        <span id="post-readtime">{post.data.readTime}</span>
-                    </span>
-                </div>
-            </header>
+      <!-- Featured Image -->
+      <div
+        class="bg-paper-light border-ink hard-shadow-sm mb-12 rotate-1 border-2 p-3 transition-transform duration-500 hover:rotate-0"
+      >
+        <div class="aspect-video w-full overflow-hidden grayscale-0">
+          <Image
+            id="post-image"
+            src={post.data.imageUrl}
+            alt={post.data.title}
+            width={800}
+            height={450}
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
 
-            <!-- Featured Image -->
+      <!-- Content -->
+      <div
+        class="prose prose-stone prose-lg text-ink first-letter:text-accent mb-20 max-w-none font-serif first-letter:float-left first-letter:mt-2 first-letter:mr-3 first-letter:text-5xl first-letter:font-bold"
+      >
+        <Content />
+      </div>
+
+      <!-- Author Bio -->
+      <div class="border-ink mt-12 mb-20 border-t-4 pt-12">
+        <div
+          class="bg-paper-light border-ink flex flex-col items-center gap-8 border-2 p-8 md:flex-row"
+        >
+          <div
+            class="border-ink hard-shadow-sm h-24 w-24 shrink-0 overflow-hidden rounded-full border-2"
+          >
+            <Image
+              src="https://picsum.photos/200/200?random=99"
+              alt="Heidar Abdi"
+              width={200}
+              height={200}
+              class="h-full w-full object-cover grayscale"
+            />
+          </div>
+          <div class="text-center md:text-left">
             <div
-                class="bg-paper-light border-ink hard-shadow-sm mb-12 rotate-1 border-2 p-3 transition-transform duration-500 hover:rotate-0"
+              class="text-accent mb-2 inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase"
             >
-                <div class="aspect-video w-full overflow-hidden grayscale-0">
-                    <Image
-                        id="post-image"
-                        src={post.data.imageUrl}
-                        alt={post.data.title}
-                        width={800}
-                        height={450}
-                        class="h-full w-full object-cover"
-                    />
-                </div>
+              <User class="h-3 w-3" /> About the Author
             </div>
-
-            <!-- Content -->
-            <div
-                class="prose prose-stone prose-lg text-ink first-letter:text-accent mb-20 max-w-none font-serif first-letter:float-left first-letter:mt-2 first-letter:mr-3 first-letter:text-5xl first-letter:font-bold"
-            >
-                <Content />
-            </div>
-
-            <!-- Author Bio -->
-            <div class="border-ink mt-12 mb-20 border-t-4 pt-12">
-                <div
-                    class="bg-paper-light border-ink flex flex-col items-center gap-8 border-2 p-8 md:flex-row"
-                >
-                    <div
-                        class="border-ink hard-shadow-sm h-24 w-24 shrink-0 overflow-hidden rounded-full border-2"
-                    >
-                        <Image
-                            src="https://picsum.photos/200/200?random=99"
-                            alt="Heidar Abdi"
-                            width={200}
-                            height={200}
-                            class="h-full w-full object-cover grayscale"
-                        />
-                    </div>
-                    <div class="text-center md:text-left">
-                        <div
-                            class="text-accent mb-2 inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase"
-                        >
-                            <User class="h-3 w-3" /> About the Author
-                        </div>
-                        <h3 class="text-ink mb-3 font-serif text-2xl font-bold">
-                            Heidar Abdi Ahmed
-                        </h3>
-                        <p class="font-serif leading-relaxed text-stone-600">
-                            Full Stack Engineer and AI enthusiast passionate
-                            about bridging the gap between complex machine
-                            learning models and intuitive user experiences.
-                            Based in Mogadishu.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </main>
+            <h3 class="text-ink mb-3 font-serif text-2xl font-bold">
+              Heidar Abdi Ahmed
+            </h3>
+            <p class="font-serif leading-relaxed text-stone-600">
+              Full Stack Engineer and AI enthusiast passionate about bridging
+              the gap between complex machine learning models and intuitive user
+              experiences. Based in Mogadishu.
+            </p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
 </Layout>

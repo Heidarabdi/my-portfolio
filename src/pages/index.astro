@@ -8,51 +8,42 @@ import ClientEndorsements from "../components/ClientEndorsements.astro";
 import CTA from "../components/CTA.astro";
 import Separator from "../components/ui/Separator.astro";
 
-// Data is now hardcoded in components for strict 1:1 match
-// We pass simple strings to Hero for customization
-const name = "Heidar Dev";
-const title = "Full Stack Engineer";
 const summary =
-	"Innovative and detail-oriented Full Stack Developer with hands-on experience in web and mobile app development, machine learning, and IT support. Adept at quickly adapting to new technologies and frameworks, delivering scalable, efficient solutions for complex challenges.";
+  "Innovative and detail-oriented Full Stack Developer with hands-on experience in web and mobile app development, machine learning, and IT support. Adept at quickly adapting to new technologies and frameworks, delivering scalable, efficient solutions for complex challenges.";
 const contact = {
-	github: "github.com/Heidarabdi",
-	linkedin: "linkedin.com/in/heidar",
-	email: "contact@heidar.dev",
+  github: "github.com/Heidarabdi",
+  linkedin: "linkedin.com/in/heidar",
+  email: "contact@heidar.dev",
 };
 ---
 
 <Layout>
-	<main class="min-h-screen space-y-0 pt-24" transition:animate="fade">
-		<div class="mx-auto max-w-7xl px-6">
-			<Hero
-				name={name}
-				title={title}
-				summary={summary}
-				contact={contact}
-			/>
+  <main class="min-h-screen space-y-0 pt-24" transition:animate="fade">
+    <div class="mx-auto max-w-7xl px-6">
+      <Hero summary={summary} contact={contact} />
 
-			<Separator />
+      <Separator />
 
-			<TechnicalInventory />
+      <TechnicalInventory />
 
-			<Separator />
+      <Separator />
 
-			<ServiceOfferings />
+      <ServiceOfferings />
 
-			<Separator />
+      <Separator />
 
-			<SelectedWorks />
+      <SelectedWorks />
 
-			<div class="mt-20 mb-20"></div>
+      <div class="mt-20 mb-20"></div>
 
-			<ClientEndorsements />
+      <ClientEndorsements />
 
-			<div
-				class="border-ink my-16 mt-20 mb-20 w-full border-t-2 border-dashed opacity-30"
-			>
-			</div>
+      <div
+        class="border-ink my-16 mt-20 mb-20 w-full border-t-2 border-dashed opacity-30"
+      >
+      </div>
 
-			<CTA />
-		</div>
-	</main>
+      <CTA />
+    </div>
+  </main>
 </Layout>

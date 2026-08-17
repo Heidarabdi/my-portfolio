@@ -2,579 +2,512 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import {
-    User,
-    Mail,
-    Download,
-    Globe,
-    Briefcase,
-    GraduationCap,
-    Award,
-    ExternalLink,
-    Send,
+  User,
+  Mail,
+  Download,
+  Globe,
+  Briefcase,
+  GraduationCap,
+  Award,
+  ExternalLink,
+  Send,
 } from "lucide-astro";
 
 const title = "About - Heidar Dev Portfolio";
 ---
 
 <Layout title={title}>
-    <main
-        class="mx-auto min-h-screen max-w-7xl px-6 pt-24"
-        transition:animate="fade"
-    >
-        <div class="py-12">
-            <!-- HEADER -->
+  <main
+    class="mx-auto min-h-screen max-w-7xl px-6 pt-24"
+    transition:animate="fade"
+  >
+    <div class="py-12">
+      <!-- HEADER -->
+      <div
+        class="border-ink reveal mb-16 flex flex-col items-end justify-between border-b-4 pb-6 md:flex-row"
+      >
+        <div class="max-w-2xl">
+          <div
+            class="border-ink bg-ink text-paper mb-4 inline-flex items-center gap-1 border px-2 py-1 text-[10px] font-bold tracking-widest uppercase"
+          >
+            <User class="h-3 w-3" /> Personnel File
+          </div>
+          <h1 class="text-ink mb-2 font-serif text-4xl font-bold md:text-6xl">
+            Heidar Abdi Ahmed
+          </h1>
+          <p class="font-serif text-lg text-stone-600 italic">
+            Full Stack Developer & Machine Learning Engineer
+          </p>
+        </div>
+        <div
+          class="text-ink mt-4 flex gap-4 font-mono text-sm font-bold tracking-widest uppercase md:mt-0"
+        >
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 rounded p-2 transition-colors hover:bg-stone-100"
+            ><Mail class="h-4 w-4" />
+            Contact</a
+          >
+          <a
+            href="#"
+            class="inline-flex items-center gap-2 rounded p-2 transition-colors hover:bg-stone-100"
+            ><Download class="h-4 w-4" />
+            Download CV</a
+          >
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
+        <!-- LEFT COLUMN (BIO) -->
+        <div class="reveal reveal-delay-100 space-y-8 lg:col-span-4">
+          <!-- Photo -->
+          <div class="bg-paper-light border-ink hard-shadow-sm border-2 p-3">
             <div
-                class="border-ink reveal mb-16 flex flex-col items-end justify-between border-b-4 pb-6 md:flex-row"
+              class="aspect-3/4 overflow-hidden bg-stone-200 grayscale transition-all duration-700 hover:grayscale-0"
             >
-                <div class="max-w-2xl">
-                    <div
-                        class="border-ink bg-ink text-paper mb-4 inline-flex items-center gap-1 border px-2 py-1 text-[10px] font-bold tracking-widest uppercase"
-                    >
-                        <User class="h-3 w-3" /> Personnel File
-                    </div>
-                    <h1
-                        class="text-ink mb-2 font-serif text-4xl font-bold md:text-6xl"
-                    >
-                        Heidar Abdi Ahmed
-                    </h1>
-                    <p class="font-serif text-lg text-stone-600 italic">
-                        Full Stack Developer & Machine Learning Engineer
-                    </p>
+              <Image
+                src="https://picsum.photos/400/500?random=99"
+                alt="Heidar Abdi Ahmed"
+                width={400}
+                height={500}
+                loading="eager"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div
+              class="mt-3 flex items-center justify-between font-mono text-xs font-bold tracking-widest text-stone-500 uppercase"
+            >
+              <span>ID: H-2025</span>
+              <span>Mogadishu, SO</span>
+            </div>
+          </div>
+
+          <!-- About Text -->
+          <div class="border-accent border-l-4 bg-stone-200 p-6">
+            <h3 class="text-ink mb-4 font-serif text-xl font-bold">About</h3>
+            <p class="mb-4 font-serif text-sm leading-relaxed text-stone-700">
+              Passionate about building impactful digital products and
+              contributing to both the technical and strategic success of modern
+              projects.
+            </p>
+            <p class="font-serif text-sm leading-relaxed text-stone-700">
+              I seek to leverage a versatile technical skill set in dynamic,
+              forward-thinking environments, combining Machine Learning
+              expertise with solid Full Stack foundations.
+            </p>
+          </div>
+
+          <!-- Languages -->
+          <div class="bg-paper-light border-ink text-ink border-2 p-6">
+            <h3
+              class="mb-4 flex items-center gap-2 font-mono text-xs font-bold tracking-widest uppercase"
+            >
+              <Globe class="text-accent h-4 w-4" />
+              Languages
+            </h3>
+            <ul class="space-y-3 font-mono text-sm">
+              <li
+                class="flex justify-between border-b border-dashed border-stone-300 pb-2"
+              >
+                <span>English</span><span class="font-bold">Fluent</span>
+              </li>
+              <li
+                class="flex justify-between border-b border-dashed border-stone-300 pb-2"
+              >
+                <span>Somali</span><span class="font-bold">Native</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN (TIMELINE) -->
+        <div class="reveal reveal-delay-200 lg:col-span-8">
+          <!-- EXPERIENCE -->
+          <div class="mb-12">
+            <div class="mb-8 flex items-center gap-4">
+              <div class="bg-ink text-paper p-2">
+                <Briefcase class="h-6 w-6" />
+              </div>
+              <h2
+                class="text-ink font-serif text-2xl font-bold tracking-wider uppercase"
+              >
+                Professional History
+              </h2>
+            </div>
+            <div
+              class="border-line-medium relative ml-4 space-y-8 border-l-2 pl-8"
+            >
+              <!-- Job 1 -->
+              <div class="group relative">
+                <div
+                  class="bg-paper border-ink group-hover:bg-accent absolute top-1.5 -left-[39px] h-5 w-5 rounded-full border-2 transition-colors"
+                >
                 </div>
                 <div
-                    class="text-ink mt-4 flex gap-4 font-mono text-sm font-bold tracking-widest uppercase md:mt-0"
+                  class="bg-paper-light border-ink hard-shadow-sm border-2 p-6 transition-all hover:translate-x-1"
                 >
-                    <a
-                        href="/contact"
-                        class="inline-flex items-center gap-2 rounded p-2 transition-colors hover:bg-stone-100"
-                        ><Mail class="h-4 w-4" />
-                        Contact</a
+                  <div
+                    class="mb-2 flex flex-col sm:flex-row sm:items-start sm:justify-between"
+                  >
+                    <h3 class="text-ink font-serif text-xl font-bold">
+                      Machine Learning Developer – Freelancer
+                    </h3>
+                    <span
+                      class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase sm:mt-0"
+                      >2024 - Present</span
                     >
-                    <a
-                        href="#"
-                        class="inline-flex items-center gap-2 rounded p-2 transition-colors hover:bg-stone-100"
-                        ><Download class="h-4 w-4" />
-                        Download CV</a
-                    >
+                  </div>
+                  <div
+                    class="text-accent mb-4 font-mono text-sm font-bold tracking-wide uppercase"
+                  >
+                    Setsom Institute for Robotics Engineering and Technology
+                  </div>
+                  <ul
+                    class="list-inside list-disc space-y-2 font-serif text-sm text-stone-600"
+                  >
+                    <li>
+                      Design and develop machine learning models and integrate
+                      them into web-based applications.
+                    </li>
+                    <li>
+                      Focus on optimizing algorithms for real-world
+                      applications, enhancing accuracy and performance.
+                    </li>
+                    <li>
+                      Collaborate with research teams to deploy scalable and
+                      reliable AI-driven solutions.
+                    </li>
+                  </ul>
                 </div>
-            </div>
+              </div>
 
-            <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
-                <!-- LEFT COLUMN (BIO) -->
-                <div class="reveal reveal-delay-100 space-y-8 lg:col-span-4">
-                    <!-- Photo -->
-                    <div
-                        class="bg-paper-light border-ink hard-shadow-sm border-2 p-3"
-                    >
-                        <div
-                            class="aspect-3/4 overflow-hidden bg-stone-200 grayscale transition-all duration-700 hover:grayscale-0"
-                        >
-                            <Image
-                                src="https://picsum.photos/400/500?random=99"
-                                alt="Heidar Abdi Ahmed"
-                                width={400}
-                                height={500}
-                                loading="eager"
-                                class="h-full w-full object-cover"
-                            />
-                        </div>
-                        <div
-                            class="mt-3 flex items-center justify-between font-mono text-xs font-bold tracking-widest text-stone-500 uppercase"
-                        >
-                            <span>ID: H-2025</span>
-                            <span>Mogadishu, SO</span>
-                        </div>
-                    </div>
-
-                    <!-- About Text -->
-                    <div class="border-accent border-l-4 bg-stone-200 p-6">
-                        <h3 class="text-ink mb-4 font-serif text-xl font-bold">
-                            About
-                        </h3>
-                        <p
-                            class="mb-4 font-serif text-sm leading-relaxed text-stone-700"
-                        >
-                            Passionate about building impactful digital products
-                            and contributing to both the technical and strategic
-                            success of modern projects.
-                        </p>
-                        <p
-                            class="font-serif text-sm leading-relaxed text-stone-700"
-                        >
-                            I seek to leverage a versatile technical skill set
-                            in dynamic, forward-thinking environments, combining
-                            Machine Learning expertise with solid Full Stack
-                            foundations.
-                        </p>
-                    </div>
-
-                    <!-- Languages -->
-                    <div
-                        class="bg-paper-light border-ink text-ink border-2 p-6"
-                    >
-                        <h3
-                            class="mb-4 flex items-center gap-2 font-mono text-xs font-bold tracking-widest uppercase"
-                        >
-                            <Globe class="text-accent h-4 w-4" />
-                            Languages
-                        </h3>
-                        <ul class="space-y-3 font-mono text-sm">
-                            <li
-                                class="flex justify-between border-b border-dashed border-stone-300 pb-2"
-                            >
-                                <span>English</span><span class="font-bold"
-                                    >Fluent</span
-                                >
-                            </li>
-                            <li
-                                class="flex justify-between border-b border-dashed border-stone-300 pb-2"
-                            >
-                                <span>Somali</span><span class="font-bold"
-                                    >Native</span
-                                >
-                            </li>
-                        </ul>
-                    </div>
+              <!-- Job 2 -->
+              <div class="group relative">
+                <div
+                  class="bg-paper border-ink group-hover:bg-accent absolute top-1.5 -left-[39px] h-5 w-5 rounded-full border-2 transition-colors"
+                >
                 </div>
-
-                <!-- RIGHT COLUMN (TIMELINE) -->
-                <div class="reveal reveal-delay-200 lg:col-span-8">
-                    <!-- EXPERIENCE -->
-                    <div class="mb-12">
-                        <div class="mb-8 flex items-center gap-4">
-                            <div class="bg-ink text-paper p-2">
-                                <Briefcase class="h-6 w-6" />
-                            </div>
-                            <h2
-                                class="text-ink font-serif text-2xl font-bold tracking-wider uppercase"
-                            >
-                                Professional History
-                            </h2>
-                        </div>
-                        <div
-                            class="border-line-medium relative ml-4 space-y-8 border-l-2 pl-8"
-                        >
-                            <!-- Job 1 -->
-                            <div class="group relative">
-                                <div
-                                    class="bg-paper border-ink group-hover:bg-accent absolute top-1.5 -left-[39px] h-5 w-5 rounded-full border-2 transition-colors"
-                                >
-                                </div>
-                                <div
-                                    class="bg-paper-light border-ink hard-shadow-sm border-2 p-6 transition-all hover:translate-x-1"
-                                >
-                                    <div
-                                        class="mb-2 flex flex-col sm:flex-row sm:items-start sm:justify-between"
-                                    >
-                                        <h3
-                                            class="text-ink font-serif text-xl font-bold"
-                                        >
-                                            Machine Learning Developer –
-                                            Freelancer
-                                        </h3>
-                                        <span
-                                            class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase sm:mt-0"
-                                            >2024 - Present</span
-                                        >
-                                    </div>
-                                    <div
-                                        class="text-accent mb-4 font-mono text-sm font-bold tracking-wide uppercase"
-                                    >
-                                        Setsom Institute for Robotics
-                                        Engineering and Technology
-                                    </div>
-                                    <ul
-                                        class="list-inside list-disc space-y-2 font-serif text-sm text-stone-600"
-                                    >
-                                        <li>
-                                            Design and develop machine learning
-                                            models and integrate them into
-                                            web-based applications.
-                                        </li>
-                                        <li>
-                                            Focus on optimizing algorithms for
-                                            real-world applications, enhancing
-                                            accuracy and performance.
-                                        </li>
-                                        <li>
-                                            Collaborate with research teams to
-                                            deploy scalable and reliable
-                                            AI-driven solutions.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Job 2 -->
-                            <div class="group relative">
-                                <div
-                                    class="bg-paper border-ink group-hover:bg-accent absolute top-1.5 -left-[39px] h-5 w-5 rounded-full border-2 transition-colors"
-                                >
-                                </div>
-                                <div
-                                    class="bg-paper-light border-ink hard-shadow-sm border-2 p-6 transition-all hover:translate-x-1"
-                                >
-                                    <div
-                                        class="mb-2 flex flex-col sm:flex-row sm:items-start sm:justify-between"
-                                    >
-                                        <h3
-                                            class="text-ink font-serif text-xl font-bold"
-                                        >
-                                            Web Developer – Freelancer
-                                        </h3>
-                                        <span
-                                            class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase sm:mt-0"
-                                            >01/2024 - 01/2025</span
-                                        >
-                                    </div>
-                                    <div
-                                        class="text-accent mb-4 font-mono text-sm font-bold tracking-wide uppercase"
-                                    >
-                                        Somali National Women Organization
-                                        (SNWO)
-                                    </div>
-                                    <ul
-                                        class="list-inside list-disc space-y-2 font-serif text-sm text-stone-600"
-                                    >
-                                        <li>
-                                            Built and maintained the
-                                            organization’s official website to
-                                            improve accessibility and user
-                                            experience.
-                                        </li>
-                                        <li>
-                                            Implemented responsive design
-                                            principles, ensuring seamless
-                                            usability across devices.
-                                        </li>
-                                        <li>
-                                            Supported IT operations and provided
-                                            technical solutions to improve
-                                            digital communication.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Job 3 -->
-                            <div class="group relative">
-                                <div
-                                    class="bg-paper border-ink group-hover:bg-accent absolute top-1.5 -left-[39px] h-5 w-5 rounded-full border-2 transition-colors"
-                                >
-                                </div>
-                                <div
-                                    class="bg-paper-light border-ink hard-shadow-sm border-2 p-6 transition-all hover:translate-x-1"
-                                >
-                                    <div
-                                        class="mb-2 flex flex-col sm:flex-row sm:items-start sm:justify-between"
-                                    >
-                                        <h3
-                                            class="text-ink font-serif text-xl font-bold"
-                                        >
-                                            IT Support Specialist
-                                        </h3>
-                                        <span
-                                            class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase sm:mt-0"
-                                            >01/2023 - 07/2023</span
-                                        >
-                                    </div>
-                                    <div
-                                        class="text-accent mb-4 font-mono text-sm font-bold tracking-wide uppercase"
-                                    >
-                                        Jamhuriya University of Science &
-                                        Technology (JUST)
-                                    </div>
-                                    <ul
-                                        class="list-inside list-disc space-y-2 font-serif text-sm text-stone-600"
-                                    >
-                                        <li>
-                                            Provided technical assistance to
-                                            students, troubleshooting hardware
-                                            (keyboard, battery replacements) and
-                                            installing software.
-                                        </li>
-                                        <li>
-                                            Improved the efficiency of computer
-                                            labs by ensuring proper system setup
-                                            and maintenance.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- EDUCATION -->
-                    <div class="mb-12">
-                        <div class="mb-8 flex items-center gap-4">
-                            <div class="bg-ink text-paper p-2">
-                                <GraduationCap class="h-6 w-6" />
-                            </div>
-                            <h2
-                                class="text-ink font-serif text-2xl font-bold tracking-wider uppercase"
-                            >
-                                Education
-                            </h2>
-                        </div>
-                        <div
-                            class="border-line-medium ml-4 space-y-6 border-l-2 pl-8"
-                        >
-                            <!-- Edu 1 -->
-                            <div class="group relative">
-                                <div
-                                    class="bg-ink absolute top-2 -left-[37px] h-4 w-4 rounded-none transition-transform group-hover:rotate-45"
-                                >
-                                </div>
-                                <div
-                                    class="border-line-medium flex flex-col items-start justify-between border-b border-dashed pb-4 md:flex-row"
-                                >
-                                    <div>
-                                        <h3
-                                            class="text-ink font-serif font-bold"
-                                        >
-                                            Bachelor of Computer Application
-                                        </h3>
-                                        <div
-                                            class="font-mono text-sm text-stone-500"
-                                        >
-                                            Jamhuriya University of Science &
-                                            Technology (JUST)
-                                        </div>
-                                    </div>
-                                    <span
-                                        class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase md:mt-0"
-                                        >2020 - 2024</span
-                                    >
-                                </div>
-                            </div>
-                            <!-- Edu 2 -->
-                            <div class="group relative">
-                                <div
-                                    class="bg-ink absolute top-2 -left-[37px] h-4 w-4 rounded-none transition-transform group-hover:rotate-45"
-                                >
-                                </div>
-                                <div
-                                    class="border-line-medium flex flex-col items-start justify-between border-b border-dashed pb-4 md:flex-row"
-                                >
-                                    <div>
-                                        <h3
-                                            class="text-ink font-serif font-bold"
-                                        >
-                                            High School Diploma
-                                        </h3>
-                                        <div
-                                            class="font-mono text-sm text-stone-500"
-                                        >
-                                            Hoyga Xamar School
-                                        </div>
-                                    </div>
-                                    <span
-                                        class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase md:mt-0"
-                                        >2013 - 2018</span
-                                    >
-                                </div>
-                            </div>
-                            <!-- Edu 3 -->
-                            <div class="group relative">
-                                <div
-                                    class="bg-ink absolute top-2 -left-[37px] h-4 w-4 rounded-none transition-transform group-hover:rotate-45"
-                                >
-                                </div>
-                                <div
-                                    class="border-line-medium flex flex-col items-start justify-between border-b border-dashed pb-4 md:flex-row"
-                                >
-                                    <div>
-                                        <h3
-                                            class="text-ink font-serif font-bold"
-                                        >
-                                            Primary School
-                                        </h3>
-                                        <div
-                                            class="font-mono text-sm text-stone-500"
-                                        >
-                                            Hoyga Xamar School
-                                        </div>
-                                    </div>
-                                    <span
-                                        class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase md:mt-0"
-                                        >2009 - 2013</span
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CERTIFICATES -->
-                    <div>
-                        <div class="mb-8 flex items-center gap-4">
-                            <div class="bg-ink text-paper p-2">
-                                <Award class="h-6 w-6" />
-                            </div>
-                            <h2
-                                class="text-ink font-serif text-2xl font-bold tracking-wider uppercase"
-                            >
-                                Certificates & Licenses
-                            </h2>
-                        </div>
-                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                            <!-- Cert 1 -->
-                            <div
-                                class="bg-paper-light border-ink hard-shadow-sm h-full border-2 p-4 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--accent)]"
-                            >
-                                <div
-                                    class="mb-2 flex items-start justify-between"
-                                >
-                                    <div
-                                        class="bg-paper-dim border-line-medium border p-1.5"
-                                    >
-                                        <Award class="text-ink h-4 w-4" />
-                                    </div>
-                                    <span
-                                        class="bg-ink text-paper px-1.5 py-0.5 text-[10px] font-bold uppercase"
-                                        >2024</span
-                                    >
-                                </div>
-                                <h3
-                                    class="text-ink mb-1 font-serif text-sm leading-tight font-bold"
-                                >
-                                    Deep Learning Specialization
-                                </h3>
-                                <div
-                                    class="mb-3 font-mono text-xs font-bold tracking-wide text-stone-500 uppercase"
-                                >
-                                    DeepLearning.AI
-                                </div>
-                                <a
-                                    href="#"
-                                    class="text-accent inline-flex items-center gap-1 text-xs font-bold hover:underline"
-                                    >View Credential
-                                    <ExternalLink class="h-3 w-3" />
-                                </a>
-                            </div>
-                            <!-- Cert 2 -->
-                            <div
-                                class="bg-paper-light border-ink hard-shadow-sm h-full border-2 p-4 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--accent)]"
-                            >
-                                <div
-                                    class="mb-2 flex items-start justify-between"
-                                >
-                                    <div
-                                        class="bg-paper-dim border-line-medium border p-1.5"
-                                    >
-                                        <Award class="text-ink h-4 w-4" />
-                                    </div>
-                                    <span
-                                        class="bg-ink text-paper px-1.5 py-0.5 text-[10px] font-bold uppercase"
-                                        >2023</span
-                                    >
-                                </div>
-                                <h3
-                                    class="text-ink mb-1 font-serif text-sm leading-tight font-bold"
-                                >
-                                    Full Stack Web Development Bootcamp
-                                </h3>
-                                <div
-                                    class="mb-3 font-mono text-xs font-bold tracking-wide text-stone-500 uppercase"
-                                >
-                                    Udemy
-                                </div>
-                                <a
-                                    href="#"
-                                    class="text-accent inline-flex items-center gap-1 text-xs font-bold hover:underline"
-                                    >View Credential
-                                    <ExternalLink class="h-3 w-3" />
-                                </a>
-                            </div>
-                            <!-- Cert 3 -->
-                            <div
-                                class="bg-paper-light border-ink hard-shadow-sm h-full border-2 p-4 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--accent)]"
-                            >
-                                <div
-                                    class="mb-2 flex items-start justify-between"
-                                >
-                                    <div
-                                        class="bg-paper-dim border-line-medium border p-1.5"
-                                    >
-                                        <Award class="text-ink h-4 w-4" />
-                                    </div>
-                                    <span
-                                        class="bg-ink text-paper px-1.5 py-0.5 text-[10px] font-bold uppercase"
-                                        >2023</span
-                                    >
-                                </div>
-                                <h3
-                                    class="text-ink mb-1 font-serif text-sm leading-tight font-bold"
-                                >
-                                    Google IT Support Professional Certificate
-                                </h3>
-                                <div
-                                    class="mb-3 font-mono text-xs font-bold tracking-wide text-stone-500 uppercase"
-                                >
-                                    Coursera
-                                </div>
-                                <a
-                                    href="#"
-                                    class="text-accent inline-flex items-center gap-1 text-xs font-bold hover:underline"
-                                    >View Credential
-                                    <ExternalLink class="h-3 w-3" />
-                                </a>
-                            </div>
-                            <!-- Cert 4 -->
-                            <div
-                                class="bg-paper-light border-ink hard-shadow-sm h-full border-2 p-4 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--accent)]"
-                            >
-                                <div
-                                    class="mb-2 flex items-start justify-between"
-                                >
-                                    <div
-                                        class="bg-paper-dim border-line-medium border p-1.5"
-                                    >
-                                        <Award class="text-ink h-4 w-4" />
-                                    </div>
-                                    <span
-                                        class="bg-ink text-paper px-1.5 py-0.5 text-[10px] font-bold uppercase"
-                                        >2022</span
-                                    >
-                                </div>
-                                <h3
-                                    class="text-ink mb-1 font-serif text-sm leading-tight font-bold"
-                                >
-                                    Advanced Python for Data Science
-                                </h3>
-                                <div
-                                    class="mb-3 font-mono text-xs font-bold tracking-wide text-stone-500 uppercase"
-                                >
-                                    DataCamp
-                                </div>
-                                <a
-                                    href="#"
-                                    class="text-accent inline-flex items-center gap-1 text-xs font-bold hover:underline"
-                                    >View Credential
-                                    <ExternalLink class="h-3 w-3" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA -->
-            <div class="border-ink reveal mt-20 border-t-2 border-dashed pt-12">
-                <section class="text-center">
-                    <h2 class="text-ink mb-6 font-serif text-3xl font-bold">
-                        Interested in collaboration?
-                    </h2>
-                    <a
-                        href="/contact"
-                        class="border-ink text-ink hover:bg-ink hover:text-paper group inline-flex items-center gap-3 border-2 bg-transparent px-6 py-3 font-bold tracking-widest uppercase transition-all"
+                <div
+                  class="bg-paper-light border-ink hard-shadow-sm border-2 p-6 transition-all hover:translate-x-1"
+                >
+                  <div
+                    class="mb-2 flex flex-col sm:flex-row sm:items-start sm:justify-between"
+                  >
+                    <h3 class="text-ink font-serif text-xl font-bold">
+                      Web Developer – Freelancer
+                    </h3>
+                    <span
+                      class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase sm:mt-0"
+                      >01/2024 - 01/2025</span
                     >
-                        Proceed to Communication
-                        <Send
-                            class="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                        />
-                    </a>
-                </section>
+                  </div>
+                  <div
+                    class="text-accent mb-4 font-mono text-sm font-bold tracking-wide uppercase"
+                  >
+                    Somali National Women Organization (SNWO)
+                  </div>
+                  <ul
+                    class="list-inside list-disc space-y-2 font-serif text-sm text-stone-600"
+                  >
+                    <li>
+                      Built and maintained the organization’s official website
+                      to improve accessibility and user experience.
+                    </li>
+                    <li>
+                      Implemented responsive design principles, ensuring
+                      seamless usability across devices.
+                    </li>
+                    <li>
+                      Supported IT operations and provided technical solutions
+                      to improve digital communication.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Job 3 -->
+              <div class="group relative">
+                <div
+                  class="bg-paper border-ink group-hover:bg-accent absolute top-1.5 -left-[39px] h-5 w-5 rounded-full border-2 transition-colors"
+                >
+                </div>
+                <div
+                  class="bg-paper-light border-ink hard-shadow-sm border-2 p-6 transition-all hover:translate-x-1"
+                >
+                  <div
+                    class="mb-2 flex flex-col sm:flex-row sm:items-start sm:justify-between"
+                  >
+                    <h3 class="text-ink font-serif text-xl font-bold">
+                      IT Support Specialist
+                    </h3>
+                    <span
+                      class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase sm:mt-0"
+                      >01/2023 - 07/2023</span
+                    >
+                  </div>
+                  <div
+                    class="text-accent mb-4 font-mono text-sm font-bold tracking-wide uppercase"
+                  >
+                    Jamhuriya University of Science & Technology (JUST)
+                  </div>
+                  <ul
+                    class="list-inside list-disc space-y-2 font-serif text-sm text-stone-600"
+                  >
+                    <li>
+                      Provided technical assistance to students, troubleshooting
+                      hardware (keyboard, battery replacements) and installing
+                      software.
+                    </li>
+                    <li>
+                      Improved the efficiency of computer labs by ensuring
+                      proper system setup and maintenance.
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- EDUCATION -->
+          <div class="mb-12">
+            <div class="mb-8 flex items-center gap-4">
+              <div class="bg-ink text-paper p-2">
+                <GraduationCap class="h-6 w-6" />
+              </div>
+              <h2
+                class="text-ink font-serif text-2xl font-bold tracking-wider uppercase"
+              >
+                Education
+              </h2>
+            </div>
+            <div class="border-line-medium ml-4 space-y-6 border-l-2 pl-8">
+              <!-- Edu 1 -->
+              <div class="group relative">
+                <div
+                  class="bg-ink absolute top-2 -left-[37px] h-4 w-4 rounded-none transition-transform group-hover:rotate-45"
+                >
+                </div>
+                <div
+                  class="border-line-medium flex flex-col items-start justify-between border-b border-dashed pb-4 md:flex-row"
+                >
+                  <div>
+                    <h3 class="text-ink font-serif font-bold">
+                      Bachelor of Computer Application
+                    </h3>
+                    <div class="font-mono text-sm text-stone-500">
+                      Jamhuriya University of Science & Technology (JUST)
+                    </div>
+                  </div>
+                  <span
+                    class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase md:mt-0"
+                    >2020 - 2024</span
+                  >
+                </div>
+              </div>
+              <!-- Edu 2 -->
+              <div class="group relative">
+                <div
+                  class="bg-ink absolute top-2 -left-[37px] h-4 w-4 rounded-none transition-transform group-hover:rotate-45"
+                >
+                </div>
+                <div
+                  class="border-line-medium flex flex-col items-start justify-between border-b border-dashed pb-4 md:flex-row"
+                >
+                  <div>
+                    <h3 class="text-ink font-serif font-bold">
+                      High School Diploma
+                    </h3>
+                    <div class="font-mono text-sm text-stone-500">
+                      Hoyga Xamar School
+                    </div>
+                  </div>
+                  <span
+                    class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase md:mt-0"
+                    >2013 - 2018</span
+                  >
+                </div>
+              </div>
+              <!-- Edu 3 -->
+              <div class="group relative">
+                <div
+                  class="bg-ink absolute top-2 -left-[37px] h-4 w-4 rounded-none transition-transform group-hover:rotate-45"
+                >
+                </div>
+                <div
+                  class="border-line-medium flex flex-col items-start justify-between border-b border-dashed pb-4 md:flex-row"
+                >
+                  <div>
+                    <h3 class="text-ink font-serif font-bold">
+                      Primary School
+                    </h3>
+                    <div class="font-mono text-sm text-stone-500">
+                      Hoyga Xamar School
+                    </div>
+                  </div>
+                  <span
+                    class="mt-2 border border-stone-300 bg-stone-100 px-2 py-1 text-xs font-bold text-stone-600 uppercase md:mt-0"
+                    >2009 - 2013</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CERTIFICATES -->
+          <div>
+            <div class="mb-8 flex items-center gap-4">
+              <div class="bg-ink text-paper p-2">
+                <Award class="h-6 w-6" />
+              </div>
+              <h2
+                class="text-ink font-serif text-2xl font-bold tracking-wider uppercase"
+              >
+                Certificates & Licenses
+              </h2>
+            </div>
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <!-- Cert 1 -->
+              <div
+                class="bg-paper-light border-ink hard-shadow-sm h-full border-2 p-4 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--accent)]"
+              >
+                <div class="mb-2 flex items-start justify-between">
+                  <div class="bg-paper-dim border-line-medium border p-1.5">
+                    <Award class="text-ink h-4 w-4" />
+                  </div>
+                  <span
+                    class="bg-ink text-paper px-1.5 py-0.5 text-[10px] font-bold uppercase"
+                    >2024</span
+                  >
+                </div>
+                <h3
+                  class="text-ink mb-1 font-serif text-sm leading-tight font-bold"
+                >
+                  Deep Learning Specialization
+                </h3>
+                <div
+                  class="mb-3 font-mono text-xs font-bold tracking-wide text-stone-500 uppercase"
+                >
+                  DeepLearning.AI
+                </div>
+                <a
+                  href="#"
+                  class="text-accent inline-flex items-center gap-1 text-xs font-bold hover:underline"
+                  >View Credential
+                  <ExternalLink class="h-3 w-3" />
+                </a>
+              </div>
+              <!-- Cert 2 -->
+              <div
+                class="bg-paper-light border-ink hard-shadow-sm h-full border-2 p-4 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--accent)]"
+              >
+                <div class="mb-2 flex items-start justify-between">
+                  <div class="bg-paper-dim border-line-medium border p-1.5">
+                    <Award class="text-ink h-4 w-4" />
+                  </div>
+                  <span
+                    class="bg-ink text-paper px-1.5 py-0.5 text-[10px] font-bold uppercase"
+                    >2023</span
+                  >
+                </div>
+                <h3
+                  class="text-ink mb-1 font-serif text-sm leading-tight font-bold"
+                >
+                  Full Stack Web Development Bootcamp
+                </h3>
+                <div
+                  class="mb-3 font-mono text-xs font-bold tracking-wide text-stone-500 uppercase"
+                >
+                  Udemy
+                </div>
+                <a
+                  href="#"
+                  class="text-accent inline-flex items-center gap-1 text-xs font-bold hover:underline"
+                  >View Credential
+                  <ExternalLink class="h-3 w-3" />
+                </a>
+              </div>
+              <!-- Cert 3 -->
+              <div
+                class="bg-paper-light border-ink hard-shadow-sm h-full border-2 p-4 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--accent)]"
+              >
+                <div class="mb-2 flex items-start justify-between">
+                  <div class="bg-paper-dim border-line-medium border p-1.5">
+                    <Award class="text-ink h-4 w-4" />
+                  </div>
+                  <span
+                    class="bg-ink text-paper px-1.5 py-0.5 text-[10px] font-bold uppercase"
+                    >2023</span
+                  >
+                </div>
+                <h3
+                  class="text-ink mb-1 font-serif text-sm leading-tight font-bold"
+                >
+                  Google IT Support Professional Certificate
+                </h3>
+                <div
+                  class="mb-3 font-mono text-xs font-bold tracking-wide text-stone-500 uppercase"
+                >
+                  Coursera
+                </div>
+                <a
+                  href="#"
+                  class="text-accent inline-flex items-center gap-1 text-xs font-bold hover:underline"
+                  >View Credential
+                  <ExternalLink class="h-3 w-3" />
+                </a>
+              </div>
+              <!-- Cert 4 -->
+              <div
+                class="bg-paper-light border-ink hard-shadow-sm h-full border-2 p-4 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--accent)]"
+              >
+                <div class="mb-2 flex items-start justify-between">
+                  <div class="bg-paper-dim border-line-medium border p-1.5">
+                    <Award class="text-ink h-4 w-4" />
+                  </div>
+                  <span
+                    class="bg-ink text-paper px-1.5 py-0.5 text-[10px] font-bold uppercase"
+                    >2022</span
+                  >
+                </div>
+                <h3
+                  class="text-ink mb-1 font-serif text-sm leading-tight font-bold"
+                >
+                  Advanced Python for Data Science
+                </h3>
+                <div
+                  class="mb-3 font-mono text-xs font-bold tracking-wide text-stone-500 uppercase"
+                >
+                  DataCamp
+                </div>
+                <a
+                  href="#"
+                  class="text-accent inline-flex items-center gap-1 text-xs font-bold hover:underline"
+                  >View Credential
+                  <ExternalLink class="h-3 w-3" />
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
-    </main>
+      </div>
+
+      <!-- CTA -->
+      <div class="border-ink reveal mt-20 border-t-2 border-dashed pt-12">
+        <section class="text-center">
+          <h2 class="text-ink mb-6 font-serif text-3xl font-bold">
+            Interested in collaboration?
+          </h2>
+          <a
+            href="/contact"
+            class="border-ink text-ink hover:bg-ink hover:text-paper group inline-flex items-center gap-3 border-2 bg-transparent px-6 py-3 font-bold tracking-widest uppercase transition-all"
+          >
+            Proceed to Communication
+            <Send
+              class="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+            />
+          </a>
+        </section>
+      </div>
+    </div>
+  </main>
 </Layout>

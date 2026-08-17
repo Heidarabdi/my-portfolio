@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, svgoOptimizer } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -10,10 +10,10 @@ export default defineConfig({
   site: "https://heidarabdi.dev", // ✅ Fixed: removed triple slashes
   integrations: [sitemap()],
   experimental: {
-    svgo: true, // ✅ Enable automatic SVG optimization
+    svgOptimizer: svgoOptimizer(),
   },
   image: {
-    domains: ["picsum.photos"], // ✅ Authorize remote images for optimization
+    domains: ["picsum.photos", "fastly.picsum.photos"],
   },
   vite: {
     plugins: [tailwindcss()],

@@ -7,102 +7,99 @@ import Section from "./Section.astro";
 import Badge from "./ui/Badge.astro";
 
 // Fetch featured projects from content collection
-const projectEntries = await getCollection("projects", ({ slug, data }) => {
-    // Filter out template and only get featured projects
-    return !slug.startsWith("_") && data.featured === true;
+const projectEntries = await getCollection("projects", ({ data }) => {
+  // The content loader excludes underscore-prefixed templates.
+  return data.featured === true;
 });
 
 // Convert to ProjectData, sort by order, and limit to 3
 const works = projectEntries
-    .map(toProjectData)
-    .sort((a, b) => a.order - b.order)
-    .slice(0, 3);
+  .map(toProjectData)
+  .sort((a, b) => a.order - b.order)
+  .slice(0, 3);
 
 const getImage = (project: (typeof works)[0]) =>
-    project.imageUrl ||
-    `https://picsum.photos/600/400?random=${project.order * 10}`;
+  project.imageUrl ||
+  `https://picsum.photos/600/400?random=${project.order * 10}`;
 ---
 
 <Section id="works" class="relative">
-    <div class="relative">
-        <div
-            class="border-ink mb-16 items-end justify-between border-b-4 pb-6 md:flex"
-        >
-            <div class="max-w-2xl">
-                <h2
-                    class="text-ink font-display mb-4 text-4xl font-bold md:text-5xl"
-                >
-                    Selected Works
-                </h2>
-                <p class="font-display text-lg text-stone-600 italic">
-                    A curated collection of digital craftsmanship and
-                    engineering.
-                </p>
-            </div>
-            <div class="mt-4 md:mt-0">
-                <Badge variant="filled">Section 03</Badge>
-            </div>
-        </div>
-        <div class="absolute top-4 right-0 mt-16 hidden md:mt-0 md:block">
-            <a
-                href="/projects"
-                class="text-ink decoration-accent flex items-center gap-2 font-bold decoration-2 underline-offset-4 transition-all hover:underline"
-            >
-                Full Archive <ExternalLink class="h-4 w-4" />
-            </a>
-        </div>
+  <div class="relative">
+    <div
+      class="border-ink mb-16 items-end justify-between border-b-4 pb-6 md:flex"
+    >
+      <div class="max-w-2xl">
+        <h2 class="text-ink font-display mb-4 text-4xl font-bold md:text-5xl">
+          Selected Works
+        </h2>
+        <p class="font-display text-lg text-stone-600 italic">
+          A curated collection of digital craftsmanship and engineering.
+        </p>
+      </div>
+      <div class="mt-4 md:mt-0">
+        <Badge variant="filled">Section 03</Badge>
+      </div>
     </div>
-
-    <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-        {
-            works.map((work, index) => (
-                <a href={`/projects#${work.slug}`} class="group block h-full">
-                    <div class="bg-paper-light border-ink hard-shadow-sm flex h-full cursor-pointer flex-col border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_var(--color-ink)]">
-                        <div class="p-3 pb-0">
-                            <div class="relative aspect-video overflow-hidden border border-stone-200">
-                                <Image
-                                    src={getImage(work)}
-                                    width={600}
-                                    height={400}
-                                    loading={index < 3 ? "eager" : "lazy"}
-                                    class="h-full w-full object-cover grayscale filter transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                                    alt={work.title}
-                                />
-                                <div class="bg-ink text-paper absolute top-2 right-2 px-2 py-1 text-xs font-bold opacity-0 transition-opacity group-hover:opacity-100">
-                                    REF.{work.order.toString().padStart(2, "0")}
-                                </div>
-                                <div class="bg-paper-light/90 text-ink absolute bottom-2 left-2 inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-bold tracking-widest uppercase">
-                                    {work.category}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex flex-1 flex-col p-6">
-                            <h3 class="text-ink font-display group-hover:text-accent mb-2 text-2xl font-bold transition-colors">
-                                {work.title}
-                            </h3>
-                            <p class="font-display mb-4 line-clamp-2 border-l-2 border-stone-300 pl-3 text-sm leading-relaxed text-stone-600">
-                                {work.description}
-                            </p>
-                            <div class="mt-auto flex flex-wrap items-center gap-2">
-                                {work.technologies.slice(0, 2).map((tech) => (
-                                    <span class="border-ink text-ink inline-flex items-center gap-1 border bg-transparent px-1.5 py-0.5 text-[10px] font-bold tracking-widest uppercase">
-                                        {tech}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            ))
-        }
+    <div class="absolute top-4 right-0 mt-16 hidden md:mt-0 md:block">
+      <a
+        href="/projects"
+        class="text-ink decoration-accent flex items-center gap-2 font-bold decoration-2 underline-offset-4 transition-all hover:underline"
+      >
+        Full Archive <ExternalLink class="h-4 w-4" />
+      </a>
     </div>
+  </div>
 
-    <div class="mt-12 text-center md:hidden">
-        <a
-            href="/projects"
-            class="text-ink border-ink hover:bg-ink hover:text-paper inline-flex items-center justify-center gap-2 border-2 bg-transparent px-6 py-3 text-sm font-bold tracking-widest uppercase transition-colors duration-200"
-        >
-            View all projects <ExternalLink class="h-4 w-4" />
+  <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
+    {
+      works.map((work, index) => (
+        <a href={`/projects#${work.id}`} class="group block h-full">
+          <div class="bg-paper-light border-ink hard-shadow-sm flex h-full cursor-pointer flex-col border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_var(--color-ink)]">
+            <div class="p-3 pb-0">
+              <div class="relative aspect-video overflow-hidden border border-stone-200">
+                <Image
+                  src={getImage(work)}
+                  width={600}
+                  height={400}
+                  loading={index < 3 ? "eager" : "lazy"}
+                  class="h-full w-full object-cover grayscale filter transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                  alt={work.title}
+                />
+                <div class="bg-ink text-paper absolute top-2 right-2 px-2 py-1 text-xs font-bold opacity-0 transition-opacity group-hover:opacity-100">
+                  REF.{work.order.toString().padStart(2, "0")}
+                </div>
+                <div class="bg-paper-light/90 text-ink absolute bottom-2 left-2 inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-bold tracking-widest uppercase">
+                  {work.category}
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="text-ink font-display group-hover:text-accent mb-2 text-2xl font-bold transition-colors">
+                {work.title}
+              </h3>
+              <p class="font-display mb-4 line-clamp-2 border-l-2 border-stone-300 pl-3 text-sm leading-relaxed text-stone-600">
+                {work.description}
+              </p>
+              <div class="mt-auto flex flex-wrap items-center gap-2">
+                {work.technologies.slice(0, 2).map((tech) => (
+                  <span class="border-ink text-ink inline-flex items-center gap-1 border bg-transparent px-1.5 py-0.5 text-[10px] font-bold tracking-widest uppercase">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
         </a>
-    </div>
+      ))
+    }
+  </div>
+
+  <div class="mt-12 text-center md:hidden">
+    <a
+      href="/projects"
+      class="text-ink border-ink hover:bg-ink hover:text-paper inline-flex items-center justify-center gap-2 border-2 bg-transparent px-6 py-3 text-sm font-bold tracking-widest uppercase transition-colors duration-200"
+    >
+      View all projects <ExternalLink class="h-4 w-4" />
+    </a>
+  </div>
 </Section>

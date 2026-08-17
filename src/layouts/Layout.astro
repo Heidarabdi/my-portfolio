@@ -201,6 +201,7 @@ const finalTwitterDescription = twitterDescription || description;
     {
       import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN && import.meta.env.PROD && (
         <script
+          is:inline
           defer
           src="https://static.cloudflareinsights.com/beacon.min.js"
           data-cf-beacon={`{"token": "${import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN}"}`}

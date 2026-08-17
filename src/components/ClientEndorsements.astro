@@ -3,87 +3,86 @@ import { Quote, Star } from "lucide-astro";
 
 // Direct matching of Export HTML content
 const endorsements = [
-    {
-        quote: "Heidar's ability to translate complex machine learning concepts into functional web interfaces was invaluable to our research team. He delivered a robust platform that significantly accelerated our data analysis workflows.",
-        author: "Dr. A. Mohamed",
-        role: "Director of Research, Setsom Institute",
-        initial: "D",
-        date: "Dec 2024",
-    },
-    {
-        quote: "The new portal Heidar built for SNWO is not only visually professional but incredibly easy for our team to manage. His focus on accessibility ensured we could reach our entire audience effectively.",
-        author: "Fadumo Ali",
-        role: "Project Coordinator, SNWO",
-        initial: "F",
-        date: "Jan 2025",
-    },
-    {
-        quote: "Reliable, knowledgeable, and calm under pressure. Heidar played a key role in maintaining our campus infrastructure during a critical upgrade period.",
-        author: "Head of IT",
-        role: "IT Department, Jamhuriya University",
-        initial: "H",
-        date: "July 2023",
-    },
+  {
+    quote:
+      "Heidar's ability to translate complex machine learning concepts into functional web interfaces was invaluable to our research team. He delivered a robust platform that significantly accelerated our data analysis workflows.",
+    author: "Dr. A. Mohamed",
+    role: "Director of Research, Setsom Institute",
+    initial: "D",
+    date: "Dec 2024",
+  },
+  {
+    quote:
+      "The new portal Heidar built for SNWO is not only visually professional but incredibly easy for our team to manage. His focus on accessibility ensured we could reach our entire audience effectively.",
+    author: "Fadumo Ali",
+    role: "Project Coordinator, SNWO",
+    initial: "F",
+    date: "Jan 2025",
+  },
+  {
+    quote:
+      "Reliable, knowledgeable, and calm under pressure. Heidar played a key role in maintaining our campus infrastructure during a critical upgrade period.",
+    author: "Head of IT",
+    role: "IT Department, Jamhuriya University",
+    initial: "H",
+    date: "July 2023",
+  },
 ];
 ---
 
 <section
-    class="border-ink -mx-6 border-y-2 bg-stone-200 px-6 py-20"
-    id="endorsements"
+  class="border-ink -mx-6 border-y-2 bg-stone-200 px-6 py-20"
+  id="endorsements"
 >
-    <div class="mx-auto max-w-7xl">
-        <div class="mb-8 flex flex-col items-center">
-            <div class="mb-6">
-                <div
-                    class="border-ink bg-paper-light inline-flex items-center gap-1 border px-3 py-1 text-xs font-bold tracking-widest uppercase"
-                >
-                    <Star class="text-accent fill-accent h-3 w-3" /> Performance Reports
-                </div>
-            </div>
-            <div class="flex flex-col items-center border-none text-center">
-                <div class="mx-auto max-w-2xl">
-                    <h2
-                        class="text-ink font-display mb-4 text-4xl font-bold md:text-5xl"
-                    >
-                        Client Endorsements
-                    </h2>
-                </div>
-            </div>
+  <div class="mx-auto max-w-7xl">
+    <div class="mb-8 flex flex-col items-center">
+      <div class="mb-6">
+        <div
+          class="border-ink bg-paper-light inline-flex items-center gap-1 border px-3 py-1 text-xs font-bold tracking-widest uppercase"
+        >
+          <Star class="text-accent fill-accent h-3 w-3" /> Performance Reports
         </div>
-
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {
-                endorsements.map((item) => (
-                    <div class="bg-paper-light border-ink hard-shadow-sm relative h-full border-2 p-8">
-                        <div class="bg-ink text-paper absolute -top-4 left-6 p-2">
-                            <Quote class="h-5 w-5" />
-                        </div>
-                        <div class="mt-4 mb-6">
-                            <p class="font-display text-lg leading-relaxed text-stone-700 italic">
-                                "{item.quote}"
-                            </p>
-                        </div>
-                        <div class="flex items-center gap-4 border-t-2 border-stone-100 pt-6">
-                            <div class="border-ink font-display text-ink flex h-10 w-10 items-center justify-center border bg-stone-200 font-bold">
-                                {item.initial}
-                            </div>
-                            <div>
-                                <>
-                                    <div class="text-ink text-sm font-bold">
-                                        {item.author}
-                                    </div>
-                                    <div class="font-mono text-xs text-stone-500 uppercase">
-                                        {item.role}
-                                    </div>
-                                </>
-                            </div>
-                        </div>
-                        <div class="absolute right-4 bottom-4 text-[10px] font-bold text-stone-300 uppercase">
-                            Date: {item.date}
-                        </div>
-                    </div>
-                ))
-            }
+      </div>
+      <div class="flex flex-col items-center border-none text-center">
+        <div class="mx-auto max-w-2xl">
+          <h2 class="text-ink font-display mb-4 text-4xl font-bold md:text-5xl">
+            Client Endorsements
+          </h2>
         </div>
+      </div>
     </div>
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+      {
+        endorsements.map((item) => (
+          <div class="bg-paper-light border-ink hard-shadow-sm relative h-full border-2 p-8">
+            <div class="bg-ink text-paper absolute -top-4 left-6 p-2">
+              <Quote class="h-5 w-5" />
+            </div>
+            <div class="mt-4 mb-6">
+              <p class="font-display text-lg leading-relaxed text-stone-700 italic">
+                "{item.quote}"
+              </p>
+            </div>
+            <div class="flex items-center gap-4 border-t-2 border-stone-100 pt-6">
+              <div class="border-ink font-display text-ink flex h-10 w-10 items-center justify-center border bg-stone-200 font-bold">
+                {item.initial}
+              </div>
+              <div>
+                <>
+                  <div class="text-ink text-sm font-bold">{item.author}</div>
+                  <div class="font-mono text-xs text-stone-500 uppercase">
+                    {item.role}
+                  </div>
+                </>
+              </div>
+            </div>
+            <div class="absolute right-4 bottom-4 text-[10px] font-bold text-stone-300 uppercase">
+              Date: {item.date}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
 </section>

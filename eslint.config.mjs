@@ -1,6 +1,6 @@
 import eslintPluginAstro from "eslint-plugin-astro";
 import tseslint from "typescript-eslint";
-import astroParser from "astro-eslint-parser";
+import * as astroParser from "astro-eslint-parser";
 
 export default [
   {
