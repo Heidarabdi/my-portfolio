@@ -112,6 +112,7 @@ class PortfolioContact extends HTMLElement {
           token,
         };
         busy = true;
+        delete status.dataset.deliveryCode;
         refresh();
         showStatus("");
         try {

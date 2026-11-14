@@ -15,31 +15,38 @@ export interface ContactEmail {
 export async function sendGmail(
   password: string,
   message: ContactEmail,
+  localPreview = false,
 ): Promise<void> {
-  // Workers' socket implementation does not fall back from unreachable IPv6.
-  // Resolve IPv4 each request; retain the hostname below for TLS verification.
-  const [host] = await dns.resolve4("smtp.gmail.com");
+  // The Windows preview needs an IPv4 socket adapter. Production uses the
+  // SMTP transport supported by Nodemailer and Cloudflare's Node APIs.
+  const host = localPreview
+    ? (await dns.resolve4("smtp.gmail.com"))[0]
+    : "smtp.gmail.com";
   if (!host) throw new Error("delivery_failed");
   // One connection per request; never share authenticated sockets between visitors.
   const transport = nodemailer.createTransport({
     host,
     port: 465,
     secure: true,
-    getSocket: (
-      _options: SMTPTransport.Options,
-      callback: (error: Error | null, options: object | false) => void,
-    ) => {
-      openGmailSocket(host).then(
-        (connection) => callback(null, { connection, secured: true }),
-        (error: unknown) =>
-          callback(
-            error instanceof Error
-              ? error
-              : new Error("SMTP connection failed"),
-            false,
-          ),
-      );
-    },
+    ...(localPreview
+      ? {
+          getSocket: (
+            _options: SMTPTransport.Options,
+            callback: (error: Error | null, options: object | false) => void,
+          ) => {
+            openGmailSocket(host).then(
+              (connection) => callback(null, { connection, secured: true }),
+              (error: unknown) =>
+                callback(
+                  error instanceof Error
+                    ? error
+                    : new Error("SMTP connection failed"),
+                  false,
+                ),
+            );
+          },
+        }
+      : {}),
     auth: { user: message.from.email, pass: password.replace(/\s/g, "") },
     connectionTimeout: 7000,
     greetingTimeout: 7000,

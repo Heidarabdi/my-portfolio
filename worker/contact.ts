@@ -124,7 +124,11 @@ export async function handleContact(
   request: Request,
   env: Env,
   send: (message: ContactEmail) => Promise<void> = (message) =>
-    sendGmail(env.GMAIL_APP_PASSWORD, message),
+    sendGmail(
+      env.GMAIL_APP_PASSWORD,
+      message,
+      ["localhost", "127.0.0.1"].includes(new URL(request.url).hostname),
+    ),
 ): Promise<Response> {
   const path = new URL(request.url).pathname.replace(/\/$/, "");
   if (path === "/api/contact/config" && request.method === "GET") {

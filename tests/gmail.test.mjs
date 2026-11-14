@@ -23,7 +23,7 @@ test("Gmail connects over IPv4 while retaining Gmail's TLS identity", async (t) 
     options = configuration;
     return { sendMail: async () => ({ accepted: [message.to] }), close() {} };
   });
-  await sendGmail("test-app-password", message);
+  await sendGmail("test-app-password", message, true);
   assert.equal(options.host, "192.0.2.25");
   assert.equal(options.tls.servername, "smtp.gmail.com");
   assert.notEqual(options.tls.rejectUnauthorized, false);
@@ -47,7 +47,8 @@ test("Gmail uses authenticated TLS and closes the request's connection", async (
     };
   });
   await sendGmail("abcd efgh ijkl mnop", message);
-  assert.equal(options.host, "192.0.2.25");
+  assert.equal(options.host, "smtp.gmail.com");
+  assert.equal(options.getSocket, undefined);
   assert.equal(options.port, 465);
   assert.equal(options.secure, true);
   assert.equal(options.auth.user, message.from.email);
@@ -73,7 +74,7 @@ test("SMTP rejection is an error and still closes the connection", async (t) => 
     },
   }));
   await assert.rejects(
-    sendGmail("test-app-password", message),
+    sendGmail("test-app-password", message, true),
     /delivery_failed/,
   );
   assert.equal(closed, true);
@@ -88,7 +89,7 @@ test("DNS failure stops delivery before creating an SMTP connection", async (t) 
     created = true;
   });
   await assert.rejects(
-    sendGmail("test-app-password", message),
+    sendGmail("test-app-password", message, true),
     /DNS unavailable/,
   );
   assert.equal(created, false);
