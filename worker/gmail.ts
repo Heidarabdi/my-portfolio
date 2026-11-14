@@ -17,8 +17,8 @@ export async function sendGmail(
   message: ContactEmail,
   localPreview = false,
 ): Promise<void> {
-  // The Windows preview needs an IPv4 socket adapter. Production uses the
-  // SMTP transport supported by Nodemailer and Cloudflare's Node APIs.
+  // Use Gmail's hostname for production TLS. Only the Windows preview needs
+  // an IPv4 literal with an explicit TLS hostname override.
   const host = localPreview
     ? (await dns.resolve4("smtp.gmail.com"))[0]
     : "smtp.gmail.com";
@@ -28,25 +28,21 @@ export async function sendGmail(
     host,
     port: 465,
     secure: true,
-    ...(localPreview
-      ? {
-          getSocket: (
-            _options: SMTPTransport.Options,
-            callback: (error: Error | null, options: object | false) => void,
-          ) => {
-            openGmailSocket(host).then(
-              (connection) => callback(null, { connection, secured: true }),
-              (error: unknown) =>
-                callback(
-                  error instanceof Error
-                    ? error
-                    : new Error("SMTP connection failed"),
-                  false,
-                ),
-            );
-          },
-        }
-      : {}),
+    getSocket: (
+      _options: SMTPTransport.Options,
+      callback: (error: Error | null, options: object | false) => void,
+    ) => {
+      openGmailSocket(host).then(
+        (connection) => callback(null, { connection, secured: true }),
+        (error: unknown) =>
+          callback(
+            error instanceof Error
+              ? error
+              : new Error("SMTP connection failed"),
+            false,
+          ),
+      );
+    },
     auth: { user: message.from.email, pass: password.replace(/\s/g, "") },
     connectionTimeout: 7000,
     greetingTimeout: 7000,

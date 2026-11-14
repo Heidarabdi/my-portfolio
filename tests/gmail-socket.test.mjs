@@ -3,6 +3,32 @@ import { once } from "node:events";
 import { test } from "node:test";
 import { openGmailSocket } from "../worker/gmail-socket.ts";
 
+test("production TLS connects to Gmail's hostname without an IP override", async () => {
+  let closed = false;
+  const socket = {
+    opened: Promise.resolve(),
+    readable: new ReadableStream(),
+    writable: new WritableStream(),
+    close: async () => {
+      closed = true;
+    },
+    startTls: () => {
+      throw new Error("Production must use direct hostname TLS");
+    },
+  };
+  const connect = (address, options) => {
+    assert.deepEqual(address, { hostname: "smtp.gmail.com", port: 465 });
+    assert.equal(options.secureTransport, "on");
+    return socket;
+  };
+  const stream = await openGmailSocket("smtp.gmail.com", connect);
+  stream.setTimeout(0);
+  const finished = once(stream, "close");
+  stream.destroy();
+  await finished;
+  assert.equal(closed, true);
+});
+
 test("the Worker socket establishes TLS for Gmail before handing SMTP a stream", async () => {
   let tlsOptions;
   let closed = false;

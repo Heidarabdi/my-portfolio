@@ -48,7 +48,7 @@ test("Gmail uses authenticated TLS and closes the request's connection", async (
   });
   await sendGmail("abcd efgh ijkl mnop", message);
   assert.equal(options.host, "smtp.gmail.com");
-  assert.equal(options.getSocket, undefined);
+  assert.equal(typeof options.getSocket, "function");
   assert.equal(options.port, 465);
   assert.equal(options.secure, true);
   assert.equal(options.auth.user, message.from.email);

@@ -6,11 +6,10 @@ through the owner's Gmail account using authenticated TLS to smtp.gmail.com:465.
 There is no application database, submission history, retry queue, or content log.
 Gmail will retain sent and received mail as it normally does.
 
-Production uses Nodemailer's SMTP/TLS transport through the Workers Node APIs.
-The Windows local preview uses an IPv4 adapter with Cloudflare's native socket
-TLS upgrade and `smtp.gmail.com` as the expected certificate hostname. This
-avoids local IPv6 fallback and Node TLS connection issues. Both paths require
-encrypted connections and keep certificate verification enabled.
+Production connects directly to `smtp.gmail.com` with Cloudflare's native TLS
+socket API and passes the encrypted stream to Nodemailer. The Windows local
+preview uses an IPv4 address with an explicit Gmail TLS hostname override to
+avoid local IPv6 routing issues. Both paths keep certificate verification enabled.
 
 ## Production settings
 

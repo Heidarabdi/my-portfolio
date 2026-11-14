@@ -7,9 +7,10 @@ export async function openGmailSocket(
   connectSocket?: typeof import("cloudflare:sockets").connect,
 ) {
   const connect = connectSocket ?? (await import("cloudflare:sockets")).connect;
+  const directTls = address === "smtp.gmail.com";
   const plain = connect(
     { hostname: address, port: 465 },
-    { secureTransport: "starttls", allowHalfOpen: false },
+    { secureTransport: directTls ? "on" : "starttls", allowHalfOpen: false },
   );
   let secure: ReturnType<typeof connect> | undefined;
   let deadline: ReturnType<typeof setTimeout> | undefined;
@@ -17,7 +18,9 @@ export async function openGmailSocket(
     await Promise.race([
       (async () => {
         await plain.opened;
-        secure = plain.startTls({ expectedServerHostname: "smtp.gmail.com" });
+        secure = directTls
+          ? plain
+          : plain.startTls({ expectedServerHostname: "smtp.gmail.com" });
         await secure.opened;
       })(),
       new Promise<never>((_, reject) => {
