@@ -125,6 +125,9 @@ class PortfolioContact extends HTMLElement {
             signal: AbortSignal.any([signal, AbortSignal.timeout(45_000)]),
           });
           const result = await response.json();
+          // Non-sensitive support reference; submitted content is never recorded.
+          if (typeof result.deliveryCode === "string")
+            status.dataset.deliveryCode = result.deliveryCode;
           if (!response.ok || result.sent !== true) {
             showStatus(
               result.error === "verification_failed"

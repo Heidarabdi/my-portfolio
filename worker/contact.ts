@@ -89,6 +89,37 @@ const escapeHtml = (text: string) =>
       ]!,
   );
 
+// Only fixed support codes leave the backend; never return SMTP response text.
+function deliveryCode(error: unknown) {
+  if (!error || typeof error !== "object") return "unknown";
+  const details = error as {
+    code?: unknown;
+    name?: unknown;
+    message?: unknown;
+  };
+  const known = new Set([
+    "EAUTH",
+    "ESOCKET",
+    "ECONNECTION",
+    "EDNS",
+    "ETIMEDOUT",
+    "ETLS",
+    "EENVELOPE",
+    "ESTREAM",
+    "EMESSAGE",
+  ]);
+  if (typeof details.code === "string" && known.has(details.code))
+    return details.code;
+  if (details.name === "TypeError") return "runtime_type";
+  if (details.name === "ReferenceError") return "runtime_reference";
+  if (
+    typeof details.message === "string" &&
+    /not implemented|unsupported/i.test(details.message)
+  )
+    return "runtime_unsupported";
+  return "unknown";
+}
+
 export async function handleContact(
   request: Request,
   env: Env,
@@ -185,8 +216,11 @@ export async function handleContact(
       html: `<h1>New portfolio inquiry</h1><p><strong>${escapeHtml(fields.name)}</strong><br>${escapeHtml(fields.email)}</p><p>${escapeHtml(fields.subject)}</p><p style="white-space:pre-wrap">${escapeHtml(fields.message)}</p>`,
     });
     return json({ sent: true });
-  } catch {
+  } catch (error) {
     // Never log submitted content, provider responses, or email addresses.
-    return json({ error: "delivery_failed" }, 502);
+    return json(
+      { error: "delivery_failed", deliveryCode: deliveryCode(error) },
+      502,
+    );
   }
 }

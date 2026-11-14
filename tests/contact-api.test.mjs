@@ -138,7 +138,27 @@ test("does not report success or expose provider errors when email sending fails
     }),
   );
   assert.equal(response.status, 502);
-  assert.deepEqual(await response.json(), { error: "delivery_failed" });
+  assert.deepEqual(await response.json(), {
+    error: "delivery_failed",
+    deliveryCode: "unknown",
+  });
+});
+
+test("delivery diagnostics expose only fixed support codes", async (t) => {
+  verify(t);
+  const response = await handleContact(
+    request(),
+    environment(async () => {
+      throw Object.assign(
+        new Error("private provider response with credentials"),
+        { code: "EAUTH" },
+      );
+    }),
+  );
+  assert.deepEqual(await response.json(), {
+    error: "delivery_failed",
+    deliveryCode: "EAUTH",
+  });
 });
 
 test("unconfigured deployments do not expose a usable form", async () => {
