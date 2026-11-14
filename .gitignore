@@ -31,4 +31,15 @@ pnpm-debug.log*
 .DS_Store
 Thumbs.db
 
+# Logs
+*.log
+
 export/
+
+# Cloudflare build output and local secrets
+.cloudflare/
+cloudflare-dist/
+# Gmail and Turnstile credentials for local Cloudflare development
+.dev.vars
+.dev.vars.*
+!.dev.vars.example

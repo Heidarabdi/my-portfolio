@@ -2,7 +2,7 @@
 
 A modern, performant portfolio website built with **Astro 7**, featuring optimized images, SEO best practices, and a vintage-inspired design aesthetic.
 
-![Astro](https://img.shields.io/badge/Astro-7.2-BC52EE?logo=astro&logoColor=white)
+![Astro](https://img.shields.io/badge/Astro-7.4-BC52EE?logo=astro&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.3-38BDF8?logo=tailwind-css&logoColor=white)
 
@@ -37,7 +37,7 @@ A modern, performant portfolio website built with **Astro 7**, featuring optimiz
 - **Projects Showcase** - Filterable portfolio with modal details
 - **Blog** - Markdown content collections
 - **About Page** - Professional history, education, certificates
-- **Contact Form** - Interactive contact form with validation
+- **Contact Form** - Direct email through a Cloudflare Pages Function, with Turnstile and server-side validation; submissions are not stored
 - **Custom 404** - Branded error page
 
 ## 📁 Project Structure
@@ -86,7 +86,7 @@ A modern, performant portfolio website built with **Astro 7**, featuring optimiz
 
 ### Prerequisites
 
-- Node.js 24.19.0 or newer
+- Node.js 24.22.0 or newer
 - npm 11+
 
 ### Installation
@@ -194,90 +194,30 @@ Configured in `tsconfig.json`:
 
 This site can be deployed to any static hosting platform. Below are detailed instructions for the most popular options:
 
-### Cloudflare Pages (Recommended) ⚡
+### Cloudflare Pages
 
-Cloudflare Pages offers blazing-fast global CDN, automatic SSL, and preview deployments - perfect for Astro sites!
-
-#### Method 1: Deploy via Git (Easiest)
-
-1. **Push your code to GitHub/GitLab**
-
-   ```bash
-   git add .
-   git commit -m "Ready for deployment"
-   git push origin main
-   ```
-
-2. **Connect to Cloudflare Pages**
-   - Log in to [Cloudflare Dashboard](https://dash.cloudflare.com/)
-   - Navigate to **Workers & Pages** → **Create Application** → **Pages**
-   - Click **Connect to Git**
-
-3. **Configure your build**
-   - Select your repository
-   - Configure build settings:
-     - **Framework preset**: `Astro`
-     - **Build command**: `npm run build`
-     - **Build output directory**: `dist`
-     - **Production branch**: `master`
-
-4. **Deploy**
-   - Click **Save and Deploy**
-   - Your site will be live in ~1 minute! 🎉
-
-#### Method 2: Deploy via Wrangler CLI
-
-1. **Install Wrangler**
-
-   ```bash
-   npm install -D wrangler
-   ```
-
-2. **Build your site**
-
-   ```bash
-   npm run build
-   ```
-
-3. **Deploy to Cloudflare Pages**
-
-   ```bash
-   npx wrangler pages deploy dist
-   ```
-
-   **Important**: Use `wrangler pages deploy dist` (not just `wrangler deploy`)
-
-4. **First time setup**
-   - The CLI will ask for your project name
-   - It will guide you through authentication
-   - Your site will be deployed to `<project-name>.pages.dev`
-
-**Note**: Method 1 (Git integration) is recommended as it's easier and provides automatic deployments on every push!
-
-#### Custom Domain Setup
-
-1. In Cloudflare Dashboard, go to your Pages project
-2. Navigate to **Custom domains**
-3. Click **Set up a custom domain**
-4. Follow DNS instructions (usually add a CNAME record)
-
-**Benefits of Cloudflare Pages:**
-
-- ⚡ Global CDN with 275+ locations
-- 🔒 Free SSL certificates
-- 🚀 Unlimited bandwidth
-- 📊 Built-in analytics
-- 🔄 Automatic preview deployments for PRs
-- 💰 Generous free tier
-
-#### Deployment notes
-
-This repository uses npm as its canonical package manager. Use the committed lockfile in CI and Cloudflare Pages:
+The site stays at https://heidar-dev.pages.dev. Its Pages Function sends contact
+messages through the owner's Gmail over authenticated TLS without storing submissions.
 
 ```bash
 npm ci
-npm run build
+npm run check
+npm run lint
+npm run build:cloudflare
+npm test
+npm audit --audit-level=high
 ```
+
+Configure the Gmail App Password and Turnstile runtime settings using
+[contact setup](docs/contact-setup.md). Pushing committed changes to `master`
+automatically builds and deploys the existing `heidar-dev` Pages project.
+`npm run deploy` can also trigger a fresh build of the latest pushed `master`
+commit; it does not upload uncommitted local files.
+This repository uses `cf`, not Wrangler.
+
+`npm run dev` previews the static frontend. `npm run dev:cloudflare` runs the
+frontend and API in the local Workers runtime. Real Gmail credentials send real
+email even in development; automated tests mock delivery.
 
 ### Environment Variables
 
@@ -338,9 +278,9 @@ Contributions, issues, and feature requests are welcome!
 
 **Heidar Abdi Ahmed**
 
-- Website: [heidarabdi.dev](https://heidarabdi.dev)
+- Website: [heidar-dev.pages.dev](https://heidar-dev.pages.dev)
 - GitHub: [@Heidarabdi](https://github.com/Heidarabdi)
-- Email: [contact@heidarabdi.dev](mailto:contact@heidarabdi.dev)
+- Email: [xeydarcabdi3@gmail.com](mailto:xeydarcabdi3@gmail.com)
 
 ---
 

@@ -14,5 +14,14 @@
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
+  "exclude": [
+    "dist",
+    "cloudflare-dist",
+    "worker",
+    "functions",
+    "cloudflare.config.ts",
+    "vite.config.ts",
+    ".cloudflare",
+    ".cf-template"
+  ]
 }

@@ -1,5 +1,5 @@
 ---
-import { User, FileText, Layers, BookOpen, Moon } from "lucide-astro";
+import { User, FileText, Layers, BookOpen, Moon, Sun } from "lucide-astro";
 
 const pathname = Astro.url.pathname;
 
@@ -75,7 +75,10 @@ const isActive = (href: string) => {
           class="hover:text-ink p-2 text-stone-500 transition-colors focus:outline-none"
           aria-label="Toggle theme"
         >
-          <div id="theme-icon"><Moon class="h-5 w-5" /></div>
+          <span id="theme-icon" aria-hidden="true">
+            <Sun data-theme-icon="sun" class="hidden h-5 w-5" />
+            <Moon data-theme-icon="moon" class="h-5 w-5" />
+          </span>
         </button>
 
         <a

@@ -8,8 +8,8 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<div
-  class="project-card hard-shadow-sm group border-ink bg-paper-light flex h-full cursor-pointer flex-col border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_var(--color-ink)]"
+<article
+  class="project-card hard-shadow-sm group border-ink bg-paper-light relative flex h-full flex-col border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_var(--color-ink)]"
   data-category={project.category}
   data-id={project.id}
 >
@@ -57,4 +57,11 @@ const { project } = Astro.props;
       }
     </div>
   </div>
-</div>
+  <button
+    type="button"
+    data-project-id={project.id}
+    aria-label={`View details for ${project.title}`}
+    aria-haspopup="dialog"
+    aria-controls="project-modal"
+    class="absolute inset-0 cursor-pointer"></button>
+</article>

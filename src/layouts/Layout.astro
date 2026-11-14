@@ -88,6 +88,22 @@ const finalTwitterDescription = twitterDescription || description;
     {twitterImage && <meta property="twitter:image" content={twitterImage} />}
 
     <ClientRouter />
+    <script is:inline>
+      try {
+        const theme = localStorage.getItem("theme");
+        document.documentElement.classList.toggle(
+          "dark",
+          theme
+            ? theme === "dark"
+            : matchMedia("(prefers-color-scheme: dark)").matches,
+        );
+      } catch {
+        document.documentElement.classList.toggle(
+          "dark",
+          matchMedia("(prefers-color-scheme: dark)").matches,
+        );
+      }
+    </script>
   </head>
   <body
     class="selection:bg-accent bg-paper text-ink transition-colors duration-300 selection:text-white"
@@ -108,93 +124,8 @@ const finalTwitterDescription = twitterDescription || description;
       <ArrowUp class="h-6 w-6" />
     </button>
 
-    <script is:inline>
-      // 2. Client-side Interaction Logic
-      // Define init function to bind events
-      function initThemeLogic() {
-        const themeToggleBtn = document.getElementById("theme-toggle");
-        const themeIconContainer = document.getElementById("theme-icon");
-
-        // Icon SVG Strings (Exact match to Export)
-        const sunIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun w-5 h-5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`;
-        const moonIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon w-5 h-5"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
-
-        function updateThemeIcon(isDark) {
-          if (!themeIconContainer) return;
-          themeIconContainer.innerHTML = isDark ? sunIcon : moonIcon;
-        }
-
-        // Initial Icon State
-        const isDark = document.documentElement.classList.contains("dark");
-        updateThemeIcon(isDark);
-
-        // Find button and add listener
-        if (themeToggleBtn) {
-          // Clone to remove old listeners
-          const newBtn = themeToggleBtn.cloneNode(true);
-          if (themeToggleBtn.parentNode) {
-            themeToggleBtn.parentNode.replaceChild(newBtn, themeToggleBtn);
-
-            newBtn.addEventListener("click", () => {
-              const isDarkNow =
-                document.documentElement.classList.toggle("dark");
-              localStorage.setItem("theme", isDarkNow ? "dark" : "light");
-              updateThemeIcon(isDarkNow);
-            });
-          }
-        }
-      }
-
-      function initScrollLogic() {
-        const backToTopBtn = document.getElementById("back-to-top");
-        if (backToTopBtn) {
-          window.addEventListener("scroll", () => {
-            if (window.scrollY > 300) {
-              backToTopBtn.classList.remove(
-                "opacity-0",
-                "pointer-events-none",
-                "translate-y-4",
-              );
-            } else {
-              backToTopBtn.classList.add(
-                "opacity-0",
-                "pointer-events-none",
-                "translate-y-4",
-              );
-            }
-          });
-          backToTopBtn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          });
-        }
-      }
-
-      // Run on load and View Transitions
-      function runAll() {
-        // Re-apply theme from storage on navigation
-        const savedTheme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)",
-        ).matches;
-
-        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-
-        initThemeLogic();
-        initScrollLogic();
-      }
-
-      // Astro View Transitions support
-      document.addEventListener("astro:page-load", runAll);
-      // Standard Load
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", runAll);
-      } else {
-        runAll();
-      }
+    <script>
+      import "../scripts/layout";
     </script>
 
     <!-- Cloudflare Web Analytics -->

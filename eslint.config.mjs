@@ -4,7 +4,14 @@ import * as astroParser from "astro-eslint-parser";
 
 export default [
   {
-    ignores: [".astro/", "dist/", "node_modules/", "scripts/"],
+    ignores: [
+      ".astro/",
+      ".cloudflare/",
+      "cloudflare-dist/",
+      "dist/",
+      "node_modules/",
+      "scripts/",
+    ],
   },
   ...eslintPluginAstro.configs.recommended,
   ...tseslint.configs.recommended,
