@@ -1,49 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import ServiceOfferings from "../components/ServiceOfferings.astro";
-import TechnicalInventory from "../components/TechnicalInventory.astro";
-import SelectedWorks from "../components/SelectedWorks.astro";
-import ClientEndorsements from "../components/ClientEndorsements.astro";
-import CTA from "../components/CTA.astro";
-import Separator from "../components/ui/Separator.astro";
-
-const summary =
-  "Innovative and detail-oriented Full Stack Developer with hands-on experience in web and mobile app development, machine learning, and IT support. Adept at quickly adapting to new technologies and frameworks, delivering scalable, efficient solutions for complex challenges.";
-const contact = {
-  github: "github.com/Heidarabdi",
-  linkedin: "linkedin.com/in/heidar",
-  email: "contact@heidar.dev",
-};
+import StudioLayout from "../layouts/StudioLayout.astro";
+import Homepage from "../components/home/Homepage.astro";
 ---
 
-<Layout>
-  <main class="min-h-screen space-y-0 pt-24" transition:animate="fade">
-    <div class="mx-auto max-w-7xl px-6">
-      <Hero summary={summary} contact={contact} />
-
-      <Separator />
-
-      <TechnicalInventory />
-
-      <Separator />
-
-      <ServiceOfferings />
-
-      <Separator />
-
-      <SelectedWorks />
-
-      <div class="mt-20 mb-20"></div>
-
-      <ClientEndorsements />
-
-      <div
-        class="border-ink my-16 mt-20 mb-20 w-full border-t-2 border-dashed opacity-30"
-      >
-      </div>
-
-      <CTA />
-    </div>
-  </main>
-</Layout>
+<StudioLayout
+  current="home"
+  title="Heidar Abdi — Full Stack Developer & ML Engineer"
+  description="I build thoughtful web experiences, practical machine learning, and dependable systems. Explore my projects and get in touch."
+>
+  <Homepage />
+</StudioLayout>

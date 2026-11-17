@@ -1,115 +1,84 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import StudioLayout from "../../layouts/StudioLayout.astro";
+import StudioCTA from "../../components/studio/StudioCTA.astro";
 import { getCollection, render } from "astro:content";
-import { ArrowLeft, Calendar, Clock, Tag, User } from "lucide-astro";
-
+import { Image } from "astro:assets";
+import { ArrowLeft, ArrowUpRight, Clock } from "lucide-astro";
+import { journalImages, formatPostDate } from "../../data/journal";
+import developer from "../../assets/home/developer.png";
 export async function getStaticPaths() {
-  const blogPosts = await getCollection("blog");
-  return blogPosts.map((post) => ({
+  return (await getCollection("blog")).map((post) => ({
     params: { slug: post.id },
     props: { post },
   }));
 }
-
 const { post } = Astro.props;
 const { Content } = await render(post);
-const title = `${post.data.title} - Heidar Dev Journal`;
+const image = journalImages[post.id];
 ---
 
-<Layout title={title}>
-  <main class="mx-auto min-h-screen max-w-4xl px-6 pt-24">
-    <!-- Back Link -->
-    <a
-      href="/blog"
-      class="hover:text-ink mb-12 inline-flex items-center gap-2 text-sm font-bold tracking-widest text-stone-500 uppercase transition-colors"
-    >
-      <ArrowLeft class="h-4 w-4" /> Return to Index
-    </a>
-
+<StudioLayout
+  current="blog"
+  title={`${post.data.title} — Heidar’s Journal`}
+  description={post.data.excerpt}
+>
+  <main id="main-content" class="studio-reading-page">
     <article>
-      <!-- Post Header -->
-      <header class="mb-12 text-center">
-        <div
-          class="bg-accent mb-6 inline-flex items-center gap-2 px-3 py-1 text-xs font-bold tracking-widest text-white uppercase"
-        >
-          <Tag class="h-3 w-3" />
-          <span id="post-category">{post.data.category}</span>
-        </div>
-        <h1
-          id="post-title"
-          class="text-ink mb-6 font-serif text-3xl leading-tight font-bold md:text-5xl"
-        >
+      <header class="studio-reading-header home-inset">
+        <a class="studio-back-link" href="/blog"
+          ><ArrowLeft size={17} aria-hidden="true" /> Back to journal</a
+        ><span class="studio-reading-category">{post.data.category}</span><h1>
           {post.data.title}
-        </h1>
-        <div
-          class="flex flex-wrap items-center justify-center gap-6 font-mono text-xs font-bold tracking-widest text-stone-500 uppercase"
+        </h1><p class="studio-reading-excerpt">{post.data.excerpt}</p><div
+          class="studio-reading-meta"
         >
-          <span class="flex items-center gap-2">
-            <Calendar class="h-4 w-4" />
-            <span id="post-date">{post.data.date}</span>
-          </span>
-          <span class="h-1.5 w-1.5 rounded-full bg-stone-300"></span>
-          <span class="flex items-center gap-2">
-            <Clock class="h-4 w-4" />
-            <span id="post-readtime">{post.data.readTime}</span>
-          </span>
+          <a href="/about" class="studio-reading-author"
+            ><Image
+              src={developer}
+              alt=""
+              width={56}
+              height={56}
+              fit="cover"
+              position="top"
+            /><span>Heidar Abdi</span></a
+          ><time datetime={post.data.date.toISOString()}
+            >{formatPostDate(post.data.date)}</time
+          ><span
+            ><Clock size={16} aria-hidden="true" />{post.data.readTime}</span>
         </div>
       </header>
-
-      <!-- Featured Image -->
-      <div
-        class="bg-paper-light border-ink hard-shadow-sm mb-12 rotate-1 border-2 p-3 transition-transform duration-500 hover:rotate-0"
-      >
-        <div class="aspect-video w-full overflow-hidden grayscale-0">
-          <img
-            id="post-image"
-            src={post.data.imageUrl}
-            alt={post.data.title}
-            width={800}
-            height={450}
-            class="h-full w-full object-cover"
-          />
-        </div>
-      </div>
-
-      <!-- Content -->
-      <div class="article-content text-ink mb-20 max-w-none font-serif">
-        <Content />
-      </div>
-
-      <!-- Author Bio -->
-      <div class="border-ink mt-12 mb-20 border-t-4 pt-12">
-        <div
-          class="bg-paper-light border-ink flex flex-col items-center gap-8 border-2 p-8 md:flex-row"
-        >
-          <div
-            class="border-ink hard-shadow-sm h-24 w-24 shrink-0 overflow-hidden rounded-full border-2"
-          >
-            <img
-              src="/images/portfolio/author.svg"
-              alt="Heidar Abdi"
-              width={200}
-              height={200}
-              class="h-full w-full object-cover grayscale"
+      <div class="studio-reading-image home-inset">
+        {
+          image ? (
+            <Image
+              src={image}
+              alt=""
+              width={1400}
+              widths={[600, 1000, 1400]}
+              sizes="(max-width: 1440px) 90vw, 1280px"
+              loading="eager"
             />
-          </div>
-          <div class="text-center md:text-left">
-            <div
-              class="text-accent mb-2 inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase"
-            >
-              <User class="h-3 w-3" /> About the Author
-            </div>
-            <h3 class="text-ink mb-3 font-serif text-2xl font-bold">
-              Heidar Abdi Ahmed
-            </h3>
-            <p class="font-serif leading-relaxed text-stone-600">
-              Full Stack Engineer and AI enthusiast passionate about bridging
-              the gap between complex machine learning models and intuitive user
-              experiences. Based in Mogadishu.
+          ) : (
+            <img src={post.data.imageUrl} alt="" width="1200" height="700" />
+          )
+        }
+      </div>
+      <div class="studio-reading-body">
+        <div class="studio-article-content"><Content /></div><aside
+          class="studio-author-card"
+        >
+          <div>
+            <p>Written by</p><h2>Heidar Abdi Ahmed</h2><p>
+              Full stack developer and machine learning engineer. Connecting
+              practical intelligence with thoughtful web experiences, from
+              Mogadishu.
             </p>
-          </div>
-        </div>
+          </div><a class="studio-text-link" href="/about"
+            >More about me <ArrowUpRight size={18} aria-hidden="true" /></a>
+        </aside><a href="/blog" class="studio-back-link"
+          ><ArrowLeft size={17} aria-hidden="true" /> Explore more articles</a>
       </div>
     </article>
+    <StudioCTA title="Let’s put ideas into practice." />
   </main>
-</Layout>
+</StudioLayout>

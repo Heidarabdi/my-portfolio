@@ -1,67 +1,58 @@
 ---
 import type { ProjectData } from "../../types/project";
-
+import { ArrowUpRight } from "lucide-astro";
 interface Props {
   project: ProjectData;
+  featured?: boolean;
+  wide?: boolean;
 }
-
-const { project } = Astro.props;
+const { project, featured = false, wide = false } = Astro.props;
 ---
 
 <article
-  class="project-card hard-shadow-sm group border-ink bg-paper-light relative flex h-full flex-col border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_var(--color-ink)]"
+  class:list={[
+    "project-card studio-project-card",
+    { "studio-project-featured": featured },
+    { "studio-project-wide": wide },
+  ]}
   data-category={project.category}
   data-id={project.id}
 >
-  <div class="p-3 pb-0">
-    <div class="border-line-faint relative aspect-video overflow-hidden border">
-      <img
-        src={project.imageUrl || "/images/portfolio/project-placeholder.svg"}
-        alt={project.title}
-        width={600}
-        height={400}
-        class="h-full w-full object-cover grayscale filter transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-      />
-      <div
-        class="bg-ink text-paper absolute top-2 right-2 px-2 py-1 text-xs font-bold opacity-0 transition-opacity group-hover:opacity-100"
-      >
-        {project.order.toString().padStart(2, "0")}
-      </div>
-      <div
-        class="bg-paper-light/90 text-ink absolute bottom-2 left-2 inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-bold tracking-widest uppercase"
-      >
-        {project.category}
-      </div>
-    </div>
+  <div class="studio-project-image">
+    <img
+      src={project.imageUrl || "/images/portfolio/project-placeholder.svg"}
+      alt={`${project.title} — ${project.imageNote?.toLowerCase() || "project preview"}`}
+      width="1200"
+      height="800"
+      loading={featured ? "eager" : "lazy"}
+    /><span class="studio-visual-label">{project.imageNote}</span><span
+      class="studio-project-arrow"
+      ><ArrowUpRight size={27} aria-hidden="true" /></span
+    >
   </div>
-  <div class="flex flex-1 flex-col p-6">
-    <h3
-      class="text-ink group-hover:text-accent mb-2 font-serif text-2xl font-bold transition-colors"
+  <div class="studio-project-copy">
+    <div class="studio-project-meta">
+      <span
+        >{
+          project.category === "IT Support" ? "IT & systems" : project.category
+        }</span
+      ><span>{project.year}</span>
+    </div><h3>{project.title}</h3>{
+      project.client && <p class="studio-project-client">{project.client}</p>
+    }<p class="studio-project-description">{project.description}</p><ul
+      class="studio-tech-tags"
+      aria-label="Technologies"
     >
-      {project.title}
-    </h3>
-    <p
-      class="border-line-medium mb-4 line-clamp-2 border-l-2 pl-3 font-serif text-sm leading-relaxed text-stone-600"
+      {project.technologies.slice(0, 3).map((tech) => <li>{tech}</li>)}
+    </ul><span class="studio-project-open"
+      >View project <ArrowUpRight size={17} aria-hidden="true" /></span
     >
-      {project.description}
-    </p>
-    <div class="mt-auto flex flex-wrap items-center gap-2">
-      {
-        project.technologies
-          .slice(0, 2)
-          .map((tech) => (
-            <span class="border-ink text-ink inline-flex items-center gap-1 border bg-transparent px-1.5 py-0.5 text-[10px] font-bold tracking-widest uppercase">
-              {tech}
-            </span>
-          ))
-      }
-    </div>
   </div>
   <button
     type="button"
+    class="studio-card-hitarea"
     data-project-id={project.id}
     aria-label={`View details for ${project.title}`}
     aria-haspopup="dialog"
-    aria-controls="project-modal"
-    class="absolute inset-0 cursor-pointer"></button>
+    aria-controls="project-modal"></button>
 </article>

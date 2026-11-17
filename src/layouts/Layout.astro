@@ -11,6 +11,7 @@ import Footer from "../components/Footer.astro";
 import { ArrowUp } from "lucide-astro";
 
 interface Props {
+  homepage?: boolean;
   title?: string;
   description?: string;
   ogUrl?: string;
@@ -24,6 +25,7 @@ interface Props {
 }
 
 const {
+  homepage = false,
   title = "Heidar Dev Portfolio",
   description = "Engineering Intelligent Solutions",
   ogUrl,
@@ -87,6 +89,7 @@ const finalTwitterDescription = twitterDescription || description;
     {twitterHandle && <meta property="twitter:site" content={twitterHandle} />}
     {twitterImage && <meta property="twitter:image" content={twitterImage} />}
 
+    <slot name="head" />
     <ClientRouter />
     <script is:inline>
       try {
@@ -106,23 +109,30 @@ const finalTwitterDescription = twitterDescription || description;
     </script>
   </head>
   <body
-    class="selection:bg-accent bg-paper text-ink transition-colors duration-300 selection:text-white"
+    class:list={[
+      "selection:bg-accent bg-paper text-ink transition-colors duration-300 selection:text-white",
+      { "home-page": homepage },
+    ]}
   >
-    <div class="noise-overlay"></div>
+    {!homepage && <div class="noise-overlay" />}
 
-    <Navbar />
+    {!homepage && <Navbar />}
 
     <slot />
 
-    <Footer />
+    {!homepage && <Footer />}
 
-    <button
-      id="back-to-top"
-      class="bg-accent border-ink hard-shadow focus:ring-ink pointer-events-none fixed right-8 bottom-8 z-50 translate-y-4 border-2 p-3 text-white opacity-0 transition-all duration-300 hover:shadow-[6px_6px_0px_0px_var(--color-ink)] focus:ring-2 focus:ring-offset-2 focus:outline-none"
-      aria-label="Back to top"
-    >
-      <ArrowUp class="h-6 w-6" />
-    </button>
+    {
+      !homepage && (
+        <button
+          id="back-to-top"
+          class="bg-accent border-ink hard-shadow focus:ring-ink pointer-events-none fixed right-8 bottom-8 z-50 translate-y-4 border-2 p-3 text-white opacity-0 transition-all duration-300 hover:shadow-[6px_6px_0px_0px_var(--color-ink)] focus:ring-2 focus:ring-offset-2 focus:outline-none"
+          aria-label="Back to top"
+        >
+          <ArrowUp class="h-6 w-6" />
+        </button>
+      )
+    }
 
     <script>
       import "../scripts/layout";

@@ -1,361 +1,246 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import StudioLayout from "../layouts/StudioLayout.astro";
 import {
-  MapPin,
-  Send,
-  Copy,
+  ArrowUpRight,
+  Check,
   CheckCircle,
-  Radio,
-  ArrowRight,
+  Copy,
+  Github,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
 } from "lucide-astro";
-
-const title = "Contact - Heidar Dev Portfolio";
 ---
 
-<Layout title={title}>
-  <portfolio-contact class="block">
-    <main
-      class="mx-auto min-h-screen max-w-7xl px-6 pt-24"
-      transition:animate="fade"
-    >
-      <div class="py-12">
-        <div
-          class="border-ink reveal mb-16 flex flex-col items-end justify-between border-b-4 pb-6 md:flex-row"
+<StudioLayout
+  title="Contact — Heidar Abdi"
+  description="Have a project in mind? Get in touch with Heidar for web development, machine learning integration, and IT projects."
+  current="contact"
+>
+  <main id="main-content">
+    <header class="studio-page-heading home-inset">
+      <span class="studio-eyebrow">CONTACT</span>
+      <div class="studio-heading-row">
+        <h1>Have an idea?<br /><em>Let’s talk.</em></h1>
+        <p>
+          A new website, a useful model, or a system that needs connecting. Tell
+          me what you have in mind.
+        </p>
+      </div>
+    </header>
+    <portfolio-contact class="studio-contact home-inset">
+      <div class="studio-contact-grid">
+        <section
+          class="studio-contact-form-panel"
+          aria-labelledby="contact-form-title"
         >
-          <div class="max-w-2xl">
-            <div class="mb-4 flex items-center gap-2">
-              <div class="h-3 w-3 animate-pulse rounded-full bg-red-600"></div>
-              <span
-                class="text-xs font-bold tracking-widest text-red-600 uppercase"
-                >Channel Open</span
-              >
-            </div>
-            <h1 class="text-ink mb-2 font-serif text-4xl font-bold md:text-6xl">
-              Transmission
-            </h1>
-            <p class="font-serif text-lg text-stone-600 italic">
-              Establish a connection for inquiries and collaborations.
-            </p>
-          </div>
           <div
-            class="border-ink bg-ink text-paper inline-flex items-center gap-1 border px-2 py-1 text-[10px] font-bold tracking-widest uppercase"
+            id="success-message"
+            tabindex="-1"
+            role="status"
+            class="studio-contact-success hidden"
           >
-            Let’s talk
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-5">
-          <div class="reveal reveal-delay-100 min-w-0 lg:col-span-3">
-            <div
-              class="bg-paper-light border-ink hard-shadow-sm relative border-2 p-8"
+            <CheckCircle size={56} aria-hidden="true" />
+            <h2>Message sent.</h2>
+            <p>
+              Your email has been sent. I’ll get back to you as soon as I can.
+            </p>
+            <button id="send-another" type="button" class="home-button"
+              >Send another <ArrowUpRight
+                size={18}
+                aria-hidden="true"
+              /></button
             >
-              <div
-                class="bg-ink text-paper absolute top-0 left-0 px-2 py-1 text-xs font-bold uppercase"
-              >
-                Form C-19
-              </div>
-
-              <!-- Success State -->
-              <div
-                id="success-message"
-                tabindex="-1"
-                role="status"
-                class="hidden flex-col items-center justify-center py-12 text-center"
-              >
-                <CheckCircle class="mb-6 h-16 w-16 text-green-600" />
-                <h3 class="text-ink mb-2 font-serif text-2xl font-bold">
-                  Message sent
-                </h3>
-                <p class="mb-8 max-w-md text-stone-600">
-                  Your email has been sent. I’ll get back to you as soon as I
-                  can.
-                </p>
-                <button
-                  id="send-another"
-                  type="button"
-                  class="text-ink hover:text-accent text-xs font-bold tracking-widest uppercase underline"
-                >
-                  Send Another
-                </button>
-              </div>
-
-              <!-- Form -->
-              <form
-                id="contact-form"
-                action="/api/contact"
-                method="post"
-                class="mt-4 space-y-6"
-              >
-                <div hidden aria-hidden="true">
-                  <label for="website">Website</label>
-                  <input
-                    type="text"
-                    id="website"
-                    name="website"
-                    tabindex="-1"
-                    autocomplete="off"
-                  />
-                </div>
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                  <div class="w-full">
-                    <label
-                      for="name"
-                      class="text-ink-muted mb-2 block text-xs font-bold tracking-widest uppercase"
-                      >Identity / Name</label
-                    >
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      autocomplete="name"
-                      maxlength="100"
-                      required
-                      class="bg-paper-wash border-line-medium text-ink focus:border-ink transition-vintage w-full border-2 p-3 font-mono focus:outline-none"
-                    />
-                  </div>
-                  <div class="w-full">
-                    <label
-                      for="email"
-                      class="text-ink-muted mb-2 block text-xs font-bold tracking-widest uppercase"
-                      >Return Address / Email</label
-                    >
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      autocomplete="email"
-                      maxlength="254"
-                      required
-                      class="bg-paper-wash border-line-medium text-ink focus:border-ink transition-vintage w-full border-2 p-3 font-mono focus:outline-none"
-                    />
-                  </div>
-                </div>
-
-                <div class="space-y-2">
-                  <fieldset aria-label="Subject Matter">
-                    <legend
-                      class="text-ink-muted text-xs font-bold tracking-widest uppercase"
-                    >
-                      Subject Matter
-                    </legend>
-                    <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-                      <!-- Custom Radio Cards -->
-                      <label
-                        class="border-line-medium bg-paper-light transition-vintage focus-within:ring-accent hover:border-ink flex cursor-pointer items-center gap-2 border-2 p-3 focus-within:ring-2 focus-within:ring-offset-2"
-                      >
-                        <input
-                          type="radio"
-                          name="subject"
-                          value="Project Inquiry"
-                          checked
-                          class="peer sr-only"
-                        />
-                        <div
-                          class="border-ink-muted peer-checked:border-accent flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 peer-checked:[&>div]:opacity-100"
-                        >
-                          <div class="bg-accent h-2 w-2 rounded-full opacity-0">
-                          </div>
-                        </div>
-                        <span
-                          class="text-ink-muted peer-checked:text-ink text-sm font-bold"
-                          >Project Inquiry</span
-                        >
-                      </label>
-
-                      <label
-                        class="border-line-medium bg-paper-light transition-vintage focus-within:ring-accent hover:border-ink flex cursor-pointer items-center gap-2 border-2 p-3 focus-within:ring-2 focus-within:ring-offset-2"
-                      >
-                        <input
-                          type="radio"
-                          name="subject"
-                          value="Consultation"
-                          class="peer sr-only"
-                        />
-                        <div
-                          class="border-ink-muted peer-checked:border-accent flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 peer-checked:[&>div]:opacity-100"
-                        >
-                          <div class="bg-accent h-2 w-2 rounded-full opacity-0">
-                          </div>
-                        </div>
-                        <span
-                          class="text-ink-muted peer-checked:text-ink text-sm font-bold"
-                          >Consultation</span
-                        >
-                      </label>
-
-                      <label
-                        class="border-line-medium bg-paper-light transition-vintage focus-within:ring-accent hover:border-ink flex cursor-pointer items-center gap-2 border-2 p-3 focus-within:ring-2 focus-within:ring-offset-2"
-                      >
-                        <input
-                          type="radio"
-                          name="subject"
-                          value="Other"
-                          class="peer sr-only"
-                        />
-                        <div
-                          class="border-ink-muted peer-checked:border-accent flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 peer-checked:[&>div]:opacity-100"
-                        >
-                          <div class="bg-accent h-2 w-2 rounded-full opacity-0">
-                          </div>
-                        </div>
-                        <span
-                          class="text-ink-muted peer-checked:text-ink text-sm font-bold"
-                          >Other</span
-                        >
-                      </label>
-                    </div>
-                  </fieldset>
-
-                  <div class="w-full">
-                    <label
-                      for="message"
-                      class="text-ink-muted mb-2 block text-xs font-bold tracking-widest uppercase"
-                      >Message Content</label
-                    >
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows="6"
-                      minlength="20"
-                      maxlength="5000"
-                      required
-                      class="bg-paper-wash border-line-medium text-ink focus:border-ink transition-vintage w-full resize-none border-2 p-3 font-mono focus:outline-none"
-                    ></textarea>
-                  </div>
-
-                  <div id="contact-verification" class="my-4"></div>
-                  <p
-                    id="contact-status"
-                    role="status"
-                    aria-live="polite"
-                    class="text-ink-muted my-4 text-sm"
-                  >
-                    Loading the security check…
-                  </p>
-                  <noscript
-                    ><p>
-                      Please enable JavaScript to use this form, or <a
-                        href="mailto:xeydarcabdi3@gmail.com"
-                        >email me directly</a
-                      >.
-                    </p></noscript
-                  >
-                  <p class="text-ink-muted mb-4 text-xs">
-                    Your message is emailed directly to me. This website does
-                    not store submissions.
-                  </p>
-                  <button
-                    type="submit"
-                    disabled
-                    class="bg-ink text-paper border-ink hover:bg-accent hover:border-accent hard-shadow-sm inline-flex w-full items-center justify-center gap-2 border-2 px-6 py-3 font-bold tracking-widest uppercase transition-colors duration-200"
-                  >
-                    <span>Send message</span>
-                    <Send class="h-4 w-4" />
-                  </button>
-                </div>
-              </form>
-            </div>
           </div>
-
-          <div class="reveal reveal-delay-200 min-w-0 space-y-8 lg:col-span-2">
-            <div class="bg-paper-dim border-ink border-l-4 p-6">
-              <h3
-                class="text-ink mb-4 flex items-center gap-2 font-serif text-xl font-bold"
-              >
-                <Radio class="h-5 w-5" />
-                Direct Line
-              </h3>
-              <div class="space-y-6">
-                <div class="group">
-                  <div class="mb-1 text-xs font-bold text-stone-500 uppercase">
-                    Email Protocol
-                  </div>
-                  <div
-                    class="bg-paper-light border-line-medium group-hover:border-ink transition-vintage flex items-center justify-between gap-2 border p-3"
-                  >
-                    <span
-                      class="text-ink truncate overflow-hidden font-mono text-sm"
-                      ><a href="mailto:xeydarcabdi3@gmail.com"
-                        >xeydarcabdi3@gmail.com</a
-                      ></span
-                    >
-                    <button
-                      data-copy="xeydarcabdi3@gmail.com"
-                      type="button"
-                      aria-label="Copy email address"
-                      class="hover:text-ink text-stone-400 focus:outline-none"
-                    >
-                      <div id="copy-email-icon">
-                        <Copy class="h-4 w-4" />
-                      </div>
-                    </button>
-                  </div>
-                </div>
-                <div class="group">
-                  <div class="mb-1 text-xs font-bold text-stone-500 uppercase">
-                    Voice / Mobile
-                  </div>
-                  <div
-                    class="bg-paper-light border-line-medium group-hover:border-ink transition-vintage flex items-center justify-between gap-2 border p-3"
-                  >
-                    <span class="text-ink font-mono text-sm"
-                      >+252 615054820</span
-                    >
-                    <button
-                      data-copy="+252 615054820"
-                      type="button"
-                      aria-label="Copy phone number"
-                      class="hover:text-ink text-stone-400 focus:outline-none"
-                    >
-                      <div id="copy-phone-icon">
-                        <Copy class="h-4 w-4" />
-                      </div>
-                    </button>
-                  </div>
-                </div>
-                <div class="group">
-                  <div class="mb-1 text-xs font-bold text-stone-500 uppercase">
-                    Coordinates
-                  </div>
-                  <div
-                    class="bg-paper-light border-line-medium flex items-center gap-2 border p-3"
-                  >
-                    <MapPin class="text-accent h-4 w-4" />
-                    <span class="text-ink font-mono text-sm">Mogadishu, SO</span
-                    >
-                  </div>
-                </div>
+          <form id="contact-form" action="/api/contact" method="post">
+            <div class="studio-form-heading">
+              <h2 id="contact-form-title">Tell me about it.</h2>
+              <p>A few details are all we need to start.</p>
+            </div>
+            <div hidden aria-hidden="true">
+              <label for="website">Website</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+            <div class="studio-contact-fields">
+              <div class="studio-form-field">
+                <label for="name">Your name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  autocomplete="name"
+                  maxlength="100"
+                  required
+                  placeholder="Your full name"
+                />
+              </div>
+              <div class="studio-form-field">
+                <label for="email">Email address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  maxlength="254"
+                  required
+                  placeholder="you@example.com"
+                />
               </div>
             </div>
-
-            <div class="bg-ink text-paper relative overflow-hidden p-6">
-              <div class="absolute top-0 right-0 p-8 opacity-10">
-                <ArrowRight class="h-24 w-24 -rotate-45" />
+            <fieldset class="studio-contact-subject">
+              <legend>What would you like to discuss?</legend>
+              <div>
+                {
+                  ["Project Inquiry", "Consultation", "Other"].map(
+                    (subject, index) => (
+                      <label>
+                        <input
+                          type="radio"
+                          name="subject"
+                          value={subject}
+                          checked={index === 0}
+                        />
+                        <span>{subject}</span>
+                      </label>
+                    ),
+                  )
+                }
               </div>
-              <h3 class="relative z-10 mb-4 font-serif text-xl font-bold">
-                Availability Status
-              </h3>
-              <div class="relative z-10 mb-4 flex items-center gap-3">
-                <div class="h-3 w-3 animate-pulse rounded-full bg-green-500">
-                </div>
-                <span class="font-mono text-sm font-bold text-green-400"
-                  >OPEN FOR COMMISSIONS</span
-                >
-              </div>
-              <p
-                class="relative z-10 font-serif text-sm leading-relaxed text-stone-400 italic"
-              >
-                Currently accepting new projects. Specialized in Full Stack
-                Architecture and Machine Learning Integration.
+            </fieldset>
+            <div class="studio-form-field">
+              <label for="message">Your message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                minlength="20"
+                maxlength="5000"
+                required
+                placeholder="What are you working on, and how can I help?"
+                aria-describedby="message-hint"></textarea>
+              <p id="message-hint" class="studio-field-hint">
+                At least 20 characters. A little context goes a long way.
               </p>
             </div>
-          </div>
-        </div>
+            <div id="contact-verification" class="studio-contact-verification">
+            </div>
+            <p
+              id="contact-status"
+              role="status"
+              aria-live="polite"
+              class="studio-contact-status"
+            >
+              Loading the security check…
+            </p>
+            <noscript
+              ><p>
+                Please enable JavaScript to use this form, or <a
+                  href="mailto:xeydarcabdi3@gmail.com">email me directly</a
+                >.
+              </p></noscript
+            >
+            <button
+              type="submit"
+              disabled
+              class="home-button studio-contact-submit"
+              ><span>Send message</span><Send
+                size={18}
+                aria-hidden="true"
+              /></button
+            >
+            <p class="studio-contact-privacy">
+              Your message is emailed directly to me. This website does not
+              store submissions.
+            </p>
+          </form>
+        </section>
+        <aside class="studio-contact-aside" aria-label="Other ways to connect">
+          <section
+            class="studio-direct-contact"
+            aria-labelledby="direct-contact-title"
+          >
+            <span class="studio-contact-icon"
+              ><Mail size={24} aria-hidden="true" /></span
+            >
+            <h2 id="direct-contact-title">Prefer a direct hello?</h2>
+            <p>You can reach me here, too.</p>
+            <dl>
+              <div>
+                <dt>Email</dt>
+                <dd>
+                  <a href="mailto:xeydarcabdi3@gmail.com"
+                    >xeydarcabdi3@gmail.com</a
+                  ><button
+                    data-copy="xeydarcabdi3@gmail.com"
+                    type="button"
+                    aria-label="Copy email address"
+                    ><Copy size={18} aria-hidden="true" /></button
+                  >
+                </dd>
+              </div>
+              <div>
+                <dt>Phone</dt>
+                <dd>
+                  <a href="tel:+252615054820"
+                    ><Phone size={16} aria-hidden="true" />+252 615054820</a
+                  ><button
+                    data-copy="+252 615054820"
+                    type="button"
+                    aria-label="Copy phone number"
+                    ><Copy size={18} aria-hidden="true" /></button
+                  >
+                </dd>
+              </div>
+              <div>
+                <dt>Based in</dt>
+                <dd>
+                  <span
+                    ><MapPin size={17} aria-hidden="true" />Mogadishu, Somalia</span
+                  >
+                </dd>
+              </div>
+            </dl>
+            <a
+              class="studio-contact-github"
+              href="https://github.com/Heidarabdi"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><Github size={19} aria-hidden="true" /> Find me on GitHub <ArrowUpRight
+                size={18}
+                aria-hidden="true"
+              /></a
+            >
+          </section>
+          <section
+            class="studio-contact-availability"
+            aria-labelledby="availability-title"
+          >
+            <span class="studio-availability-label"
+              ><span aria-hidden="true"></span>Available for new projects</span
+            >
+            <h2 id="availability-title">Good ideas can<br />start anywhere.</h2>
+            <p>Based in Mogadishu. Open to collaborating worldwide.</p>
+            <ul>
+              <li><Check size={17} aria-hidden="true" />Web development</li>
+              <li>
+                <Check size={17} aria-hidden="true" />Machine learning
+                integration
+              </li>
+              <li><Check size={17} aria-hidden="true" />IT & systems</li>
+            </ul>
+          </section>
+        </aside>
       </div>
-
       <script>
         import "../scripts/contact";
       </script>
-    </main>
-  </portfolio-contact>
-</Layout>
+    </portfolio-contact>
+  </main>
+</StudioLayout>

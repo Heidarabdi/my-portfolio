@@ -1,214 +1,212 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
-import { toProjectData } from "../types/project";
+import StudioLayout from "../layouts/StudioLayout.astro";
+import StudioCTA from "../components/studio/StudioCTA.astro";
 import ProjectCard from "../components/cards/ProjectCard.astro";
-import SectionHeader from "../components/ui/SectionHeader.astro";
+import { getCollection } from "astro:content";
+import { getImage } from "astro:assets";
+import { toProjectData } from "../types/project";
 import {
   X,
-  ChevronLeft,
-  ChevronRight,
-  FolderOpen,
-  ExternalLink,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
   Github,
+  Check,
 } from "lucide-astro";
-
-// Fetch projects from content collection
-const projectEntries = await getCollection("projects");
-
-// Convert to ProjectData and sort by order
-const projects = projectEntries
+import research from "../assets/home/research.png";
+import community from "../assets/home/community.png";
+import workspace from "../assets/home/workspace.jpg";
+const media = {
+  "ml-integration-platform": { source: research, note: "Interface study" },
+  "snwo-official-portal": { source: community, note: "Interface study" },
+  "campus-it-infrastructure": { source: workspace, note: "Context photograph" },
+};
+const entries = (await getCollection("projects"))
   .map(toProjectData)
   .sort((a, b) => a.order - b.order);
-
-// Prepare JSON for client-side modal
-const projectsJson = JSON.stringify(projects);
-
-const title = "Works - Heidar Dev Portfolio";
+const projects = await Promise.all(
+  entries.map(async (project) => {
+    const visual = media[project.id as keyof typeof media];
+    if (!visual) return { ...project, imageNote: "Project illustration" };
+    const image = await getImage({
+      src: visual.source,
+      width: 1200,
+      format: "webp",
+    });
+    return {
+      ...project,
+      imageUrl: image.src,
+      gallery: [image.src],
+      imageNote: visual.note,
+    };
+  }),
+);
+const filters = [
+  { key: "All", label: "All projects" },
+  { key: "Web Development", label: "Web development" },
+  { key: "Machine Learning", label: "Machine learning" },
+  { key: "IT Support", label: "IT & systems" },
+  { key: "Other", label: "Other" },
+];
 ---
 
-<Layout title={title}>
-  <project-archive data-projects={projectsJson} class="block">
-    <main
-      class="mx-auto min-h-screen max-w-7xl px-6 pt-24"
-      transition:animate="fade"
-    >
-      <section class="relative min-h-screen py-20">
-        <SectionHeader
-          title="Project Archive"
-          subtitle="The complete database of developed systems."
-          badge="Section 03"
-        />
-
-        <!-- Filter Buttons -->
-        <div class="reveal reveal-delay-100 mb-12 flex flex-wrap gap-4">
-          <button
-            class="filter-btn active hard-shadow-sm border-ink bg-ink text-paper rounded-sm border-2 px-4 py-2 text-xs font-bold tracking-widest uppercase transition-all focus:outline-none"
-            data-filter="All"
-          >
-            All
-          </button>
-          <button
-            class="filter-btn hover:border-ink hover:text-ink border-line-medium bg-paper-light rounded-sm border-2 px-4 py-2 text-xs font-bold tracking-widest text-stone-500 uppercase transition-all focus:outline-none"
-            data-filter="Web Development"
-          >
-            Web Development
-          </button>
-          <button
-            class="filter-btn hover:border-ink hover:text-ink border-line-medium bg-paper-light rounded-sm border-2 px-4 py-2 text-xs font-bold tracking-widest text-stone-500 uppercase transition-all focus:outline-none"
-            data-filter="Machine Learning"
-          >
-            Machine Learning
-          </button>
-          <button
-            class="filter-btn hover:border-ink hover:text-ink border-line-medium bg-paper-light rounded-sm border-2 px-4 py-2 text-xs font-bold tracking-widest text-stone-500 uppercase transition-all focus:outline-none"
-            data-filter="IT Support"
-          >
-            IT Support
-          </button>
-          <button
-            class="filter-btn hover:border-ink hover:text-ink border-line-medium bg-paper-light rounded-sm border-2 px-4 py-2 text-xs font-bold tracking-widest text-stone-500 uppercase transition-all focus:outline-none"
-            data-filter="Other"
-          >
-            Other
-          </button>
-        </div>
-
-        <div
-          class="reveal reveal-delay-200 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3"
+<StudioLayout
+  current="projects"
+  title="Projects — Heidar Abdi"
+  description="Explore my work in web development, machine learning, and IT systems, from research platforms to community portals."
+>
+  <project-archive
+    data-projects={JSON.stringify(projects)}
+    class="studio-projects"
+  >
+    <main id="main-content">
+      <header class="studio-page-heading home-inset">
+        <a class="studio-back-link" href="/"
+          ><ArrowLeft size={16} aria-hidden="true" /> Back to home</a
         >
-          {projects.map((project) => <ProjectCard project={project} />)}
+        <div class="studio-heading-row">
+          <h1>Thoughtful work.<br /><em>Practical impact.</em></h1><p>
+            Web experiences, intelligent tools, and dependable systems. A closer
+            look at what I build and how I approach it.
+          </p>
         </div>
+      </header>
+      <section
+        class="studio-work-section home-inset"
+        aria-labelledby="project-list-title"
+      >
+        <div class="studio-collection-toolbar">
+          <div>
+            <h2 id="project-list-title">
+              My projects<span class="studio-count">{projects.length}</span>
+            </h2><p
+              class="studio-result-count"
+              data-result-count
+              role="status"
+              aria-live="polite"
+            >
+              Showing all {projects.length} projects
+            </p>
+          </div><a
+            class="studio-text-link"
+            href="https://github.com/Heidarabdi"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Explore GitHub <ArrowUpRight size={18} aria-hidden="true" /></a
+          >
+        </div>
+        <div
+          class="studio-filters"
+          role="group"
+          aria-label="Filter projects by category"
+        >
+          {
+            filters.map((filter, index) => (
+              <button
+                type="button"
+                class="filter-btn"
+                data-filter={filter.key}
+                aria-pressed={index === 0}
+              >
+                {filter.label}
+                <span>
+                  {
+                    projects.filter(
+                      (project) =>
+                        filter.key === "All" || project.category === filter.key,
+                    ).length
+                  }
+                </span>
+              </button>
+            ))
+          }
+        </div>
+        <div class="studio-project-grid">
+          {
+            projects.map((project, index) => (
+              <ProjectCard
+                project={project}
+                featured={index === 0}
+                wide={
+                  index === projects.length - 1 && projects.length % 2 === 0
+                }
+              />
+            ))
+          }
+        </div>
+        <p class="studio-image-note">
+          Interface studies and illustrations show the direction of the work.
+          They are labeled separately from project photography.
+        </p>
       </section>
+      <StudioCTA title="Let’s build your next project." />
     </main>
-
-    <!-- Dynamic Modal -->
     <dialog
       id="project-modal"
       closedby="any"
-      class="project-dialog bg-paper-light text-ink m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-5xl overflow-y-auto border-0 p-0"
+      class="studio-project-dialog"
       aria-labelledby="modal-title"
       aria-describedby="modal-desc"
     >
-      <div
-        class="bg-paper-light border-ink relative flex w-full flex-col border-2 md:min-h-[650px] md:flex-row"
+      <button
+        id="close-modal"
+        type="button"
+        class="studio-dialog-close"
+        aria-label="Close project details"
+        autofocus><X size={22} aria-hidden="true" /></button
       >
-        <button
-          id="close-modal"
-          type="button"
-          aria-label="Close project details"
-          autofocus
-          class="bg-paper-light border-ink hover:bg-ink transition-vintage hard-shadow-sm absolute top-4 right-4 z-20 border-2 p-2 hover:text-white focus:outline-none"
-        >
-          <X class="h-5 w-5" />
-        </button>
-
-        <!-- Gallery Side -->
-        <div
-          class="bg-paper-dim border-ink flex w-full items-center justify-center border-b-2 p-8 md:w-3/5 md:border-r-2 md:border-b-0"
-          style="background-image: radial-gradient(var(--color-ink-muted) 1px, transparent 1px); background-size: 16px 16px;"
-        >
-          <div
-            class="border-paper-light relative w-full rotate-1 border-4 shadow-lg transition-transform duration-500 hover:rotate-0"
-          >
-            <div
-              class="bg-paper-light flex aspect-video items-center justify-center overflow-hidden"
-            >
-              <img
-                id="modal-img"
-                src="/images/portfolio/project-placeholder.svg"
-                alt=""
-                width={800}
-                height={600}
-                class="h-full w-full object-cover transition-opacity duration-300"
-              />
-            </div>
-
-            <!-- Nav Buttons -->
+      <div class="studio-dialog-layout">
+        <div class="studio-dialog-visual">
+          <img
+            id="modal-img"
+            src={projects[0]?.imageUrl}
+            alt=""
+            width="1000"
+            height="700"
+          /><div class="studio-gallery-controls">
             <button
               id="prev-image"
               type="button"
+              class="home-circle-control"
               aria-label="Previous project image"
-              class="bg-paper-light border-ink text-ink hard-shadow-sm transition-vintage absolute top-1/2 -left-3 z-10 -translate-y-1/2 border-2 p-3 hover:translate-y-[-2px] focus:outline-none md:-left-6"
-            >
-              <ChevronLeft class="h-5 w-5" />
-            </button>
-            <button
+              ><ArrowLeft size={20} aria-hidden="true" /></button
+            ><span id="modal-img-counter"></span><button
               id="next-image"
               type="button"
+              class="home-circle-control is-orange"
               aria-label="Next project image"
-              class="bg-paper-light border-ink text-ink hard-shadow-sm transition-vintage absolute top-1/2 -right-3 z-10 -translate-y-1/2 border-2 p-3 hover:translate-y-[-2px] focus:outline-none md:-right-6"
+              ><ArrowRight size={20} aria-hidden="true" /></button
             >
-              <ChevronRight class="h-5 w-5" />
-            </button>
-
-            <!-- Counter -->
-            <div
-              id="modal-img-counter"
-              class="bg-ink text-paper border-ink absolute -bottom-10 left-1/2 -translate-x-1/2 border-2 px-3 py-1 font-mono text-xs"
-            >
-              IMG_01 / 02
-            </div>
-          </div>
+          </div><p id="modal-image-note"></p>
         </div>
-
-        <!-- Content Side -->
-        <div
-          class="bg-paper-light flex h-full w-full flex-col overflow-y-auto p-8 md:w-2/5"
-        >
-          <div class="mb-6">
-            <div class="mb-2 flex items-center gap-2">
-              <span
-                class="text-accent text-xs font-bold tracking-widest uppercase"
-                >Project Dossier</span
-              >
-            </div>
-            <h2
-              id="modal-title"
-              class="text-ink mb-4 font-serif text-4xl font-bold"
+        <div class="studio-dialog-copy">
+          <p id="modal-category" class="studio-dialog-category"></p><h2
+            id="modal-title"
+          >
+          </h2><p id="modal-meta" class="studio-muted"></p><div
+            id="modal-tech"
+            class="studio-tech-tags"
+          >
+          </div><p id="modal-desc"></p><div class="studio-dialog-features">
+            <h3><Check size={18} aria-hidden="true" /> What’s included</h3><ul
+              id="modal-features-list"
             >
-            </h2>
-            <div
-              id="modal-tech"
-              class="mb-8 flex flex-wrap gap-2 border-b-2 border-dashed border-stone-200 pb-6"
-            >
-            </div>
-            <p
-              id="modal-desc"
-              class="mb-6 font-serif text-sm leading-relaxed text-stone-600 md:text-base"
-            >
-            </p>
-          </div>
-
-          <div class="bg-paper-dim border-line-medium mb-8 border p-4">
-            <h4
-              class="text-ink mb-4 flex items-center gap-2 text-xs font-bold tracking-widest uppercase"
-            >
-              <FolderOpen class="h-4 w-4" />
-              Specifications
-            </h4>
-            <ul id="modal-features-list" class="space-y-3"></ul>
-          </div>
-
-          <div id="modal-links" class="mt-auto flex flex-col gap-3 pt-6">
+            </ul>
+          </div><div id="modal-links" class="studio-dialog-links">
             <a
               id="modal-live-link"
               target="_blank"
               rel="noopener noreferrer"
-              class="bg-ink text-paper border-ink hover:bg-accent hover:border-accent hidden w-full items-center justify-center gap-2 border-2 py-3 font-bold tracking-widest uppercase transition-colors"
-            >
-              Launch Project
-              <ExternalLink class="h-4 w-4" />
-            </a>
-            <a
+              class="home-button"
+              hidden
+              >Visit project <ArrowUpRight size={18} aria-hidden="true" /></a
+            ><a
               id="modal-github-link"
               target="_blank"
               rel="noopener noreferrer"
-              class="bg-paper-light text-ink border-ink hidden w-full items-center justify-center gap-2 border-2 py-3 font-bold tracking-widest uppercase transition-shadow hover:shadow-[4px_4px_0px_0px_var(--color-accent)]"
+              class="home-button home-button-outline"
+              hidden>Source code <Github size={18} aria-hidden="true" /></a
             >
-              Source Code
-              <Github class="h-4 w-4" />
-            </a>
           </div>
         </div>
       </div>
@@ -217,4 +215,4 @@ const title = "Works - Heidar Dev Portfolio";
   <script>
     import "../scripts/projects";
   </script>
-</Layout>
+</StudioLayout>

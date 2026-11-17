@@ -13,6 +13,7 @@ export interface ProjectData {
   liveUrl?: string;
   githubUrl?: string;
   imageUrl?: string;
+  imageNote?: string;
   gallery: string[];
   category: "Machine Learning" | "Web Development" | "IT Support" | "Other";
   featured: boolean;

@@ -1,32 +1,108 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import StudioLayout from "../layouts/StudioLayout.astro";
+import StudioCTA from "../components/studio/StudioCTA.astro";
 import { getCollection } from "astro:content";
 import BlogCard from "../components/cards/BlogCard.astro";
-import SectionHeader from "../components/ui/SectionHeader.astro";
-
-const title = "Journal - Heidar Dev Portfolio";
-const posts = await getCollection("blog");
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const filters = ["All", "Machine Learning", "Web Development", "IT Operations"];
 ---
 
-<Layout title={title}>
-  <main
-    class="mx-auto min-h-screen max-w-7xl px-6 pt-24"
-    transition:animate="fade"
-  >
-    <div class="py-12">
-      <!-- HEADER -->
-      <SectionHeader
-        title="The Journal"
-        subtitle="Technical dispatches and engineering notes from the field."
-        badge="Section 04"
-      />
-
-      <!-- BLOG GRID -->
-      <div
-        class="reveal reveal-delay-100 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+<StudioLayout
+  current="blog"
+  title="Journal — Heidar Abdi"
+  description="Notes on building web applications, integrating machine learning, and keeping systems working."
+>
+  <main id="main-content">
+    <header class="studio-page-heading home-inset">
+      <p class="studio-simple-label">The journal</p><div
+        class="studio-heading-row"
       >
-        {posts.map((post) => <BlogCard post={post} />)}
+        <h1>Notes from<br /><em>the build.</em></h1><p>
+          Ideas, lessons, and practical guides from working across web
+          development, machine learning, and IT.
+        </p>
       </div>
-    </div>
+    </header>
+    <journal-filter class="studio-journal home-inset"
+      ><div class="studio-journal-toolbar">
+        <div
+          class="studio-filters"
+          role="group"
+          aria-label="Filter articles by category"
+        >
+          {
+            filters.map((category, index) => (
+              <button
+                type="button"
+                data-filter={category}
+                aria-pressed={index === 0}
+              >
+                {category === "All"
+                  ? "All articles"
+                  : category === "IT Operations"
+                    ? "IT & systems"
+                    : category}
+              </button>
+            ))
+          }
+        </div><p
+          class="studio-result-count"
+          data-result-count
+          role="status"
+          aria-live="polite"
+        >
+          {posts.length} articles
+        </p>
+      </div><div class="studio-journal-grid">
+        {
+          posts.map((post, index) => (
+            <BlogCard post={post} featured={index === 0} />
+          ))
+        }
+      </div></journal-filter
+    >
+    <StudioCTA title="Have something to explore?" />
   </main>
-</Layout>
+  <script>
+    class JournalFilter extends HTMLElement {
+      private events?: AbortController;
+      connectedCallback() {
+        this.events?.abort();
+        this.events = new AbortController();
+        const { signal } = this.events;
+        const buttons =
+          this.querySelectorAll<HTMLButtonElement>("[data-filter]");
+        buttons.forEach((button) =>
+          button.addEventListener(
+            "click",
+            () => {
+              buttons.forEach((item) =>
+                item.setAttribute("aria-pressed", String(item === button)),
+              );
+              let count = 0;
+              this.querySelectorAll<HTMLElement>("[data-filter-item]").forEach(
+                (item) => {
+                  item.hidden =
+                    button.dataset.filter !== "All" &&
+                    item.dataset.category !== button.dataset.filter;
+                  if (!item.hidden) count++;
+                },
+              );
+              const status = this.querySelector("[data-result-count]");
+              if (status)
+                status.textContent = `${count} ${count === 1 ? "article" : "articles"}`;
+            },
+            { signal },
+          ),
+        );
+      }
+      disconnectedCallback() {
+        this.events?.abort();
+      }
+    }
+    if (!customElements.get("journal-filter"))
+      customElements.define("journal-filter", JournalFilter);
+  </script>
+</StudioLayout>

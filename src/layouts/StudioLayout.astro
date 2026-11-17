@@ -1,0 +1,25 @@
+---
+import Layout from "./Layout.astro";
+import StudioNav from "../components/studio/StudioNav.astro";
+import StudioFooter from "../components/studio/StudioFooter.astro";
+import "@fontsource/outfit/400.css";
+import "@fontsource/outfit/500.css";
+import "@fontsource/outfit/600.css";
+import "../styles/home.css";
+import "../styles/studio.css";
+interface Props {
+  title: string;
+  description?: string;
+  current?: "home" | "projects" | "about" | "blog" | "contact";
+}
+const { title, description, current } = Astro.props;
+---
+
+<Layout homepage title={title} description={description}>
+  <div class="home-shell" id="top">
+    <a href="#main-content" class="home-skip">Skip to content</a>
+    <StudioNav current={current} />
+    <slot />
+    <StudioFooter />
+  </div>
+</Layout>

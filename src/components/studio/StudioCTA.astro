@@ -1,0 +1,13 @@
+---
+import { ArrowUpRight } from "lucide-astro";
+interface Props {
+  title?: string;
+}
+const { title = "Have a project in mind?" } = Astro.props;
+---
+
+<section class="studio-cta home-inset">
+  <div><p>Let’s make something useful.</p><h2>{title}</h2></div><a
+    class="home-button"
+    href="/contact">Let’s talk <ArrowUpRight size={20} aria-hidden="true" /></a>
+</section>

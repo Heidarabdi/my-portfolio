@@ -199,11 +199,15 @@ class PortfolioContact extends HTMLElement {
           throw new Error("unavailable");
         const turnstile = await loadTurnstile();
         if (signal.aborted) return;
+        // Flexible widgets need 300px; use a centered compact widget below that.
+        const widgetSize =
+          verification.clientWidth < 300 ? "compact" : "flexible";
+        verification.dataset.size = widgetSize;
         this.widget = turnstile.render(verification, {
           sitekey: config.sitekey,
           action: "contact",
-          theme: "auto",
-          size: "flexible",
+          theme: "light",
+          size: widgetSize,
           callback: (value) => {
             token = value;
             refresh();
@@ -222,6 +226,7 @@ class PortfolioContact extends HTMLElement {
             );
           },
         });
+        if (!token) showStatus("Complete the security check before sending.");
       } catch {
         if (!signal.aborted)
           showStatus(

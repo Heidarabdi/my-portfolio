@@ -1,0 +1,547 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import {
+  ArrowUpRight,
+  ArrowLeft,
+  ArrowRight,
+  Quote,
+  CodeXml,
+  Mail,
+  Check,
+  Plus,
+} from "lucide-astro";
+import { experience, endorsements, email } from "../../data/home";
+import developer from "../../assets/home/developer.png";
+import research from "../../assets/home/research.png";
+import community from "../../assets/home/community.png";
+import workspace from "../../assets/home/workspace.jpg";
+import blogAI from "../../assets/home/blog-ai.jpg";
+import blogAccessibility from "../../assets/home/blog-accessibility.jpg";
+import heroArrow from "../../assets/home/hero-arrow.svg?url";
+import helloRays from "../../assets/home/hello-rays.svg?url";
+import testimonialRays from "../../assets/home/testimonial-rays.svg?url";
+import testimonialStar from "../../assets/home/testimonial-star.svg?url";
+
+const services = [
+  {
+    title: "Web Development",
+    image: community,
+    alt: "Responsive community portal interface study across desktop and mobile",
+    featured: false,
+  },
+  {
+    title: "ML Integration",
+    image: research,
+    alt: "Machine learning research dashboard interface study",
+    featured: true,
+  },
+  {
+    title: "IT & Systems",
+    image: workspace,
+    alt: "A team collaborating around laptops and devices",
+    featured: false,
+  },
+];
+const journalDisplay = {
+  "ai-integration": {
+    title: "Bridging AI Models and Modern Web Apps",
+    image: blogAI,
+  },
+  "web-accessibility": {
+    title: "Building More Accessible Public Portals",
+    image: blogAccessibility,
+  },
+  "it-support": {
+    title: "Supporting Technology Across a Campus",
+    image: workspace,
+  },
+};
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+const date = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  timeZone: "Africa/Nairobi",
+});
+const projectStudies = [
+  {
+    image: research,
+    alt: "Research workspace interface study with model experiments and data visualizations",
+    id: "ml-integration-platform",
+    label: "ML Integration Platform",
+  },
+  {
+    image: community,
+    alt: "Community portal interface study on responsive mobile screens",
+    id: "snwo-official-portal",
+    label: "SNWO Official Portal",
+  },
+  {
+    image: workspace,
+    alt: "A collaborative technology workspace representing campus IT support",
+    id: "campus-it-infrastructure",
+    label: "Campus IT Infrastructure",
+  },
+];
+---
+
+<main id="main-content">
+  <section class="home-hero" aria-labelledby="hero-title">
+    <div class="home-hero-heading">
+      <span class="home-hello"
+        >Hello!<img src={helloRays} alt="" width="40" height="42" /></span
+      ><h1 id="hero-title">
+        <span class="home-name">I’m <em>Heidar,</em></span><span
+          class="home-role">Full Stack Developer</span
+        >
+      </h1>
+    </div>
+    <div class="home-hero-circle" aria-hidden="true"></div>
+    <Image
+      class="home-portrait"
+      src={developer}
+      alt="Illustration of a developer holding a laptop"
+      widths={[420, 640, 900]}
+      sizes="(max-width: 700px) 90vw, 570px"
+      width={570}
+      loading="eager"
+      fetchpriority="high"
+    />
+    <aside class="home-hero-proof">
+      <Quote size={29} aria-hidden="true" /><blockquote>
+        His focus on accessibility ensured we could reach our entire audience
+        effectively.
+      </blockquote><p class="home-quote-author">Fadumo Ali / SNWO</p><div
+        class="home-availability"
+      >
+        <strong>Available</strong><span>for new projects</span>
+      </div>
+    </aside>
+    <aside class="home-hero-expertise">
+      <CodeXml size={30} aria-hidden="true" /><strong>Web + ML</strong><span
+        >Connected expertise</span
+      >
+    </aside>
+    <img
+      class="home-hero-arrow"
+      src={heroArrow}
+      alt=""
+      width="130"
+      height="130"
+    />
+    <div class="home-hero-actions">
+      <a class="home-button" href="#works"
+        >Portfolio <ArrowUpRight size={21} aria-hidden="true" /></a
+      ><a class="home-button home-button-outline" href="/contact">Hire Me</a>
+    </div>
+  </section>
+
+  <section
+    class="home-services home-dark home-inset"
+    id="services"
+    aria-labelledby="services-title"
+  >
+    <div class="home-section-header home-services-header">
+      <h2 id="services-title">My <em>Services</em></h2><p>
+        Web experiences, practical intelligence, and the systems connecting
+        them.
+      </p>
+    </div>
+    <div class="home-service-grid">
+      {
+        services.map((service) => (
+          <a
+            class:list={[
+              "home-service-card",
+              { "is-featured": service.featured },
+            ]}
+            href="/contact"
+          >
+            <>
+              <h3>{service.title}</h3>
+              <div class="home-service-stack">
+                <>
+                  <div class="home-stack-back" aria-hidden="true" />
+                  <div class="home-stack-middle" aria-hidden="true" />
+                  <Image
+                    src={service.image}
+                    alt={service.alt}
+                    widths={[400, 650, 900]}
+                    sizes="(max-width: 700px) 90vw, (max-width: 1000px) 45vw, 30vw"
+                    width={650}
+                    height={450}
+                    fit="cover"
+                    loading="lazy"
+                  />
+                  <span class="home-service-arrow">
+                    <>
+                      <ArrowUpRight size={29} aria-hidden="true" />
+                      <span class="sr-only">Discuss {service.title}</span>
+                    </>
+                  </span>
+                </>
+              </div>
+            </>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section
+    class="home-experience home-inset"
+    id="experience"
+    aria-labelledby="experience-title"
+  >
+    <h2 id="experience-title">My Work Experience</h2><ol class="home-timeline">
+      {
+        experience.map((item) => (
+          <li>
+            <>
+              <div class="home-organization">
+                <>
+                  <h3>{item.organization}</h3>
+                  <p>{item.year} / Project experience</p>
+                </>
+              </div>
+              <span class="home-timeline-dot" aria-hidden="true" />
+              <div class="home-role-description">
+                <>
+                  <h3>{item.role}</h3>
+                  <p>{item.description}</p>
+                </>
+              </div>
+            </>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section
+    class="home-about home-inset"
+    id="about"
+    aria-labelledby="about-title"
+  >
+    <div class="home-about-portrait">
+      <div aria-hidden="true"></div><Image
+        src={developer}
+        alt="Developer illustration holding a laptop"
+        width={400}
+        loading="lazy"
+      />
+    </div><div class="home-about-copy">
+      <h2 id="about-title">
+        Why <em>Hire Me</em> for<br />Your Next Project?
+      </h2><p>
+        I connect thoughtful interfaces, useful machine learning, and dependable
+        systems, with experience across research, community, and campus
+        projects.
+      </p><dl>
+        <div><dt>Web + ML</dt><dd>Connected expertise</dd></div><div>
+          <dt>Worldwide</dt><dd>Based in Mogadishu</dd>
+        </div>
+      </dl><a
+        class="home-button home-button-outline home-about-button"
+        href="/contact">Hire Me <ArrowUpRight size={15} aria-hidden="true" /></a
+      >
+    </div>
+  </section>
+
+  <section
+    class="home-projects home-inset"
+    id="works"
+    aria-labelledby="works-title"
+  >
+    <div class="home-section-header">
+      <h2 id="works-title">
+        Let’s Have a Look at<br />my <em>Portfolio</em>
+      </h2><a class="home-button" href="/projects"
+        >See More <ArrowUpRight size={20} aria-hidden="true" /></a
+      >
+    </div>
+    <home-carousel
+      class="home-project-carousel"
+      data-start="0"
+      data-align="start"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Selected project interface studies"
+    >
+      <div class="home-project-controls">
+        <button
+          type="button"
+          class="home-circle-control"
+          data-direction="previous"
+          aria-label="Previous project"
+          aria-controls="project-track"
+          ><ArrowLeft size={24} aria-hidden="true" /></button
+        ><button
+          type="button"
+          class="home-circle-control is-orange"
+          data-direction="next"
+          aria-label="Next project"
+          aria-controls="project-track"
+          ><ArrowRight size={24} aria-hidden="true" /></button
+        >
+      </div>
+      <div
+        class="home-project-track"
+        id="project-track"
+        data-track
+        tabindex="0"
+        aria-label="Project studies"
+      >
+        {
+          projectStudies.map((study, index) => (
+            <div
+              class="home-project-slide"
+              data-slide
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${index + 1} of ${projectStudies.length}: ${study.label}`}
+            >
+              <a
+                href={`/projects#${study.id}`}
+                aria-label={`View ${study.label}`}
+              >
+                <Image
+                  src={study.image}
+                  alt={study.alt}
+                  width={900}
+                  widths={[420, 700, 1100]}
+                  sizes="(max-width: 700px) 85vw, 45vw"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          ))
+        }
+      </div>
+      <p class="sr-only" data-status role="status" aria-live="polite"></p>
+    </home-carousel>
+    <div class="home-project-caption">
+      <ul class="home-tags" aria-label="Project disciplines">
+        {
+          ["Web Applications", "Machine Learning", "CMS"].map((tag) => (
+            <li>{tag}</li>
+          ))
+        }
+      </ul><a class="home-project-heading" href="/projects"
+        ><h3>Research &amp; Community Platforms</h3><span
+          class="home-small-arrow"
+          ><ArrowUpRight size={20} aria-hidden="true" /></span
+        ></a
+      ><p>
+        Connecting research models to web applications, and helping communities
+        access the information they need.
+      </p><small
+        >Illustrative interface studies inspired by my work with Setsom
+        Institute and SNWO.</small
+      >
+    </div>
+  </section>
+
+  <section
+    class="home-testimonials home-dark"
+    aria-labelledby="testimonials-title"
+  >
+    <div class="home-testimonial-heading">
+      <h2 id="testimonials-title">
+        Testimonials that<br />Speak to <em>My Results</em><img
+          src={testimonialRays}
+          alt=""
+          width="65"
+          height="65"
+        />
+      </h2><p>Feedback from the people behind the projects.</p>
+    </div><img
+      class="home-testimonial-star"
+      src={testimonialStar}
+      alt=""
+      width="42"
+      height="50"
+    />
+    <home-carousel
+      class="home-quote-carousel"
+      data-start="1"
+      data-align="center"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Client testimonials"
+    >
+      <div class="home-quote-controls">
+        <button
+          type="button"
+          class="home-circle-control"
+          data-direction="previous"
+          aria-label="Previous testimonial"
+          aria-controls="quote-track"
+          ><ArrowLeft size={18} aria-hidden="true" /></button
+        ><button
+          type="button"
+          class="home-circle-control is-orange"
+          data-direction="next"
+          aria-label="Next testimonial"
+          aria-controls="quote-track"
+          ><ArrowRight size={18} aria-hidden="true" /></button
+        >
+      </div>
+      <div
+        class="home-quote-track"
+        id="quote-track"
+        data-track
+        tabindex="0"
+        aria-label="Client feedback"
+      >
+        {
+          endorsements.map((item, index) => (
+            <figure
+              class="home-quote-card"
+              data-slide
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${index + 1} of 3: ${item.author}`}
+            >
+              <>
+                <Quote class="home-quote-mark" size={28} aria-hidden="true" />
+                <blockquote>{item.quote}</blockquote>
+                <figcaption>
+                  <>
+                    <span class="home-client-initial" aria-hidden="true">
+                      {item.initial}
+                    </span>
+                    <span>
+                      <>
+                        <strong>{item.author}</strong>
+                        <span>{item.role}</span>
+                      </>
+                    </span>
+                  </>
+                </figcaption>
+                <Quote
+                  class="home-quote-watermark"
+                  size={48}
+                  aria-hidden="true"
+                />
+              </>
+            </figure>
+          ))
+        }
+      </div>
+      <p class="sr-only" data-status role="status" aria-live="polite"></p>
+    </home-carousel>
+  </section>
+
+  <section
+    class="home-invitation home-inset"
+    aria-labelledby="invitation-title"
+  >
+    <h2 id="invitation-title">
+      Have An Awesome Project<br />Idea? <em>Let’s Discuss</em>
+    </h2><div class="home-email-pill">
+      <a href={`mailto:${email}`} class="home-email-address"
+        ><span><Mail size={24} aria-hidden="true" /></span>{email}</a
+      ><a href="/contact" class="home-button">Let’s Talk</a>
+    </div><ul class="home-invitation-points">
+      {
+        ["Web development", "Machine learning", "Worldwide collaboration"].map(
+          (item) => (
+            <li>
+              <Check size={16} aria-hidden="true" />
+              {item}
+            </li>
+          ),
+        )
+      }
+    </ul>
+  </section>
+
+  <div
+    class="home-ribbon"
+    aria-label="Web development, machine learning, APIs, systems, creative thinking"
+  >
+    <div>
+      {
+        [
+          "Web Development",
+          "Machine Learning",
+          "APIs",
+          "Systems",
+          "Creative Thinking",
+        ].map((item) => (
+          <span>
+            {item}
+            <Plus size={25} aria-hidden="true" />
+          </span>
+        ))
+      }
+    </div>
+  </div>
+
+  <section class="home-journal home-inset" aria-labelledby="journal-title">
+    <div class="home-section-header">
+      <h2 id="journal-title">From my<br /><em>blog post</em></h2><a
+        class="home-button"
+        href="/blog">View All <ArrowUpRight size={20} aria-hidden="true" /></a
+      >
+    </div><div class="home-journal-grid">
+      {
+        posts.map((post) => {
+          const display =
+            journalDisplay[post.id as keyof typeof journalDisplay];
+          return (
+            <article class="home-journal-card">
+              <>
+                <a
+                  class="home-journal-image"
+                  href={`/blog/${post.id}`}
+                  aria-label={`Read ${post.data.title}`}
+                >
+                  <>
+                    <Image
+                      src={display?.image ?? workspace}
+                      alt=""
+                      width={650}
+                      height={446}
+                      fit="cover"
+                      widths={[400, 650, 900]}
+                      sizes="(max-width: 700px) 90vw, 30vw"
+                      loading="lazy"
+                    />
+                    <span class="home-journal-arrow">
+                      <ArrowUpRight size={27} aria-hidden="true" />
+                    </span>
+                  </>
+                </a>
+                <span class="home-journal-category">
+                  {post.data.category === "IT Operations"
+                    ? "IT & Systems"
+                    : post.data.category}
+                </span>
+                <p class="home-journal-meta">
+                  <time datetime={post.data.date.toISOString()}>
+                    {date.format(post.data.date)}
+                  </time>{" "}
+                  / {post.data.readTime}
+                </p>
+                <h3>
+                  <a href={`/blog/${post.id}`}>
+                    {display?.title ?? post.data.title}
+                  </a>
+                </h3>
+              </>
+            </article>
+          );
+        })
+      }
+    </div>
+  </section>
+</main>
+
+<script>
+  import "../../scripts/home";
+</script>

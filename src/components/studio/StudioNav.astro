@@ -1,0 +1,94 @@
+---
+import { Menu } from "lucide-astro";
+interface Props {
+  current?: "home" | "projects" | "about" | "blog" | "contact";
+}
+const { current } = Astro.props;
+const links = [
+  { label: "Home", href: "/", active: current === "home" },
+  {
+    label: "About",
+    href: "/about",
+    active: current === "about",
+  },
+  {
+    label: "Services",
+    href: "/#services",
+    active: false,
+  },
+  {
+    label: "Experience",
+    href: "/#experience",
+    active: false,
+  },
+  {
+    label: "Projects",
+    href: "/projects",
+    active: current === "projects",
+  },
+  { label: "Blog", href: "/blog", active: current === "blog" },
+  { label: "Contact", href: "/contact", active: current === "contact" },
+];
+const left = links.slice(0, 3);
+const right = links.slice(3);
+---
+
+<header class="home-header home-inset">
+  <nav class="home-nav" aria-label="Main navigation">
+    <div class="home-nav-links">
+      {
+        left.map((link) => (
+          <a href={link.href} aria-current={link.active ? "page" : undefined}>
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+    <a class="home-brand" href="/" aria-label="Heidar — Home"
+      ><span class="home-monogram" aria-hidden="true">h</span><span>Heidar</span
+      ></a
+    >
+    <div class="home-nav-links home-nav-right">
+      {
+        right.map((link) => (
+          <a href={link.href} aria-current={link.active ? "page" : undefined}>
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+    <details class="home-mobile-menu">
+      <summary aria-label="Open navigation"
+        ><Menu size={24} aria-hidden="true" /></summary
+      >
+      <div>
+        {
+          links.map((link) => (
+            <a href={link.href} aria-current={link.active ? "page" : undefined}>
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </details>
+  </nav>
+</header>
+<script>
+  document.addEventListener("astro:page-load", () => {
+    document
+      .querySelectorAll<HTMLDetailsElement>(".home-mobile-menu")
+      .forEach((menu) => {
+        menu.querySelectorAll("a").forEach((link) =>
+          link.addEventListener("click", () => {
+            menu.open = false;
+          }),
+        );
+        menu.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            menu.open = false;
+            menu.querySelector("summary")?.focus();
+          }
+        });
+      });
+  });
+</script>

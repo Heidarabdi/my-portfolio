@@ -1,71 +1,28 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { Home, ArrowLeft, Search } from "lucide-astro";
-
-const title = "404 - Page Not Found";
-const description = "The page you're looking for doesn't exist.";
+import StudioLayout from "../layouts/StudioLayout.astro";
+import { ArrowUpRight } from "lucide-astro";
 ---
 
-<Layout title={title} description={description}>
-  <main
-    class="mx-auto min-h-screen max-w-7xl px-6 pt-24"
-    transition:animate="fade"
-  >
-    <div
-      class="flex min-h-[80vh] flex-col items-center justify-center text-center"
-    >
-      <div
-        class="border-ink hard-shadow-sm bg-paper-light max-w-2xl border-2 p-12"
+<StudioLayout
+  title="Page not found — Heidar Abdi"
+  description="This page could not be found. Explore Heidar's portfolio or return to the homepage."
+>
+  <main id="main-content" class="studio-not-found home-inset">
+    <p class="studio-muted">404 / Page not found</p>
+    <div class="studio-heading-row">
+      <h1>This page<br /><em>isn’t here.</em></h1>
+      <p>
+        The link may have changed, or the page may no longer exist. Let’s get
+        you back to the portfolio.
+      </p>
+    </div>
+    <div class="studio-inline-actions">
+      <a class="home-button" href="/"
+        >Back to home <ArrowUpRight size={18} aria-hidden="true" /></a
       >
-        <div class="mb-8 flex justify-center">
-          <div
-            class="bg-ink text-paper border-ink relative flex h-24 w-24 items-center justify-center border-2"
-          >
-            <div class="absolute inset-0 border border-white/20"></div>
-            <Search class="h-12 w-12" />
-          </div>
-        </div>
-
-        <h1 class="text-ink font-display mb-4 text-6xl font-bold md:text-8xl">
-          404
-        </h1>
-
-        <p
-          class="text-ink mb-8 font-mono text-sm font-bold tracking-widest uppercase"
-        >
-          Error: Page Not Found
-        </p>
-
-        <p class="font-display mb-12 text-lg text-stone-600 italic">
-          The page you're looking for has either moved, been deleted, or never
-          existed. Let's get you back on track.
-        </p>
-
-        <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
-          <a
-            href="/"
-            class="bg-ink text-paper border-ink hover:bg-accent hover:border-accent hard-shadow-sm inline-flex items-center justify-center gap-2 border-2 px-6 py-3 font-bold tracking-widest uppercase transition-colors"
-          >
-            <Home class="h-5 w-5" />
-            Return Home
-          </a>
-
-          <button
-            onclick="history.back()"
-            class="border-ink text-ink hover:bg-ink hover:text-paper inline-flex items-center justify-center gap-2 border-2 bg-transparent px-6 py-3 font-bold tracking-widest uppercase transition-colors"
-          >
-            <ArrowLeft class="h-5 w-5" />
-            Go Back
-          </button>
-        </div>
-      </div>
-
-      <div class="mt-12 text-stone-500">
-        <p class="font-mono text-xs">
-          If you think this is an error, please
-          <a href="/contact" class="text-accent hover:underline">contact me</a>.
-        </p>
-      </div>
+      <a class="studio-text-link" href="/projects"
+        >Explore projects <ArrowUpRight size={18} aria-hidden="true" /></a
+      >
     </div>
   </main>
-</Layout>
+</StudioLayout>

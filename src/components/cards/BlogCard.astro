@@ -1,66 +1,75 @@
 ---
-import { Clock, ArrowRight, Newspaper } from "lucide-astro";
+import { Image } from "astro:assets";
+import { ArrowUpRight, ArrowRight, Clock } from "lucide-astro";
 import type { CollectionEntry } from "astro:content";
-
+import { journalImages, formatPostDate } from "../../data/journal";
 interface Props {
   post: CollectionEntry<"blog">;
+  featured?: boolean;
 }
-
-const { post } = Astro.props;
+const { post, featured = false } = Astro.props;
+const image = journalImages[post.id];
 ---
 
-<a href={`/blog/${post.id}`} class="group block h-full focus:outline-none">
-  <div
-    class="bg-paper-light border-ink hard-shadow-sm flex h-full flex-col border-2 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[6px_6px_0px_0px_var(--ink)]"
+<article
+  class:list={["studio-article-card", { "studio-article-featured": featured }]}
+  data-filter-item
+  data-category={post.data.category}
+>
+  <a
+    class="studio-article-image"
+    href={`/blog/${post.id}`}
+    aria-label={`Read ${post.data.title}`}
   >
-    <div class="border-ink relative aspect-video overflow-hidden border-b-2">
-      <img
-        src={post.data.imageUrl}
-        alt={post.data.title}
-        width={600}
-        height={400}
-        class="h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0"
-      />
-      <div
-        class="bg-ink text-paper absolute top-0 left-0 px-2 py-1 text-[10px] font-bold tracking-widest uppercase"
-      >
-        {post.data.category}
-      </div>
-    </div>
-    <div class="flex flex-1 flex-col p-6">
-      <header
-        class="border-line-medium mb-4 flex items-center justify-between border-b pb-2"
-      >
-        <time class="font-mono text-xs font-bold text-stone-400"
-          >{post.data.date}</time
-        >
-        <div class="text-stone-400">
-          <Newspaper class="h-4 w-4" />
-        </div>
-      </header>
-      <h3
-        class="text-ink group-hover:text-accent mb-3 font-serif text-2xl leading-tight font-bold transition-colors"
-      >
-        {post.data.title}
-      </h3>
-      <p
-        class="mb-6 line-clamp-3 flex-1 font-serif text-sm leading-relaxed text-stone-600"
-      >
-        {post.data.excerpt}
-      </p>
-      <footer
-        class="border-paper-dim mt-auto flex items-center justify-between border-t-2 pt-4 text-sm"
-      >
-        <span class="flex items-center gap-1 font-mono text-xs text-stone-500"
-          ><Clock class="h-3 w-3" />
-          {post.data.readTime}</span
-        >
-        <span
-          class="text-ink flex items-center gap-1 text-xs font-bold uppercase transition-all group-hover:gap-2"
-          >Read Issue
-          <ArrowRight class="h-3 w-3" /></span
-        >
-      </footer>
-    </div>
+    {
+      image ? (
+        <Image
+          src={image}
+          alt=""
+          width={1200}
+          widths={[500, 800, 1200]}
+          sizes={
+            featured
+              ? "(max-width: 700px) 90vw, 60vw"
+              : "(max-width: 700px) 90vw, 45vw"
+          }
+          loading={featured ? "eager" : "lazy"}
+        />
+      ) : (
+        <img
+          src={post.data.imageUrl}
+          alt=""
+          width="800"
+          height="500"
+          loading="lazy"
+        />
+      )
+    }
+    {
+      !featured && (
+        <span class="home-journal-arrow">
+          <ArrowUpRight size={26} aria-hidden="true" />
+        </span>
+      )
+    }
+  </a>
+  <div class="studio-article-copy">
+    <div class="studio-article-topline">
+      <span class="studio-article-category">{post.data.category}</span>{
+        featured && <span class="studio-featured-label">Latest article</span>
+      }
+    </div><h2><a href={`/blog/${post.id}`}>{post.data.title}</a></h2><p>
+      {post.data.excerpt}
+    </p><div class="studio-article-bottom">
+      <time datetime={post.data.date.toISOString()}
+        >{formatPostDate(post.data.date)}</time
+      ><span><Clock size={15} aria-hidden="true" />{post.data.readTime}</span>
+    </div>{
+      featured && (
+        <a class="home-button" href={`/blog/${post.id}`}>
+          Read the article <ArrowRight size={18} aria-hidden="true" />
+        </a>
+      )
+    }
   </div>
-</a>
+</article>
